@@ -1,0 +1,50 @@
+{
+  "expectations": [
+    {
+      "text": "script.json 파일이 생성되었다",
+      "passed": true,
+      "evidence": "파일이 존재하며 정상적으로 읽혔음 (title: '삼성전자 주가 전망 반도체 사이클 분석')"
+    },
+    {
+      "text": "첫 번째 scene의 visual_type이 intro_card이다",
+      "passed": true,
+      "evidence": "scene_id 0의 visual_type이 'intro_card'임"
+    },
+    {
+      "text": "마지막 scene의 visual_type이 outro_card이다",
+      "passed": true,
+      "evidence": "scene_id 7(마지막 scene)의 visual_type이 'outro_card'임"
+    },
+    {
+      "text": "chart 또는 stat_card 또는 number_highlight 중 하나 이상이 사용되었다",
+      "passed": true,
+      "evidence": "scene_id 1에서 visual_type 'stat_card' 사용됨 (card_items: 주가, PBR, 시가총액)"
+    },
+    {
+      "text": "bullet_list가 있다면 items에 ①②③ 번호가 포함되어 있다",
+      "passed": true,
+      "evidence": "scene_id 2 items: ['① 메모리 반도체 공급 과잉 지속', '② HBM 경쟁에서 SK하이닉스에 뒤처짐', '③ 파운드리, TSMC와 격차 더 벌어짐'], scene_id 6도 동일하게 ①②③ 포함"
+    },
+    {
+      "text": "comparison이 있다면 left_items와 right_items 각 항목이 15자 이하이다",
+      "passed": true,
+      "evidence": "scene_id 4 comparison left_items: 'HBM 인증 지연'(7자), '범용 D램 비중 높음'(10자), '파운드리 적자 부담'(9자). right_items: 'HBM3E 엔비디아 공급'(10자), '고부가 제품 비중 높음'(11자), '영업이익률 우위'(8자) — 모두 15자 이하"
+    },
+    {
+      "text": "모든 scene의 visual_type이 narration 내용과 주제적으로 연관되어 있다",
+      "passed": true,
+      "evidence": "intro_card(채널 소개), stat_card(주가·PBR 수치), bullet_list(부진 원인 목록), timeline(반도체 사이클 흐름), comparison(삼성 vs 하이닉스 비교), keyword(HBM 개념 설명), bullet_list(반등 조건), outro_card(요약) — 모두 narration과 연관"
+    },
+    {
+      "text": "제목이 30자 이내이다",
+      "passed": true,
+      "evidence": "제목 '삼성전자 주가 전망 반도체 사이클 분석' = 20자 (30자 이내)"
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 0,
+    "total": 8,
+    "pass_rate": 1.0
+  }
+}

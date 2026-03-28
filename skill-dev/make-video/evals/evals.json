@@ -1,0 +1,43 @@
+{
+  "skill_name": "make-video",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "/make-video e550da62",
+      "expected_output": "실행 전 영상 정보(제목/길이/장면구성)를 표시하고, 명령어를 실행하고, 완료 후 결과와 수정 안내를 표시한다",
+      "files": [],
+      "assertions": [
+        "실행 전에 remotion_props.json을 읽어서 영상 제목과 총 길이를 표시했다",
+        "실행 전에 장면 구성(visual_type별 시작/종료 시간)을 표시했다",
+        "예상 렌더링 소요 시간을 안내했다",
+        "python -m orchestrator.run_video e550da62 명령어를 실행했다",
+        "완료 후 출력 파일 경로와 파일 크기를 표시했다",
+        "완료 후 수정 시나리오별 다음 단계를 안내했다"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "/make-video 없는ID123",
+      "expected_output": "필수 파일 없음을 확인하고 make-audio 먼저 실행하라고 안내한다. 명령어를 실행하지 않는다",
+      "files": [],
+      "assertions": [
+        "워크스페이스 또는 필수 파일 존재 여부를 사전에 확인했다",
+        "오류 상황을 명확하게 안내했다",
+        "/make-audio 먼저 실행하라고 안내했다",
+        "명령어를 실행하지 않았다"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "비주얼 색상을 수정했어요. e550da62 영상 다시 렌더링해주세요",
+      "expected_output": "재렌더링 상황임을 인식하고, 비주얼 수정은 재렌더링만 하면 된다고 안내하며, 명령어를 실행한다",
+      "files": [],
+      "assertions": [
+        "비주얼 수정 후 재렌더링 상황임을 인식했다",
+        "대본이나 음성 재생성 없이 렌더링만 진행했다",
+        "python -m orchestrator.run_video e550da62 명령어를 실행했다",
+        "완료 후 출력 파일 정보를 표시했다"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "script.json 파일이 생성되었다",
+      "passed": true,
+      "evidence": "파일이 존재하며 정상적으로 읽혔음 (title: '비트코인 10만 달러 돌파 이유와 전망')"
+    },
+    {
+      "text": "첫 번째 scene의 visual_type이 intro_card이다",
+      "passed": true,
+      "evidence": "scene_id 0의 visual_type이 'intro_card'임"
+    },
+    {
+      "text": "마지막 scene의 visual_type이 outro_card이다",
+      "passed": true,
+      "evidence": "scene_id 7(마지막 scene)의 visual_type이 'outro_card'임"
+    },
+    {
+      "text": "number_highlight 또는 stat_card가 사용되어 핵심 수치를 강조했다",
+      "passed": true,
+      "evidence": "scene_id 1에서 visual_type 'number_highlight' 사용됨 (main_number: '$100,000+', 시가총액 2조 달러 등 핵심 수치 강조)"
+    },
+    {
+      "text": "bullet_list가 있다면 items에 ①②③ 번호가 포함되어 있다",
+      "passed": true,
+      "evidence": "scene_id 2 items: ['① 비트코인 현물 ETF 승인 – 기관 자금 유입', '② 반감기 효과 – 공급 감소로 희소성 증가', '③ 달러 약세·금리 인하 기대 – 위험 선호 확대'], scene_id 6도 동일하게 ①②③ 포함"
+    },
+    {
+      "text": "keyword의 description이 한 줄이다 (줄바꿈 없음)",
+      "passed": true,
+      "evidence": "scene_id 4 keyword description: '약 4년 주기로 비트코인 채굴 보상이 절반으로 줄어드는 공급 축소 이벤트' — 줄바꿈(\\n) 없음"
+    },
+    {
+      "text": "total_duration_seconds가 180~300초 사이이다 (3~5분)",
+      "passed": true,
+      "evidence": "total_duration_seconds = 194.0 (180 이상 300 이하)"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  }
+}

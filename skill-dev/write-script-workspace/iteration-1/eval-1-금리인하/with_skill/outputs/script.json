@@ -1,0 +1,161 @@
+{
+  "title": "연준 2026년 금리 인하할까? 핵심 분석",
+  "hook": "2026년, 미국 연준이 금리를 내릴까요? 지금 당장 알아야 할 이유가 있어요.",
+  "scenes": [
+    {
+      "scene_id": 0,
+      "type": "intro",
+      "duration_seconds": 6.0,
+      "narration": "안녕하세요! 오늘은 2026년 미국 연준의 금리 인하 가능성을 같이 분석해볼 거거든요. 투자자라면 꼭 알아야 할 내용이에요.",
+      "visual_type": "intro_card",
+      "visual_data": {
+        "title": "연준 2026 금리 인하 가능성",
+        "subtitle": "지금 시장이 주목하는 핵심 변수 분석"
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 1,
+      "type": "main",
+      "duration_seconds": 28.0,
+      "narration": "먼저 현재 금리 상황을 확인해볼게요. 2026년 초 기준으로 연준 기준금리는 4.25%에서 4.50% 사이를 유지하고 있거든요. 이게 얼마나 높은 수준이냐면, 2000년대 이후 두 번째로 높은 수준이에요.",
+      "visual_type": "stat_card",
+      "visual_data": {
+        "card_items": [
+          "현재 기준금리: 4.25~4.50%",
+          "2000년대 이후 두 번째 고금리",
+          "동결 유지 기간: 약 12개월"
+        ]
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 2,
+      "type": "main",
+      "duration_seconds": 35.0,
+      "narration": "그러면 연준이 금리를 내릴 수 있는 이유가 뭘까요? 크게 세 가지로 볼 수 있어요. 첫째는 인플레이션 둔화, 둘째는 고용 시장 냉각, 셋째는 경기 침체 우려예요. 하나씩 살펴볼게요.",
+      "visual_type": "bullet_list",
+      "visual_data": {
+        "title": "금리 인하 기대 요인",
+        "items": [
+          "① 인플레이션 둔화 – CPI 2%대 근접",
+          "② 고용 시장 냉각 – 실업률 상승 신호",
+          "③ 경기 침체 우려 – GDP 성장 둔화"
+        ]
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 3,
+      "type": "main",
+      "duration_seconds": 30.0,
+      "narration": "반대로 금리 인하를 어렵게 만드는 요인도 있어요. 관세 인상으로 인한 수입 물가 상승, 여전히 견조한 서비스 물가, 그리고 재정 적자 확대 문제가 있거든요. 연준 입장에서는 이게 정말 딜레마예요.",
+      "visual_type": "bullet_list",
+      "visual_data": {
+        "title": "금리 인하 저해 요인",
+        "items": [
+          "① 관세 인상 → 수입 물가 상승 압력",
+          "② 서비스 물가 여전히 높은 수준 유지",
+          "③ 재정 적자 확대로 장기 금리 상승"
+        ]
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 4,
+      "type": "main",
+      "duration_seconds": 32.0,
+      "narration": "인플레이션 추이를 시간 순서로 보면 더 명확해지죠. 2023년 6%대에서 시작해서 2024년 3%대로 내려왔고, 2025년에는 2.5% 수준까지 떨어졌어요. 이 추세가 계속된다면 연준도 행동할 명분이 생기는 거예요.",
+      "visual_type": "timeline",
+      "visual_data": {
+        "title": "미국 CPI 인플레이션 흐름",
+        "events": [
+          {"year": "2023", "label": "CPI 약 6%대 – 고물가 정점"},
+          {"year": "2024", "label": "CPI 약 3%대 – 둔화 시작"},
+          {"year": "2025", "label": "CPI 약 2.5% – 목표 근접"},
+          {"year": "2026", "label": "CPI 2% 달성 여부가 관건"}
+        ]
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 5,
+      "type": "main",
+      "duration_seconds": 30.0,
+      "narration": "시장 전망과 연준 공식 입장을 비교해보면 흥미로운 차이가 있어요. 시장은 2026년 상반기 안에 한 번은 인하를 기대하고 있는 반면, 연준은 '데이터 의존적'이라는 표현을 쓰면서 신중한 태도를 유지하고 있거든요.",
+      "visual_type": "comparison",
+      "visual_data": {
+        "title": "시장 vs 연준 전망 비교",
+        "left_label": "시장 기대",
+        "right_label": "연준 공식 입장",
+        "left_items": [
+          "2026 상반기 인하 기대",
+          "1~2회 인하 가능성",
+          "CME 선물 반영 중"
+        ],
+        "right_items": [
+          "데이터 의존적 결정",
+          "섣부른 인하 경계",
+          "물가 안정 최우선"
+        ]
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 6,
+      "type": "main",
+      "duration_seconds": 25.0,
+      "narration": "핵심 개념 하나만 정리하고 갈게요. '점도표'라는 게 뭔지 아세요? 연준 위원들이 앞으로의 금리 경로를 익명으로 예측한 도표예요. 시장이 연준 의도를 읽는 가장 중요한 신호거든요.",
+      "visual_type": "keyword",
+      "visual_data": {
+        "keyword": "점도표 (Dot Plot)",
+        "description": "연준 위원들이 향후 금리 경로를 익명으로 예측해 발표하는 분기별 도표"
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 7,
+      "type": "main",
+      "duration_seconds": 28.0,
+      "narration": "2026년 연준 금리 결정의 핵심 변수를 정리하면 이렇게 볼 수 있어요. 인플레이션이 2% 목표에 안착하는지, 실업률이 4.5%를 넘는지, 그리고 트럼프 관세 정책이 물가에 얼마나 영향을 주는지가 결정적이에요.",
+      "visual_type": "bullet_list",
+      "visual_data": {
+        "title": "2026 금리 결정 핵심 변수",
+        "items": [
+          "① 인플레이션 2% 목표 안착 여부",
+          "② 실업률 4.5% 초과 시 인하 압력 증가",
+          "③ 관세 정책의 물가 전이 효과"
+        ]
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 8,
+      "type": "outro",
+      "duration_seconds": 12.0,
+      "narration": "정리하자면, 2026년 금리 인하는 가능하지만 확실하지 않아요. 물가와 고용 데이터를 꾸준히 체크하면서 연준의 점도표 업데이트에 주목하는 게 중요해요. 오늘 영상이 도움이 됐다면 구독과 좋아요 부탁드려요!",
+      "visual_type": "outro_card",
+      "visual_data": {
+        "title": "핵심 요약",
+        "points": [
+          "인플레이션·고용 데이터가 관건",
+          "점도표로 연준 신호 확인",
+          "2026 상반기 1회 인하 가능성"
+        ],
+        "cta": "구독 & 좋아요"
+      },
+      "chart_data": null,
+      "chart_title": null
+    }
+  ],
+  "total_duration_seconds": 226.0,
+  "tags": ["연준", "금리인하", "2026금리", "미국경제", "Fed", "인플레이션", "통화정책", "투자"]
+}

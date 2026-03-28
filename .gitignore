@@ -1,0 +1,10 @@
+.env
+workspace/
+remotion-project/node_modules/
+remotion-project/public/
+__pycache__/
+*.pyc
+.DS_Store
+.remotion/
+샘플대본/
+sample/

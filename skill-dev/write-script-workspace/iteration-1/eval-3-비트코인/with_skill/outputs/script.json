@@ -1,0 +1,146 @@
+{
+  "title": "비트코인 10만 달러 돌파 이유와 전망",
+  "hook": "비트코인이 드디어 10만 달러를 넘었어요. 이게 왜 일어났는지, 앞으로는 어떻게 될지 같이 알아봐요.",
+  "scenes": [
+    {
+      "scene_id": 0,
+      "type": "intro",
+      "duration_seconds": 6.0,
+      "narration": "안녕하세요! 비트코인이 역사적인 10만 달러를 돌파했죠? 오늘은 이게 왜 가능했는지, 그리고 앞으로 어디까지 갈 수 있는지 분석해볼 거거든요. 끝까지 봐주세요!",
+      "visual_type": "intro_card",
+      "visual_data": {
+        "title": "비트코인 10만 달러 돌파",
+        "subtitle": "이유와 향후 전망 완전 분석"
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 1,
+      "type": "main",
+      "duration_seconds": 25.0,
+      "narration": "먼저 숫자로 현황을 짚어볼게요. 비트코인은 10만 달러를 돌파하면서 시가총액이 2조 달러를 넘어섰어요. 한화로 약 2,700조 원이에요. 전 세계 금 시가총액의 약 10%를 넘어선 수준이거든요.",
+      "visual_type": "number_highlight",
+      "visual_data": {
+        "main_number": "$100,000+",
+        "label": "비트코인 돌파 가격",
+        "sub_items": [
+          "시가총액: 2조 달러 이상",
+          "금 시총 대비: 약 10% 수준",
+          "한화 환산: 약 2,700조 원"
+        ]
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 2,
+      "type": "main",
+      "duration_seconds": 35.0,
+      "narration": "비트코인이 10만 달러를 돌파한 이유가 뭘까요? 세 가지 핵심 요인이 있어요. 첫째는 현물 ETF 승인이에요. 미국 SEC가 비트코인 현물 ETF를 승인하면서 기관 투자자들의 자금이 대거 유입됐거든요. 둘째는 반감기 효과예요. 2024년 4월에 비트코인 반감기가 있었는데, 공급량이 절반으로 줄면서 희소성이 커졌어요. 셋째는 매크로 환경이에요. 달러 약세와 금리 인하 기대감이 위험 자산 선호를 높였어요.",
+      "visual_type": "bullet_list",
+      "visual_data": {
+        "title": "10만 달러 돌파 3대 이유",
+        "items": [
+          "① 비트코인 현물 ETF 승인 – 기관 자금 유입",
+          "② 반감기 효과 – 공급 감소로 희소성 증가",
+          "③ 달러 약세·금리 인하 기대 – 위험 선호 확대"
+        ]
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 3,
+      "type": "main",
+      "duration_seconds": 30.0,
+      "narration": "비트코인의 가격 흐름을 반감기 중심으로 보면 패턴이 보여요. 반감기 후 12~18개월 안에 역대 신고가를 경신하는 경향이 있었거든요. 2012년 반감기 후 상승, 2016년 반감기 후 2017년 대폭등, 2020년 반감기 후 2021년 6만 달러 돌파가 그 예예요.",
+      "visual_type": "timeline",
+      "visual_data": {
+        "title": "비트코인 반감기와 가격 흐름",
+        "events": [
+          {"year": "2012", "label": "1차 반감기 → 2013년 1,000달러 돌파"},
+          {"year": "2016", "label": "2차 반감기 → 2017년 2만 달러 돌파"},
+          {"year": "2020", "label": "3차 반감기 → 2021년 6만 달러 돌파"},
+          {"year": "2024", "label": "4차 반감기 → 10만 달러 돌파"}
+        ]
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 4,
+      "type": "main",
+      "duration_seconds": 28.0,
+      "narration": "핵심 개념 하나 정리하고 갈게요. '반감기(Halving)'가 정확히 뭔지 아세요? 약 4년마다 비트코인 채굴 보상이 절반으로 줄어드는 이벤트예요. 새로 공급되는 비트코인 양이 줄어들기 때문에 수요가 유지되면 가격이 오를 수밖에 없는 구조거든요.",
+      "visual_type": "keyword",
+      "visual_data": {
+        "keyword": "반감기 (Halving)",
+        "description": "약 4년 주기로 비트코인 채굴 보상이 절반으로 줄어드는 공급 축소 이벤트"
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 5,
+      "type": "main",
+      "duration_seconds": 30.0,
+      "narration": "그렇다면 앞으로 비트코인 전망은 어떨까요? 강세 시나리오와 약세 시나리오를 나눠볼게요. 강세 시나리오에서는 기관 투자 확대와 ETF 자금 유입 지속으로 15만 달러까지도 바라볼 수 있어요. 반면 약세 시나리오에서는 규제 강화나 매크로 악화로 7만 달러 이하로 되돌아올 수도 있어요.",
+      "visual_type": "comparison",
+      "visual_data": {
+        "title": "비트코인 향후 시나리오",
+        "left_label": "강세 시나리오",
+        "right_label": "약세 시나리오",
+        "left_items": [
+          "ETF 자금 유입 지속",
+          "기관 채택 확대",
+          "목표가 15만 달러+"
+        ],
+        "right_items": [
+          "각국 규제 강화",
+          "매크로 리스크 악화",
+          "되돌림 7만 달러-"
+        ]
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 6,
+      "type": "main",
+      "duration_seconds": 28.0,
+      "narration": "비트코인 투자 시 반드시 알아야 할 리스크도 있어요. 세 가지를 꼭 기억하세요. 변동성이 극단적으로 크다는 것, 규제 환경이 언제든 바뀔 수 있다는 것, 그리고 세금 신고 의무가 생겼다는 거예요.",
+      "visual_type": "bullet_list",
+      "visual_data": {
+        "title": "비트코인 투자 주요 리스크",
+        "items": [
+          "① 극단적 변동성 – 단기 50% 급락 가능",
+          "② 규제 리스크 – 각국 정책 변화 불확실",
+          "③ 세금 의무 – 가상자산 과세 시행 중"
+        ]
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 7,
+      "type": "outro",
+      "duration_seconds": 12.0,
+      "narration": "오늘 정리해드릴게요. 비트코인 10만 달러 돌파는 ETF 승인, 반감기, 매크로 환경이 맞물린 결과예요. 앞으로도 상승 여력이 있지만 변동성과 리스크는 항상 함께 해요. 분산 투자와 원칙을 지키면서 접근하세요. 도움이 됐다면 구독과 좋아요 부탁드려요!",
+      "visual_type": "outro_card",
+      "visual_data": {
+        "title": "비트코인 핵심 요약",
+        "points": [
+          "10만 달러 돌파 이유: ETF·반감기·매크로",
+          "강세 시나리오: 15만 달러 이상 가능",
+          "리스크: 변동성·규제·세금 유의"
+        ],
+        "cta": "구독 & 좋아요"
+      },
+      "chart_data": null,
+      "chart_title": null
+    }
+  ],
+  "total_duration_seconds": 194.0,
+  "tags": ["비트코인", "10만달러", "BTC", "반감기", "비트코인ETF", "암호화폐", "가상자산", "비트코인전망"]
+}

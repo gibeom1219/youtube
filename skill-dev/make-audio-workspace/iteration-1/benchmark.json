@@ -1,0 +1,160 @@
+{
+  "metadata": {
+    "skill_name": "make-audio",
+    "skill_path": "/home/user/workspaces/youtube/skill-dev/make-audio",
+    "timestamp": "2026-03-27T00:00:00Z",
+    "evals_run": [1, 2, 3],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "정상실행",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 0,
+        "tokens": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "실행 전에 script.json을 읽어서 대본 제목과 장면 수를 표시했다", "passed": true, "evidence": "제목·장면 수·글자수 모두 표시"},
+        {"text": "실행 전에 예상 나레이션 길이를 표시했다", "passed": true, "evidence": "1,484자 (~164초) 표시"},
+        {"text": "python -m orchestrator.run_audio 명령어를 실행했다", "passed": true, "evidence": "명령어 실행 확인"},
+        {"text": "완료 후 오디오 길이를 표시했다", "passed": true, "evidence": "176.3초(2분 56초) 표시"},
+        {"text": "완료 후 /make-video 다음 단계 안내를 제공했다", "passed": true, "evidence": "다음 단계: /make-video e550da62 표시"}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "정상실행",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.4,
+        "passed": 2,
+        "failed": 3,
+        "total": 5,
+        "time_seconds": 0,
+        "tokens": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "실행 전에 script.json을 읽어서 대본 제목과 장면 수를 표시했다", "passed": false, "evidence": "사전 요약 없이 바로 명령어 실행"},
+        {"text": "실행 전에 예상 나레이션 길이를 표시했다", "passed": false, "evidence": "예상 길이 미표시"},
+        {"text": "python -m orchestrator.run_audio 명령어를 실행했다", "passed": true, "evidence": "명령어 실행 확인"},
+        {"text": "완료 후 오디오 길이를 표시했다", "passed": false, "evidence": "오디오 길이 미표시, 파일 목록만 나열"},
+        {"text": "완료 후 /make-video 다음 단계 안내를 제공했다", "passed": true, "evidence": "다음 단계 안내 있음"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "없는워크스페이스",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 0,
+        "tokens": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "워크스페이스 경로가 존재하지 않음을 확인했다", "passed": true, "evidence": "경로 확인 후 오류 감지"},
+        {"text": "사용자에게 오류 상황을 명확히 안내했다", "passed": true, "evidence": "❌ 워크스페이스를 찾을 수 없습니다 표시"},
+        {"text": "/write-script 명령어로 먼저 대본을 만들라고 안내했다", "passed": true, "evidence": "/write-script <영상 주제> 안내"},
+        {"text": "명령어를 실행하지 않았다", "passed": true, "evidence": "오류 감지 후 명령어 실행 안 함"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "없는워크스페이스",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.25,
+        "passed": 1,
+        "failed": 3,
+        "total": 4,
+        "time_seconds": 0,
+        "tokens": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "워크스페이스 경로가 존재하지 않음을 확인했다", "passed": false, "evidence": "사전 확인 없이 명령어 바로 실행"},
+        {"text": "사용자에게 오류 상황을 명확히 안내했다", "passed": true, "evidence": "오류 메시지 표시"},
+        {"text": "/write-script 명령어로 먼저 대본을 만들라고 안내했다", "passed": false, "evidence": "다음 단계 안내 없음"},
+        {"text": "명령어를 실행하지 않았다", "passed": false, "evidence": "오류 발생까지 명령어 실행함"}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "script없음",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 0,
+        "tokens": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "실행 전에 script.json 존재 여부를 확인했다", "passed": true, "evidence": "script.json 확인 후 없음 감지"},
+        {"text": "script.json이 없을 경우 오류 메시지를 표시했다", "passed": true, "evidence": "❌ script.json이 없습니다 표시"},
+        {"text": "/write-script 먼저 실행하라고 안내했다", "passed": true, "evidence": "/write-script 안내 포함"}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "script없음",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.33,
+        "passed": 1,
+        "failed": 2,
+        "total": 3,
+        "time_seconds": 0,
+        "tokens": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "실행 전에 script.json 존재 여부를 확인했다", "passed": false, "evidence": "사전 확인 없이 명령어 실행"},
+        {"text": "script.json이 없을 경우 오류 메시지를 표시했다", "passed": true, "evidence": "오류 발생 후 메시지 표시"},
+        {"text": "/write-script 먼저 실행하라고 안내했다", "passed": false, "evidence": "다음 단계 안내 없음"}
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0},
+      "time_seconds": {"mean": 0, "stddev": 0, "min": 0, "max": 0},
+      "tokens": {"mean": 0, "stddev": 0, "min": 0, "max": 0}
+    },
+    "without_skill": {
+      "pass_rate": {"mean": 0.33, "stddev": 0.06, "min": 0.25, "max": 0.40},
+      "time_seconds": {"mean": 0, "stddev": 0, "min": 0, "max": 0},
+      "tokens": {"mean": 0, "stddev": 0, "min": 0, "max": 0}
+    },
+    "delta": {
+      "pass_rate": "+0.67",
+      "time_seconds": "0",
+      "tokens": "0"
+    }
+  },
+  "notes": [
+    "without_skill의 가장 큰 문제: 사전 확인 없이 명령어를 바로 실행 — 오류 상황에서도 강행",
+    "without_skill은 실행 전 대본 요약을 전혀 제공하지 않음 — 사용자가 어떤 내용이 TTS될지 모름",
+    "with_skill은 오류 상황에서 명령어 실행을 막고 올바른 다음 단계를 안내함",
+    "with_skill은 실행 전 대본 미리보기로 사용자가 내용을 재확인할 기회를 제공"
+  ]
+}

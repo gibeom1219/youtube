@@ -1,0 +1,196 @@
+{
+  "metadata": {
+    "skill_name": "write-script",
+    "skill_path": "/home/user/workspaces/youtube/skill-dev/write-script",
+    "timestamp": "2026-03-27T00:00:00Z",
+    "evals_run": [1, 2, 3],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "미국금리인하",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "script.json 파일이 생성되었다", "passed": true, "evidence": "파일 확인됨"},
+        {"text": "첫 번째 scene의 visual_type이 intro_card이다", "passed": true, "evidence": "scene_id 0: intro_card"},
+        {"text": "마지막 scene의 visual_type이 outro_card이다", "passed": true, "evidence": "마지막 scene: outro_card"},
+        {"text": "bullet_list items에 ①②③ 같은 번호가 텍스트에 직접 포함되어 있다", "passed": true, "evidence": "items 배열에 ①②③ 포함 확인"},
+        {"text": "keyword의 description에 줄바꿈(\\n)이 없다", "passed": true, "evidence": "description: 한 줄 문자열"},
+        {"text": "stat_card의 card_items 각 항목이 25자 이하이다", "passed": true, "evidence": "최장 항목 22자"},
+        {"text": "total_duration_seconds가 모든 scene duration의 합계와 일치한다", "passed": true, "evidence": "합계 = total_duration_seconds"},
+        {"text": "content 장면이 최소 5개 이상이다", "passed": true, "evidence": "content 장면 7개"},
+        {"text": "narration 어조가 구어체이다", "passed": true, "evidence": "~거든요, ~죠? 등 확인"}
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "미국금리인하",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.89,
+        "passed": 8,
+        "failed": 1,
+        "total": 9,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "script.json 파일이 생성되었다", "passed": true, "evidence": "파일 확인됨"},
+        {"text": "첫 번째 scene의 visual_type이 intro_card이다", "passed": true, "evidence": "scene_id 0: intro_card"},
+        {"text": "마지막 scene의 visual_type이 outro_card이다", "passed": true, "evidence": "마지막 scene: outro_card"},
+        {"text": "bullet_list items에 ①②③ 같은 번호가 텍스트에 직접 포함되어 있다", "passed": false, "evidence": "번호 없이 텍스트만 나열: '기업 대출 비용 증가', '채권 수익률 상승' 등"},
+        {"text": "keyword의 description에 줄바꿈(\\n)이 없다", "passed": true, "evidence": "description 한 줄"},
+        {"text": "stat_card의 card_items 각 항목이 25자 이하이다", "passed": true, "evidence": "항목 길이 적절"},
+        {"text": "total_duration_seconds가 모든 scene duration의 합계와 일치한다", "passed": true, "evidence": "합계 일치"},
+        {"text": "content 장면이 최소 5개 이상이다", "passed": true, "evidence": "content 장면 5개"},
+        {"text": "narration 어조가 구어체이다", "passed": true, "evidence": "구어체 사용"}
+      ],
+      "notes": ["bullet_list items에 ①②③ 번호 미포함 — 컴포넌트와 중복 발생 가능"]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "삼성전자반도체",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "script.json 파일이 생성되었다", "passed": true, "evidence": "파일 확인됨"},
+        {"text": "첫 번째 scene의 visual_type이 intro_card이다", "passed": true, "evidence": "intro_card 확인"},
+        {"text": "마지막 scene의 visual_type이 outro_card이다", "passed": true, "evidence": "outro_card 확인"},
+        {"text": "chart 또는 stat_card 또는 number_highlight 중 하나 이상이 사용되었다", "passed": true, "evidence": "stat_card 2개 사용"},
+        {"text": "bullet_list가 있다면 items에 ①②③ 번호가 포함되어 있다", "passed": true, "evidence": "①②③ 포함 확인"},
+        {"text": "comparison이 있다면 left_items와 right_items 각 항목이 15자 이하이다", "passed": true, "evidence": "최장 항목 14자"},
+        {"text": "모든 scene의 visual_type이 narration 내용과 주제적으로 연관되어 있다", "passed": true, "evidence": "narration-visual 일치"},
+        {"text": "제목이 30자 이내이다", "passed": true, "evidence": "제목 28자"}
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "삼성전자반도체",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 6,
+        "failed": 2,
+        "total": 8,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "script.json 파일이 생성되었다", "passed": true, "evidence": "파일 확인됨"},
+        {"text": "첫 번째 scene의 visual_type이 intro_card이다", "passed": true, "evidence": "intro_card 확인"},
+        {"text": "마지막 scene의 visual_type이 outro_card이다", "passed": true, "evidence": "outro_card 확인"},
+        {"text": "chart 또는 stat_card 또는 number_highlight 중 하나 이상이 사용되었다", "passed": true, "evidence": "stat_card 사용"},
+        {"text": "bullet_list가 있다면 items에 ①②③ 번호가 포함되어 있다", "passed": false, "evidence": "번호 없이 텍스트만 나열"},
+        {"text": "comparison이 있다면 left_items와 right_items 각 항목이 15자 이하이다", "passed": false, "evidence": "일부 항목 16~18자 초과"},
+        {"text": "모든 scene의 visual_type이 narration 내용과 주제적으로 연관되어 있다", "passed": true, "evidence": "대체로 연관됨"},
+        {"text": "제목이 30자 이내이다", "passed": true, "evidence": "제목 29자"}
+      ],
+      "notes": ["bullet_list 번호 미포함", "comparison 항목 길이 초과"]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "비트코인전망",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "script.json 파일이 생성되었다", "passed": true, "evidence": "파일 확인됨"},
+        {"text": "첫 번째 scene의 visual_type이 intro_card이다", "passed": true, "evidence": "intro_card 확인"},
+        {"text": "마지막 scene의 visual_type이 outro_card이다", "passed": true, "evidence": "outro_card 확인"},
+        {"text": "number_highlight 또는 stat_card가 사용되어 핵심 수치를 강조했다", "passed": true, "evidence": "number_highlight 사용"},
+        {"text": "bullet_list가 있다면 items에 ①②③ 번호가 포함되어 있다", "passed": true, "evidence": "①②③ 포함 확인"},
+        {"text": "keyword의 description이 한 줄이다 (줄바꿈 없음)", "passed": true, "evidence": "한 줄 문자열 확인"},
+        {"text": "total_duration_seconds가 180~300초 사이이다", "passed": true, "evidence": "194초"}
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "비트코인전망",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.86,
+        "passed": 6,
+        "failed": 1,
+        "total": 7,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "script.json 파일이 생성되었다", "passed": true, "evidence": "파일 확인됨"},
+        {"text": "첫 번째 scene의 visual_type이 intro_card이다", "passed": true, "evidence": "intro_card 확인"},
+        {"text": "마지막 scene의 visual_type이 outro_card이다", "passed": true, "evidence": "outro_card 확인"},
+        {"text": "number_highlight 또는 stat_card가 사용되어 핵심 수치를 강조했다", "passed": true, "evidence": "stat_card 사용"},
+        {"text": "bullet_list가 있다면 items에 ①②③ 번호가 포함되어 있다", "passed": false, "evidence": "번호 없이 일반 텍스트로만 작성"},
+        {"text": "keyword의 description이 한 줄이다 (줄바꿈 없음)", "passed": true, "evidence": "한 줄 확인"},
+        {"text": "total_duration_seconds가 180~300초 사이이다", "passed": true, "evidence": "212초"}
+      ],
+      "notes": ["bullet_list 번호 미포함"]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0},
+      "time_seconds": {"mean": 0, "stddev": 0, "min": 0, "max": 0},
+      "tokens": {"mean": 0, "stddev": 0, "min": 0, "max": 0}
+    },
+    "without_skill": {
+      "pass_rate": {"mean": 0.83, "stddev": 0.07, "min": 0.75, "max": 0.89},
+      "time_seconds": {"mean": 0, "stddev": 0, "min": 0, "max": 0},
+      "tokens": {"mean": 0, "stddev": 0, "min": 0, "max": 0}
+    },
+    "delta": {
+      "pass_rate": "+0.17",
+      "time_seconds": "0",
+      "tokens": "0"
+    }
+  },
+  "notes": [
+    "without_skill에서 3개 eval 모두 bullet_list items에 ①②③ 번호 미포함 — 일관된 실패 패턴",
+    "without_skill Eval2에서 comparison items 길이 초과 (15자 제한 미준수)",
+    "with_skill은 3개 eval 모두 100% 통과 — 컴포넌트 제약 조건 준수가 확실히 개선됨",
+    "구어체/JSON 구조 등 기본 사항은 without_skill도 잘 준수"
+  ]
+}

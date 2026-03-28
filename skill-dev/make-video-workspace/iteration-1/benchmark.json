@@ -1,0 +1,165 @@
+{
+  "metadata": {
+    "skill_name": "make-video",
+    "skill_path": "/home/user/workspaces/youtube/skill-dev/make-video",
+    "timestamp": "2026-03-27T00:00:00Z",
+    "evals_run": [1, 2, 3],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "정상실행",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 0,
+        "tokens": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "실행 전에 remotion_props.json을 읽어서 영상 제목과 총 길이를 표시했다", "passed": true, "evidence": "제목·176.2초(2분 56초) 표시"},
+        {"text": "실행 전에 장면 구성(visual_type별 시작/종료 시간)을 표시했다", "passed": true, "evidence": "9개 장면 타임라인 표시"},
+        {"text": "예상 렌더링 소요 시간을 안내했다", "passed": true, "evidence": "약 4~6분 소요 안내"},
+        {"text": "python -m orchestrator.run_video e550da62 명령어를 실행했다", "passed": true, "evidence": "명령어 실행 확인"},
+        {"text": "완료 후 출력 파일 경로와 파일 크기를 표시했다", "passed": true, "evidence": "output.mp4 경로 및 15.4MB 표시"},
+        {"text": "완료 후 수정 시나리오별 다음 단계를 안내했다", "passed": true, "evidence": "비주얼/음성/대본 수정 시나리오 모두 안내"}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "정상실행",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.33,
+        "passed": 2,
+        "failed": 4,
+        "total": 6,
+        "time_seconds": 0,
+        "tokens": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "실행 전에 remotion_props.json을 읽어서 영상 제목과 총 길이를 표시했다", "passed": false, "evidence": "사전 정보 표시 없이 바로 실행"},
+        {"text": "실행 전에 장면 구성(visual_type별 시작/종료 시간)을 표시했다", "passed": false, "evidence": "장면 구성 미표시"},
+        {"text": "예상 렌더링 소요 시간을 안내했다", "passed": false, "evidence": "소요 시간 안내 없음"},
+        {"text": "python -m orchestrator.run_video e550da62 명령어를 실행했다", "passed": true, "evidence": "명령어 실행 확인"},
+        {"text": "완료 후 출력 파일 경로와 파일 크기를 표시했다", "passed": true, "evidence": "경로·크기 표시"},
+        {"text": "완료 후 수정 시나리오별 다음 단계를 안내했다", "passed": false, "evidence": "수정 안내 없음"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "파일없음",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 0,
+        "tokens": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "워크스페이스 또는 필수 파일 존재 여부를 사전에 확인했다", "passed": true, "evidence": "경로 확인 후 오류 감지"},
+        {"text": "오류 상황을 명확하게 안내했다", "passed": true, "evidence": "❌ 워크스페이스를 찾을 수 없습니다 표시"},
+        {"text": "/make-audio 먼저 실행하라고 안내했다", "passed": true, "evidence": "전체 파이프라인 순서 안내"},
+        {"text": "명령어를 실행하지 않았다", "passed": true, "evidence": "오류 감지 후 명령어 실행 안 함"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "파일없음",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.25,
+        "passed": 1,
+        "failed": 3,
+        "total": 4,
+        "time_seconds": 0,
+        "tokens": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "워크스페이스 또는 필수 파일 존재 여부를 사전에 확인했다", "passed": false, "evidence": "사전 확인 없이 명령어 실행"},
+        {"text": "오류 상황을 명확하게 안내했다", "passed": true, "evidence": "오류 메시지 표시"},
+        {"text": "/make-audio 먼저 실행하라고 안내했다", "passed": false, "evidence": "다음 단계 안내 없음"},
+        {"text": "명령어를 실행하지 않았다", "passed": false, "evidence": "오류 발생까지 명령어 실행"}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "재렌더링",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 0,
+        "tokens": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "비주얼 수정 후 재렌더링 상황임을 인식했다", "passed": true, "evidence": "재렌더링 상황 명시"},
+        {"text": "대본이나 음성 재생성 없이 렌더링만 진행했다", "passed": true, "evidence": "run_video만 실행"},
+        {"text": "python -m orchestrator.run_video e550da62 명령어를 실행했다", "passed": true, "evidence": "명령어 실행 확인"},
+        {"text": "완료 후 출력 파일 정보를 표시했다", "passed": true, "evidence": "output.mp4 정보 표시"}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "재렌더링",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "time_seconds": 0,
+        "tokens": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "비주얼 수정 후 재렌더링 상황임을 인식했다", "passed": false, "evidence": "상황 인식 없이 바로 실행"},
+        {"text": "대본이나 음성 재생성 없이 렌더링만 진행했다", "passed": true, "evidence": "run_video만 실행"},
+        {"text": "python -m orchestrator.run_video e550da62 명령어를 실행했다", "passed": true, "evidence": "명령어 실행 확인"},
+        {"text": "완료 후 출력 파일 정보를 표시했다", "passed": false, "evidence": "파일 경로만 표시, 크기 등 정보 미흡"}
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0},
+      "time_seconds": {"mean": 0, "stddev": 0, "min": 0, "max": 0},
+      "tokens": {"mean": 0, "stddev": 0, "min": 0, "max": 0}
+    },
+    "without_skill": {
+      "pass_rate": {"mean": 0.36, "stddev": 0.10, "min": 0.25, "max": 0.50},
+      "time_seconds": {"mean": 0, "stddev": 0, "min": 0, "max": 0},
+      "tokens": {"mean": 0, "stddev": 0, "min": 0, "max": 0}
+    },
+    "delta": {
+      "pass_rate": "+0.64",
+      "time_seconds": "0",
+      "tokens": "0"
+    }
+  },
+  "notes": [
+    "without_skill의 가장 큰 문제: 실행 전 영상 정보 미표시 — 사용자가 어떤 영상이 렌더링될지 모름",
+    "without_skill은 오류 상황에서 명령어를 강행 실행 후 에러 확인",
+    "without_skill은 완료 후 수정 시나리오별 안내 없음 — 사용자가 다음에 무엇을 해야 할지 불명확",
+    "with_skill은 예상 소요 시간 안내로 사용자가 기다릴 준비를 할 수 있음",
+    "재렌더링 시나리오에서 with_skill만 상황을 명시적으로 인식하고 안내"
+  ]
+}

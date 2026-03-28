@@ -1,0 +1,145 @@
+{
+  "title": "삼성전자 주가 전망 반도체 사이클 분석",
+  "hook": "삼성전자 주가, 지금 사도 될까요? 반도체 사이클의 비밀을 알면 답이 보여요.",
+  "scenes": [
+    {
+      "scene_id": 0,
+      "type": "intro",
+      "duration_seconds": 6.0,
+      "narration": "안녕하세요! 오늘은 삼성전자 주가 전망과 반도체 사이클에 대해 분석해볼 거거든요. 지금 투자해도 되는지 궁금하셨죠? 끝까지 봐주세요!",
+      "visual_type": "intro_card",
+      "visual_data": {
+        "title": "삼성전자 주가 전망",
+        "subtitle": "반도체 사이클로 읽는 투자 타이밍"
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 1,
+      "type": "main",
+      "duration_seconds": 28.0,
+      "narration": "현재 삼성전자의 상황을 숫자로 먼저 확인해볼게요. 2026년 초 기준으로 삼성전자 주가는 5만 원대 후반에서 6만 원대 초반을 오가고 있고요. PBR은 약 1.0배 수준이에요. 역사적으로 삼성전자가 PBR 1배에서 반등한 경우가 많았거든요.",
+      "visual_type": "stat_card",
+      "visual_data": {
+        "card_items": [
+          "주가: 5만 원대 후반~6만 원 초반",
+          "PBR: 약 1.0배 (역사적 저점권)",
+          "시가총액: 약 350~370조 원"
+        ]
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 2,
+      "type": "main",
+      "duration_seconds": 32.0,
+      "narration": "삼성전자 주가가 왜 이렇게 부진했는지 이유를 살펴볼까요? 세 가지 핵심 요인이 있어요. 메모리 반도체 공급 과잉, HBM 경쟁에서 SK하이닉스에 밀린 것, 그리고 파운드리 사업에서 TSMC와의 격차 확대예요.",
+      "visual_type": "bullet_list",
+      "visual_data": {
+        "title": "삼성전자 주가 부진 원인",
+        "items": [
+          "① 메모리 반도체 공급 과잉 지속",
+          "② HBM 경쟁에서 SK하이닉스에 뒤처짐",
+          "③ 파운드리, TSMC와 격차 더 벌어짐"
+        ]
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 3,
+      "type": "main",
+      "duration_seconds": 30.0,
+      "narration": "반도체 사이클을 시간 흐름으로 보면 지금이 어느 위치인지 알 수 있어요. 2022년에 업황이 꺾이면서 2023년 하반기에 바닥을 찍었고, 2024년 AI 수요로 반등했지만 삼성은 HBM 이슈로 소외됐어요. 2026년은 범용 메모리 수급이 다시 회복되는 시기로 예상돼요.",
+      "visual_type": "timeline",
+      "visual_data": {
+        "title": "반도체 업황 사이클",
+        "events": [
+          {"year": "2022", "label": "메모리 수요 급감 – 다운사이클 시작"},
+          {"year": "2023", "label": "업황 바닥 – 삼성 감산 결정"},
+          {"year": "2024", "label": "AI 반도체 호황 – 삼성 HBM 소외"},
+          {"year": "2025", "label": "범용 메모리 점진적 회복"},
+          {"year": "2026", "label": "수급 균형 회복 – 업사이클 기대"}
+        ]
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 4,
+      "type": "main",
+      "duration_seconds": 30.0,
+      "narration": "삼성전자와 경쟁사 SK하이닉스를 비교해보면 뚜렷한 차이가 나타나요. SK하이닉스는 HBM3E로 엔비디아 공급을 독점하다시피 하면서 주가가 크게 올랐지만, 삼성은 HBM 인증이 늦어지면서 상대적으로 소외됐거든요.",
+      "visual_type": "comparison",
+      "visual_data": {
+        "title": "삼성전자 vs SK하이닉스",
+        "left_label": "삼성전자",
+        "right_label": "SK하이닉스",
+        "left_items": [
+          "HBM 인증 지연",
+          "범용 D램 비중 높음",
+          "파운드리 적자 부담"
+        ],
+        "right_items": [
+          "HBM3E 엔비디아 공급",
+          "고부가 제품 비중 높음",
+          "영업이익률 우위"
+        ]
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 5,
+      "type": "main",
+      "duration_seconds": 25.0,
+      "narration": "핵심 개념 하나 짚고 갈게요. HBM이 뭔지 아세요? High Bandwidth Memory의 약자로, AI 연산에 필수적인 초고속 메모리예요. 엔비디아 GPU에 들어가는 메모리인데, 이 시장을 잡느냐 못 잡느냐가 삼성의 반등 시점을 좌우하고 있어요.",
+      "visual_type": "keyword",
+      "visual_data": {
+        "keyword": "HBM (고대역폭 메모리)",
+        "description": "AI GPU에 탑재되는 초고속·고대역폭 메모리로 AI 시대 반도체 핵심 부품"
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 6,
+      "type": "main",
+      "duration_seconds": 28.0,
+      "narration": "그렇다면 삼성전자 주가 반등을 위한 조건은 뭘까요? 세 가지를 체크해야 해요. HBM 엔비디아 공급 인증 성공, 범용 D램 가격 본격 반등, 그리고 파운드리 흑자 전환이에요. 이 중 하나라도 현실화되면 주가 모멘텀이 살아날 거거든요.",
+      "visual_type": "bullet_list",
+      "visual_data": {
+        "title": "삼성전자 반등 조건",
+        "items": [
+          "① HBM 엔비디아 공급 인증 성공",
+          "② 범용 D램 가격 본격 반등",
+          "③ 파운드리 부문 흑자 전환"
+        ]
+      },
+      "chart_data": null,
+      "chart_title": null
+    },
+    {
+      "scene_id": 7,
+      "type": "outro",
+      "duration_seconds": 13.0,
+      "narration": "정리하면, 삼성전자는 지금 역사적 저평가 구간에 있어요. 하지만 반등을 위한 트리거가 아직 확인되지 않았어요. HBM 인증과 D램 가격 흐름을 꼭 모니터링하면서 분할 매수 전략을 고려해보세요. 도움이 됐다면 구독과 좋아요 부탁드려요!",
+      "visual_type": "outro_card",
+      "visual_data": {
+        "title": "삼성전자 투자 핵심 요약",
+        "points": [
+          "PBR 1배 – 역사적 저점권",
+          "반등 트리거: HBM·D램 가격",
+          "전략: 분할 매수 접근"
+        ],
+        "cta": "구독 & 좋아요"
+      },
+      "chart_data": null,
+      "chart_title": null
+    }
+  ],
+  "total_duration_seconds": 192.0,
+  "tags": ["삼성전자", "반도체사이클", "주가전망", "HBM", "D램", "반도체투자", "SK하이닉스", "파운드리"]
+}

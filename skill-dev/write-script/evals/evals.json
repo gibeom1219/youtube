@@ -1,0 +1,53 @@
+{
+  "skill_name": "write-script",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "미국 연준 2026년 금리 인하 가능성 분석 영상 대본 만들어줘",
+      "expected_output": "유효한 JSON 대본 파일(script.json)이 생성되고, intro_card/outro_card 포함, visual_type이 narration 내용과 일치, 컴포넌트 제약 조건 준수",
+      "files": [],
+      "assertions": [
+        "script.json 파일이 생성되었다",
+        "첫 번째 scene의 visual_type이 intro_card이다",
+        "마지막 scene의 visual_type이 outro_card이다",
+        "bullet_list items에 ①②③ 같은 번호가 텍스트에 직접 포함되어 있다",
+        "keyword의 description에 줄바꿈(\\n)이 없다",
+        "stat_card의 card_items 각 항목이 25자 이하이다",
+        "total_duration_seconds가 모든 scene duration의 합계와 일치한다",
+        "content 장면이 최소 5개 이상이다",
+        "narration 어조가 구어체이다 (예: ~했어요, ~거든요, ~죠?)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "삼성전자 주가 전망과 반도체 사이클 영상 대본 작성해줘",
+      "expected_output": "삼성전자/반도체 관련 수치와 시각 자료가 포함된 대본, 다양한 visual_type 사용",
+      "files": [],
+      "assertions": [
+        "script.json 파일이 생성되었다",
+        "첫 번째 scene의 visual_type이 intro_card이다",
+        "마지막 scene의 visual_type이 outro_card이다",
+        "chart 또는 stat_card 또는 number_highlight 중 하나 이상이 사용되었다",
+        "bullet_list가 있다면 items에 ①②③ 번호가 포함되어 있다",
+        "comparison이 있다면 left_items와 right_items 각 항목이 15자 이하이다",
+        "모든 scene의 visual_type이 narration 내용과 주제적으로 연관되어 있다",
+        "제목이 30자 이내이다"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "비트코인 10만 달러 돌파 이유와 향후 전망 대본 만들어줘",
+      "expected_output": "비트코인 가격 수치, 원인 분석, 투자 관련 주의사항이 포함된 대본",
+      "files": [],
+      "assertions": [
+        "script.json 파일이 생성되었다",
+        "첫 번째 scene의 visual_type이 intro_card이다",
+        "마지막 scene의 visual_type이 outro_card이다",
+        "number_highlight 또는 stat_card가 사용되어 핵심 수치를 강조했다",
+        "bullet_list가 있다면 items에 ①②③ 번호가 포함되어 있다",
+        "keyword의 description이 한 줄이다 (줄바꿈 없음)",
+        "total_duration_seconds가 180~300초 사이이다 (3~5분)"
+      ]
+    }
+  ]
+}

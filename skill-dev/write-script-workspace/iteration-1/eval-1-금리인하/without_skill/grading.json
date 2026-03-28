@@ -1,0 +1,55 @@
+{
+  "expectations": [
+    {
+      "text": "script.json 파일이 생성되었다",
+      "passed": true,
+      "evidence": "파일이 존재하며 정상적으로 읽혔음 (title: '2026년 미국 금리 인하 될까? 총정리')"
+    },
+    {
+      "text": "첫 번째 scene의 visual_type이 intro_card이다",
+      "passed": true,
+      "evidence": "scene_id 0의 visual_type이 'intro_card'임"
+    },
+    {
+      "text": "마지막 scene의 visual_type이 outro_card이다",
+      "passed": true,
+      "evidence": "scene_id 6(마지막 scene)의 visual_type이 'outro_card'임"
+    },
+    {
+      "text": "bullet_list items에 ①②③ 같은 번호가 텍스트에 직접 포함되어 있다",
+      "passed": false,
+      "evidence": "scene_id 2 items: ['인플레이션 둔화 – CPI 2%대 근접', '고용 시장 냉각 – 실업률 상승 신호', 'GDP 성장 둔화 – 경기 침체 우려'] — ①②③ 번호 미포함. scene_id 3, 5도 동일하게 번호 없음"
+    },
+    {
+      "text": "keyword의 description에 줄바꿈(\\n)이 없다",
+      "passed": true,
+      "evidence": "keyword visual_type이 사용된 scene이 없음. 해당 조건 적용 불가 — 위반 없음으로 처리"
+    },
+    {
+      "text": "stat_card의 card_items 각 항목이 25자 이하이다",
+      "passed": true,
+      "evidence": "scene_id 1 card_items: '기준금리: 4.25~4.50%'(13자), '2001년 이후 최고 수준'(12자), '동결 기간: 약 1년 이상'(13자). scene_id 4: '2026년 인하 횟수: 1~2회 예상'(17자), '인하 시점: 하반기 유력'(13자), '연준 입장: 데이터 의존적'(14자) — 모두 25자 이하"
+    },
+    {
+      "text": "total_duration_seconds가 모든 scene duration의 합계와 일치한다",
+      "passed": true,
+      "evidence": "각 scene duration 합계: 7+40+45+40+35+38+15 = 220초, total_duration_seconds = 220.0 — 일치"
+    },
+    {
+      "text": "content 장면이 최소 5개 이상이다",
+      "passed": true,
+      "evidence": "type이 'main'인 scene이 scene_id 1~5로 총 5개 존재함"
+    },
+    {
+      "text": "narration 어조가 구어체이다 (예: ~했어요, ~거든요, ~죠?)",
+      "passed": true,
+      "evidence": "'분석해볼 거예요', '중요한 주제거든요', '이어지고 있는 거죠', '상당히 크다는 얘기예요', '내려갈 수 있거든요', '될 수도 있거든요' 등 구어체 표현 다수 사용"
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 1,
+    "total": 9,
+    "pass_rate": 0.89
+  }
+}

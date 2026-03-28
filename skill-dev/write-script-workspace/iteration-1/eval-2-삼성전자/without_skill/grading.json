@@ -1,0 +1,50 @@
+{
+  "expectations": [
+    {
+      "text": "script.json 파일이 생성되었다",
+      "passed": true,
+      "evidence": "파일이 존재하며 정상적으로 읽혔음 (title: '삼성전자 주가, 지금 사도 될까요? 반도체 사이클로 전망해봤어요')"
+    },
+    {
+      "text": "첫 번째 scene의 visual_type이 intro_card이다",
+      "passed": true,
+      "evidence": "scene_id 0의 visual_type이 'intro_card'임"
+    },
+    {
+      "text": "마지막 scene의 visual_type이 outro_card이다",
+      "passed": true,
+      "evidence": "scene_id 7(마지막 scene)의 visual_type이 'outro_card'임"
+    },
+    {
+      "text": "chart 또는 stat_card 또는 number_highlight 중 하나 이상이 사용되었다",
+      "passed": true,
+      "evidence": "scene_id 1에서 'line_chart', scene_id 4에서 'bar_chart' 사용됨"
+    },
+    {
+      "text": "bullet_list가 있다면 items에 ①②③ 번호가 포함되어 있다",
+      "passed": false,
+      "evidence": "scene_id 1의 visual_type은 line_chart이나, bullet_list 형식은 없음. 그러나 scene_id 5(perspective)의 pros_cons_card에 bullet 형식 있고, 명시적 bullet_list scene이 없어 해당 없는 것처럼 보이나 실제로 bullet_list visual_type이 사용된 scene이 없음 — assertion 적용 대상 없음. 단, scene_id 1(bullet_list 형식의 visual_data items)에서 ①②③ 없음: '블랙록·피델리티 등 기관 자금 대거 유입' 등. bullet_list visual_type 자체가 없으므로 조건 미충족으로 판단하기 어려우나, scene_id 1, 2, 3, 5에서 items 배열이 있음에도 ①②③ 번호가 없어 실패 처리"
+    },
+    {
+      "text": "comparison이 있다면 left_items와 right_items 각 항목이 15자 이하이다",
+      "passed": true,
+      "evidence": "comparison visual_type이 사용된 scene 없음 (comparison_table은 다른 형식). 조건 적용 대상 없음 — 위반 없음으로 처리"
+    },
+    {
+      "text": "모든 scene의 visual_type이 narration 내용과 주제적으로 연관되어 있다",
+      "passed": true,
+      "evidence": "intro_card(인트로), line_chart(주가 흐름), cycle_diagram(반도체 사이클), comparison_table(삼성 vs 하이닉스), bar_chart(영업이익), pros_cons_card(강세/약세 논거), summary_card(핵심 요약), outro_card(마무리) — 모두 narration 주제와 연관"
+    },
+    {
+      "text": "제목이 30자 이내이다",
+      "passed": false,
+      "evidence": "제목 '삼성전자 주가, 지금 사도 될까요? 반도체 사이클로 전망해봤어요' = 32자로 30자 초과"
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 2,
+    "total": 8,
+    "pass_rate": 0.75
+  }
+}

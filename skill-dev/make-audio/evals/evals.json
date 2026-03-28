@@ -1,0 +1,41 @@
+{
+  "skill_name": "make-audio",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "/make-audio e550da62",
+      "expected_output": "실행 전 대본 요약을 보여주고, 명령어를 실행하고, 완료 후 결과를 정리해서 표시한다",
+      "files": [],
+      "assertions": [
+        "실행 전에 script.json을 읽어서 대본 제목과 장면 수를 표시했다",
+        "실행 전에 예상 나레이션 길이(글자 수 또는 예상 초)를 표시했다",
+        "cd /home/user/workspaces/youtube && python -m orchestrator.run_audio e550da62 명령어를 실행했다",
+        "완료 후 오디오 길이(초)를 표시했다",
+        "완료 후 다음 단계로 /make-video e550da62 안내를 제공했다"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "/make-audio 없는워크스페이스ID",
+      "expected_output": "워크스페이스가 없다는 오류를 친절하게 안내하고, write-script를 먼저 실행하라고 안내한다",
+      "files": [],
+      "assertions": [
+        "워크스페이스 경로가 존재하지 않음을 확인했다",
+        "사용자에게 오류 상황을 명확히 안내했다",
+        "/write-script 명령어로 먼저 대본을 만들라고 안내했다",
+        "명령어를 실행하지 않았다 (오류 상황에서 강행하지 않음)"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "/make-audio e550da62",
+      "expected_output": "script.json이 없는 경우 오류 안내 및 write-script 재실행 안내",
+      "files": [],
+      "assertions": [
+        "실행 전에 script.json 존재 여부를 확인했다",
+        "script.json이 없을 경우 오류 메시지를 표시했다",
+        "/write-script 먼저 실행하라고 안내했다"
+      ]
+    }
+  ]
+}

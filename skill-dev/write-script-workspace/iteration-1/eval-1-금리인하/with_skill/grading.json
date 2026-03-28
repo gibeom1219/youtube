@@ -1,0 +1,55 @@
+{
+  "expectations": [
+    {
+      "text": "script.json 파일이 생성되었다",
+      "passed": true,
+      "evidence": "파일이 존재하며 정상적으로 읽혔음 (title: '연준 2026년 금리 인하할까? 핵심 분석')"
+    },
+    {
+      "text": "첫 번째 scene의 visual_type이 intro_card이다",
+      "passed": true,
+      "evidence": "scene_id 0의 visual_type이 'intro_card'임"
+    },
+    {
+      "text": "마지막 scene의 visual_type이 outro_card이다",
+      "passed": true,
+      "evidence": "scene_id 8(마지막 scene)의 visual_type이 'outro_card'임"
+    },
+    {
+      "text": "bullet_list items에 ①②③ 같은 번호가 텍스트에 직접 포함되어 있다",
+      "passed": true,
+      "evidence": "scene_id 2 items: ['① 인플레이션 둔화 – CPI 2%대 근접', '② 고용 시장 냉각 – 실업률 상승 신호', '③ 경기 침체 우려 – GDP 성장 둔화'] 등 모든 bullet_list에 ①②③ 포함됨"
+    },
+    {
+      "text": "keyword의 description에 줄바꿈(\\n)이 없다",
+      "passed": true,
+      "evidence": "scene_id 6 keyword description: '연준 위원들이 향후 금리 경로를 익명으로 예측해 발표하는 분기별 도표' — 줄바꿈 없음"
+    },
+    {
+      "text": "stat_card의 card_items 각 항목이 25자 이하이다",
+      "passed": true,
+      "evidence": "scene_id 1 card_items: '현재 기준금리: 4.25~4.50%'(19자), '2000년대 이후 두 번째 고금리'(16자), '동결 유지 기간: 약 12개월'(14자) — 모두 25자 이하"
+    },
+    {
+      "text": "total_duration_seconds가 모든 scene duration의 합계와 일치한다",
+      "passed": true,
+      "evidence": "각 scene duration 합계: 6+28+35+30+32+30+25+28+12 = 226초, total_duration_seconds = 226.0 — 일치"
+    },
+    {
+      "text": "content 장면이 최소 5개 이상이다",
+      "passed": true,
+      "evidence": "type이 'main'인 scene이 scene_id 1~7로 총 7개 존재함"
+    },
+    {
+      "text": "narration 어조가 구어체이다 (예: ~했어요, ~거든요, ~죠?)",
+      "passed": true,
+      "evidence": "'분석해볼 거거든요', '알아야 할 내용이에요', '유지하고 있거든요', '딜레마예요', '명분이 생기는 거예요', '흥미로운 차이가 있어요' 등 구어체 표현 다수 사용"
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 0,
+    "total": 9,
+    "pass_rate": 1.0
+  }
+}
