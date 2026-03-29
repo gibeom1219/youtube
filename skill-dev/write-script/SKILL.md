@@ -538,6 +538,15 @@ narration 내용을 기준으로 아래 결정 트리를 따르세요:
 
 ### 4단계: visual_data 작성 규칙
 
+⚠️ **타입 규칙 (렌더링 크래시 방지)**
+- `card_items`, `items`, `pros`, `cons`, `left_items`, `right_items`, `do_items`, `dont_items`, `sub_points` 등은 반드시 **문자열 배열**: `["텍스트1", "텍스트2"]`
+  - ❌ `[{"label":"A","value":"B"}]` → React 렌더링 크래시
+  - ✅ `["A: B", "C: D"]`
+- `title`, `label`, `description`, `message`, `headline`, `quote`, `speaker` 등은 반드시 **문자열**
+  - ❌ `{"label":"A","value":"B"}` → 크래시
+  - ✅ `"A: B"`
+- 대본 생성 후 자동 검증: 필수 필드 존재 + 타입 체크 → 문제 씬만 Claude API에 수정 요청
+
 **stat_card**
 ```json
 {
