@@ -87,6 +87,10 @@ def _try_veo(client, scenes, assets_dir, scene_assets) -> bool:
 
         group_idx += 1
 
+        # RPM 한도 방지: 요청 간 35초 대기
+        if i + group_size < len(scenes):
+            time.sleep(35)
+
     return True
 
 
@@ -107,6 +111,9 @@ def _generate_images(client, scenes, assets_dir, scene_assets):
             scene_assets[scene.scene_id] = relative_path
         else:
             scene_assets[scene.scene_id] = None
+
+        # RPM 한도 방지
+        time.sleep(5)
 
 
 def _generate_image(client, prompt: str, save_path: Path, scene_id: int) -> bool:

@@ -835,8 +835,15 @@ VISUAL_DATA_SCHEMA: dict[str, list[str]] = {
 
 
 def _validate_visual_data(script: ScriptOutput) -> ScriptOutput:
-    """visual_data 필수 필드를 검증하고, 문제 있는 씬만 Claude API에 수정 요청."""
+    """visual_data 필수 필드 + 타입을 검증하고, 문제 있는 씬만 Claude API에 수정 요청."""
     broken_scenes = []
+
+    # 문자열 배열이어야 하는 필드 목록
+    STRING_ARRAY_FIELDS = {
+        "card_items", "items", "pros", "cons", "left_items", "right_items",
+        "before_items", "after_items", "sub_points", "strengths", "weaknesses",
+        "opportunities", "threats", "do_items", "dont_items",
+    }
 
     for scene in script.scenes:
         vt = scene.visual_type
@@ -853,9 +860,30 @@ def _validate_visual_data(script: ScriptOutput) -> ScriptOutput:
             broken_scenes.append((scene, schema, "visual_data가 null"))
             continue
 
+        issues = []
+
+        # 필드 존재 검증
         missing = [f for f in schema if f not in vd]
         if missing:
-            broken_scenes.append((scene, schema, f"누락 필드: {missing}"))
+            issues.append(f"누락 필드: {missing}")
+
+        # 타입 검증: 문자열 자리에 객체가 들어간 경우
+        for key in ["title", "label", "description", "message", "headline",
+                     "quote", "keyword", "text", "sub", "big_number", "big_label",
+                     "card_title", "speaker", "role", "name", "ticker", "asset",
+                     "event", "event_date", "trigger", "source", "period", "change",
+                     "before_price", "after_price", "current_price", "target_price"]:
+            if key in vd and isinstance(vd[key], dict):
+                issues.append(f"{key}가 객체 (문자열이어야 함)")
+
+        # 타입 검증: 문자열 배열 자리에 객체 배열이 들어간 경우
+        for key in STRING_ARRAY_FIELDS:
+            if key in vd and isinstance(vd[key], list) and vd[key]:
+                if isinstance(vd[key][0], dict):
+                    issues.append(f"{key}가 객체 배열 (문자열 배열이어야 함)")
+
+        if issues:
+            broken_scenes.append((scene, schema, " / ".join(issues)))
 
     if not broken_scenes:
         print(f"[ScriptWriter] ✅ visual_data 검증 통과")
@@ -954,16 +982,35 @@ def _build_schema_example(vt: str, schema: list[str]) -> str:
 
 
 def _fallback_fix(script: ScriptOutput, broken_scenes: list):
-    """API 수정 실패 시 기본값으로 채움."""
+    """API 수정 실패 시 기본값으로 채우고 타입도 자동 수정."""
+    STRING_ARRAY_FIELDS = {
+        "card_items", "items", "pros", "cons", "left_items", "right_items",
+        "before_items", "after_items", "sub_points", "strengths", "weaknesses",
+        "opportunities", "threats", "do_items", "dont_items",
+    }
+
     for scene, schema, _ in broken_scenes:
         if scene.visual_data is None:
             scene.visual_data = {}
+        vd = scene.visual_data
+
+        # 누락 필드 채우기
         for field in schema:
-            if field not in scene.visual_data:
+            if field not in vd:
                 if field in ("items", "steps", "stages", "levels", "points", "events",
                              "sectors", "stocks", "chain", "flows", "nodes"):
-                    scene.visual_data[field] = []
+                    vd[field] = []
                 elif field in ("value", "number", "level", "days"):
-                    scene.visual_data[field] = 0
+                    vd[field] = 0
                 else:
-                    scene.visual_data[field] = scene.narration[:30] if field in ("title", "text", "headline", "message", "quote", "description", "label") else ""
+                    vd[field] = scene.narration[:30] if field in ("title", "text", "headline", "message", "quote", "description", "label") else ""
+
+        # 타입 자동 수정: 문자열 자리에 객체
+        for key in list(vd.keys()):
+            if isinstance(vd[key], dict) and key not in ("left", "right", "before", "after", "center", "side_a", "side_b"):
+                vd[key] = f"{vd[key].get('label', '')} {vd[key].get('value', '')}".strip()
+
+        # 타입 자동 수정: 문자열 배열 자리에 객체 배열
+        for key in STRING_ARRAY_FIELDS:
+            if key in vd and isinstance(vd[key], list) and vd[key] and isinstance(vd[key][0], dict):
+                vd[key] = [f"{item.get('label', '')} {item.get('value', '')}".strip() if isinstance(item, dict) else str(item) for item in vd[key]]
