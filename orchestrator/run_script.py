@@ -78,7 +78,7 @@ def format_visual_data(visual_type: str, visual_data: dict | None, chart_data: l
     elif visual_type == "flow_diagram" and visual_data:
         steps = visual_data.get("steps", [])
         lines.append(f"  - {visual_data.get('title', '')}")
-        lines.append(f"  - {' → '.join(s.get('label', '') for s in steps)}")
+        lines.append(f"  - {' → '.join(s.get('label', '') if isinstance(s, dict) else str(s) for s in steps)}")
 
     elif visual_type == "news_feed" and visual_data:
         lines.append(f"  - {visual_data.get('title', '')}")

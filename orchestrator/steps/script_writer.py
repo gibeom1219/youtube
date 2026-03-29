@@ -865,6 +865,11 @@ def _validate_visual_data(script: ScriptOutput) -> ScriptOutput:
     for scene, schema, issue in broken_scenes:
         print(f"  씬 {scene.scene_id} ({scene.visual_type}): {issue}")
 
+    # rate limit 방지: 대본 생성 직후이므로 60초 대기
+    import time
+    print(f"[ScriptWriter] API rate limit 대기 (60초)...")
+    time.sleep(60)
+
     # 문제 씬들을 모아서 한 번에 수정 요청
     _fix_broken_scenes(script, broken_scenes)
 
