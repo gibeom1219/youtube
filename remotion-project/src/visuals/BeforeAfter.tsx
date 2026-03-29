@@ -18,8 +18,9 @@ export const BeforeAfter: React.FC<Props> = ({ data }) => {
   const afterP = spring({ frame: frame - 26, fps, config: { damping: 100, stiffness: 10 } });
   const changeOpacity = interpolate(frame, [34, 44], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
-  const isPositive = data.change.startsWith("+");
-  const changeColor = isPositive ? theme.green : data.change.startsWith("-") ? theme.red : theme.tiffany;
+  const changeStr = data.change ?? "";
+  const isPositive = changeStr.startsWith("+");
+  const changeColor = isPositive ? theme.green : changeStr.startsWith("-") ? theme.red : theme.tiffany;
 
   return (
     <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "70px 120px", gap: 20 }}>

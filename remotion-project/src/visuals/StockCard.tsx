@@ -28,7 +28,8 @@ export const StockCard: React.FC<Props> = ({ data }) => {
   const priceProgress = spring({ frame: frame - 10, fps, config: { damping: 100, stiffness: 5 } });
   const statsProgress = spring({ frame: frame - 22, fps, config: { damping: 100, stiffness: 10 } });
 
-  const isPositive = data.change.startsWith("+") || (!data.change.startsWith("-") && parseFloat(data.change) >= 0);
+  const changeStr = data.change ?? "";
+  const isPositive = changeStr.startsWith("+") || (!changeStr.startsWith("-") && parseFloat(changeStr) >= 0);
   const changeColor = isPositive ? "#52D68A" : "#FF6B6B";
   const changeArrow = isPositive ? "▲" : "▼";
 

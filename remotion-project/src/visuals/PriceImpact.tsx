@@ -9,7 +9,8 @@ interface Props {
 export const PriceImpact: React.FC<Props> = ({ data }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const isNegative = data.change.startsWith("-");
+  const changeStr = data.change ?? "";
+  const isNegative = changeStr.startsWith("-");
   const color = isNegative ? theme.red : theme.green;
 
   const assetOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
