@@ -221,11 +221,17 @@ remotion-project/src/
 - IN: 30프레임 (0.5초) / OUT: 25프레임 (~0.4초)
 
 ### 배경 에셋
-- **1차: Veo 3.1 Fast 영상** — 3씬 1영상 그룹화, 720p, 4초
-- **2차: Nano Banana 이미지** — Veo 실패 시 자동 전환, 씬마다 1개 .png
+- **1차: Veo 3.1 Fast 영상** — 3씬 1영상 그룹화, 720p, 4초, RPM 대기 35초
+- **2차: Nano Banana 2 이미지** (`gemini-3.1-flash-image-preview`) — Veo 실패 시 자동 전환, 씬마다 1개 .png
 - 배경 opacity: 20%, 영상은 muted+loop+playbackRate 0.8
 - Veo 영상은 ffmpeg로 매 프레임 키프레임 재인코딩 (seek 떨림 방지)
 - 파일 확장자로 영상/이미지 자동 감지 (.mp4 vs .png)
+- 렌더링 타임아웃: 120초 (배경 영상 로딩 대기)
+
+### 컴포넌트 방어 코드
+- **AreaChart**: `series[].values` 또는 `series[].data` 모두 허용
+- **StockCard/BeforeAfter/PriceImpact**: `data.change`가 undefined일 때 `??""` fallback
+- 모든 컴포넌트에서 optional 필드는 `?? ""` 또는 `?? []`로 방어 처리 권장
 
 ### 대본 스타일
 - **완전한 입말 구어체** (뉴스체/리포트체/기사체 절대 금지)

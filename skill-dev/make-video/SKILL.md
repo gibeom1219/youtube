@@ -114,3 +114,9 @@ cd /home/user/workspaces/youtube && python -m orchestrator.run_video <workspace_
 - 30fps → 60fps 변경으로 파일 크기가 커짐 (약 1.5~2배)
 - 렌더링 시간도 약간 증가
 - 예상 렌더링 시간: 영상 길이 × 2 ~ 3배
+- 렌더링 타임아웃: 120초 (배경 영상 로딩 대기, `render.mjs`의 `timeoutInMilliseconds`)
+
+## 참고: 컴포넌트 방어 코드
+- AreaChart: `series[].values` 또는 `series[].data` 모두 허용
+- StockCard/BeforeAfter/PriceImpact: `change` 필드 undefined 시 빈 문자열 fallback
+- 렌더링 에러 발생 시 에러 로그의 `functionName`으로 문제 컴포넌트 확인 가능

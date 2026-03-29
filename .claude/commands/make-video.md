@@ -89,6 +89,7 @@ cd /home/user/workspaces/youtube && python -m orchestrator.run_video <workspace_
 ## 참고: 60fps
 - 30fps → 60fps 변경으로 파일 크기가 약 1.5~2배 커짐
 - 렌더링 시간도 증가
+- 렌더링 타임아웃: 120초 (배경 영상 로딩 대기)
 
 ## 수정 후 재렌더링 가이드
 
