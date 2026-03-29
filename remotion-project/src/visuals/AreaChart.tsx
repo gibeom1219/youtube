@@ -13,7 +13,9 @@ export const AreaChart: React.FC<Props> = ({ data: props }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const { title, labels, series } = props;
-  const allVals = series.flatMap((s) => s.values);
+  // values 또는 data 필드 모두 허용
+  const getValues = (s: any) => s.values ?? s.data ?? [];
+  const allVals = series.flatMap((s) => getValues(s));
   const maxVal = Math.max(...allVals);
   const titleOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const titleP = spring({ frame, fps, config: { damping: 100, stiffness: 25 } });
@@ -58,15 +60,16 @@ export const AreaChart: React.FC<Props> = ({ data: props }) => {
         {series.map((s, si) => {
           const color = COLORS[si % COLORS.length];
           const visibleCount = Math.ceil(drawP * labels.length);
-          const pts = s.values.slice(0, visibleCount).map((v, i) => ({ x: getX(i), y: getY(v) }));
+          const vals = getValues(s);
+          const pts = vals.slice(0, visibleCount).map((v: number, i: number) => ({ x: getX(i), y: getY(v) }));
           if (pts.length < 2) return null;
-          const linePath = pts.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
+          const linePath = pts.map((p: {x: number; y: number}, i: number) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
           const areaPath = `${linePath} L ${pts[pts.length - 1].x} ${h - padB} L ${pts[0].x} ${h - padB} Z`;
           return (
             <g key={si}>
               <path d={areaPath} fill={`${color}12`} />
               <path d={linePath} fill="none" stroke={color} strokeWidth={2.5} strokeLinecap="round" />
-              {pts.map((p, i) => (
+              {pts.map((p: {x: number; y: number}, i: number) => (
                 <circle key={i} cx={p.x} cy={p.y} r={4} fill={color} stroke={theme.bg} strokeWidth={2} />
               ))}
             </g>
