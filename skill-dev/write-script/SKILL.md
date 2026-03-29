@@ -1100,6 +1100,508 @@ narration 내용을 기준으로 아래 결정 트리를 따르세요:
 }
 ```
 
+**line_chart**
+```json
+{
+  "title": "코스피 주간 추이",
+  "unit": "포인트",
+  "trend": "down",
+  "data": [
+    {"label": "3/3", "value": 2650},
+    {"label": "3/10", "value": 2580},
+    {"label": "3/17", "value": 2520},
+    {"label": "3/24", "value": 2480}
+  ]
+}
+```
+⚠️ trend: "up"(녹색), "down"(빨강), "mixed"(티파니)
+
+**heat_map**
+```json
+{
+  "title": "섹터별 주간 수익률",
+  "items": [
+    {"label": "반도체", "value": "3,200", "change": 2.3},
+    {"label": "2차전지", "value": "890", "change": -3.1},
+    {"label": "방산", "value": "1,450", "change": 5.7},
+    {"label": "바이오", "value": "720", "change": -1.2}
+  ]
+}
+```
+
+**quote_vs**
+```json
+{
+  "topic": "금리 인하 시기 논쟁",
+  "left": {"speaker": "김영익", "role": "서강대 교수", "quote": "하반기 인하 불가피", "stance": "비둘기파"},
+  "right": {"speaker": "홍춘욱", "role": "프리즘투자자문 대표", "quote": "인플레 잡힐 때까지 동결", "stance": "매파"}
+}
+```
+
+**stacked_bar**
+```json
+{
+  "title": "트럼프 자산 구성 변화",
+  "categories": ["부동산", "코인", "미디어", "기타"],
+  "data": [
+    {"label": "2024", "values": [25, 5, 8, 5]},
+    {"label": "2025", "values": [25, 30, 12, 6]}
+  ]
+}
+```
+
+**swot_card**
+```json
+{
+  "title": "삼성전자 SWOT 분석",
+  "strengths": ["메모리 시장 1위", "파운드리 투자 확대"],
+  "weaknesses": ["비메모리 경쟁력 부족", "중국 리스크"],
+  "opportunities": ["AI 반도체 수요 폭증", "HBM 독점"],
+  "threats": ["미중 갈등 심화", "TSMC 격차 확대"]
+}
+```
+
+**target_price**
+```json
+{
+  "ticker": "005930",
+  "name": "삼성전자",
+  "current_price": "72,000원",
+  "target_price": "95,000원",
+  "analyst": "NH투자증권",
+  "rating": "buy",
+  "upside": "+31.9%",
+  "logo": "📱"
+}
+```
+⚠️ rating: "buy"(녹색), "hold"(주황), "sell"(빨강)
+
+**sector_board**
+```json
+{
+  "title": "업종별 등락 현황",
+  "date": "2025년 3월 28일",
+  "sectors": [
+    {"name": "반도체", "change": "+2.3", "index": "3,200"},
+    {"name": "자동차", "change": "+1.1", "index": "2,100"},
+    {"name": "항공", "change": "-3.5", "index": "890"}
+  ]
+}
+```
+
+**mini_profile**
+```json
+{
+  "name": "케빈 워시",
+  "role": "차기 연준 의장 후보",
+  "organization": "전 연준 이사",
+  "avatar": "🎓",
+  "bio": "30대 중반에 최연소 연준 이사. 2008 금융위기 당시 투자은행 구제에 핵심 역할.",
+  "stats": [{"label": "연준 이사", "value": "2006~2011"}, {"label": "모건스탠리", "value": "부사장"}]
+}
+```
+
+**data_counter**
+```json
+{
+  "number": 1500,
+  "unit": "원",
+  "prefix": "",
+  "label": "원달러 환율",
+  "description": "2009년 금융위기 이후 처음으로 1,500원 돌파"
+}
+```
+
+**highlight_quote**
+```json
+{
+  "text": "결국 모든 돈이 밖으로 나가고 있다는 겁니다",
+  "emphasis": "밖으로",
+  "sub": "기관, 연금, 개인, 기업 — 모든 주체가 달러를 유출하고 있는 구조",
+  "icon": "💸"
+}
+```
+
+**radar_chart**
+```json
+{
+  "title": "삼성전자 투자 매력도 평가",
+  "labels": ["수익성", "성장성", "안정성", "배당", "밸류에이션"],
+  "values": [85, 70, 90, 60, 75],
+  "max": 100
+}
+```
+
+**tree_map**
+```json
+{
+  "title": "코스피 시가총액 비중",
+  "items": [
+    {"label": "삼성전자", "value": 350, "display": "20.5%"},
+    {"label": "SK하이닉스", "value": 120, "display": "7.0%"},
+    {"label": "현대차", "value": 55, "display": "3.2%"},
+    {"label": "기타", "value": 1175, "display": "69.3%"}
+  ]
+}
+```
+
+**countdown**
+```json
+{
+  "event": "FOMC 금리 결정",
+  "date": "2025년 5월 7일",
+  "days": 38,
+  "description": "시장은 동결을 예상하고 있지만 서프라이즈 가능성도 있어요",
+  "icon": "⏰",
+  "importance": "high"
+}
+```
+⚠️ importance: "high"(빨강), "medium"(주황), "low"(티파니)
+
+**matrix_grid**
+```json
+{
+  "title": "종목 포지셔닝 매트릭스",
+  "x_axis": "성장성",
+  "y_axis": "밸류에이션",
+  "quadrants": [
+    {"label": "고성장·고평가", "items": ["엔비디아", "테슬라"], "position": "top_right"},
+    {"label": "고성장·저평가", "items": ["삼성전자", "SK하이닉스"], "position": "top_left"},
+    {"label": "저성장·고평가", "items": ["코카콜라"], "position": "bottom_right"},
+    {"label": "저성장·저평가", "items": ["은행주"], "position": "bottom_left"}
+  ]
+}
+```
+
+**before_after**
+```json
+{
+  "title": "트럼프 자산 변화",
+  "before": {"label": "취임 전", "value": "39억$"},
+  "after": {"label": "취임 1년 후", "value": "73억$"},
+  "change": "+87%",
+  "period": "2024~2025"
+}
+```
+
+**big_text**
+```json
+{
+  "text": "대통령이 돈을 버는 구조가 곧 정책의 방향이다",
+  "sub": "트럼프 일가의 사업 방향을 보면 다음 정책이 보입니다"
+}
+```
+
+**waterfall_chart**
+```json
+{
+  "title": "트럼프 자산 증가 요인 분해",
+  "unit": "억$",
+  "items": [
+    {"label": "시작", "value": 39, "type": "total"},
+    {"label": "코인 사업", "value": 15, "type": "increase"},
+    {"label": "미디어(DJT)", "value": 8, "type": "increase"},
+    {"label": "부동산", "value": 6, "type": "increase"},
+    {"label": "소송비용", "value": -3, "type": "decrease"},
+    {"label": "현재", "value": 73, "type": "total"}
+  ]
+}
+```
+
+**risk_scale**
+```json
+{
+  "title": "현재 시장 리스크 수준",
+  "level": 4,
+  "labels": ["매우 낮음", "낮음", "보통", "높음", "매우 높음"],
+  "description": "중동 리스크 + 고환율 + 외국인 이탈이 겹치면서 리스크가 높아진 상태"
+}
+```
+
+**relation_map**
+```json
+{
+  "title": "트럼프 코인 사업 관계도",
+  "center": {"label": "트럼프", "icon": "🏛️"},
+  "nodes": [
+    {"label": "WLFI", "relation": "75% 배당", "icon": "💰"},
+    {"label": "TRUMP코인", "relation": "밈코인", "icon": "🪙"},
+    {"label": "USD1", "relation": "스테이블코인", "icon": "💵"},
+    {"label": "아부다비 MGX", "relation": "20억$ 투자", "icon": "🇦🇪"}
+  ]
+}
+```
+
+**milestone**
+```json
+{
+  "title": "트럼프 자산 목표 달성도",
+  "current": 73,
+  "target": 100,
+  "unit": "억 달러",
+  "label": "포브스 100억 달러 클럽 진입까지",
+  "icon": "🎯"
+}
+```
+
+**news_ticker**
+```json
+{
+  "title": "트럼프 관련 최신 뉴스",
+  "items": [
+    {"headline": "TRUMP 코인 고점 대비 -89% 폭락", "source": "코인데스크", "type": "negative"},
+    {"headline": "USD1 스테이블코인 발행량 20억 달러 돌파", "source": "로이터", "type": "positive"},
+    {"headline": "GENIUS법 상원 통과, 스테이블코인 규제 확립", "source": "블룸버그", "type": "neutral"}
+  ]
+}
+```
+⚠️ type: "positive"(녹색▲), "negative"(빨강▼), "neutral"(티파니●)
+
+**emoji_scale**
+```json
+{
+  "title": "시장 분위기 평가",
+  "levels": [
+    {"emoji": "😱", "label": "극단 공포"},
+    {"emoji": "😰", "label": "공포"},
+    {"emoji": "😐", "label": "중립"},
+    {"emoji": "😊", "label": "낙관"},
+    {"emoji": "🤩", "label": "극단 탐욕"}
+  ],
+  "active": 1,
+  "description": "외국인 매도세가 지속되면서 시장 심리가 위축된 상태"
+}
+```
+⚠️ active: 0부터 시작하는 인덱스
+
+**horizontal_bar**
+```json
+{
+  "title": "중동 무기 수출 규모",
+  "unit": "조 원",
+  "items": [
+    {"label": "UAE", "value": 10},
+    {"label": "쿠웨이트", "value": 12},
+    {"label": "요르단", "value": 6},
+    {"label": "기타", "value": 6}
+  ]
+}
+```
+
+**gradient_stat**
+```json
+{
+  "title": "주요 시장 지표",
+  "stats": [
+    {"label": "코스피", "value": "2,480", "change": "-2.1%", "icon": "📉"},
+    {"label": "원달러", "value": "1,505", "change": "+1.3%", "icon": "💱"},
+    {"label": "유가", "value": "$94", "change": "+8.5%", "icon": "🛢️"}
+  ]
+}
+```
+
+**area_chart**
+```json
+{
+  "title": "외국인 순매수 추이",
+  "labels": ["1월", "2월", "3월", "4월"],
+  "series": [
+    {"name": "코스피", "values": [2000, -3000, -5000, -8000]},
+    {"name": "코스닥", "values": [500, -1000, -2000, -3500]}
+  ]
+}
+```
+
+**money_flow**
+```json
+{
+  "title": "한국 달러 유출 구조",
+  "source": "한국 내 달러",
+  "flows": [
+    {"from": "국민연금", "to": "해외 주식·채권", "amount": "370조 원", "note": "운용자산의 37%"},
+    {"from": "서학개미", "to": "미국 주식", "amount": "663억 달러", "note": "2025년 누적"},
+    {"from": "기업", "to": "해외 직접 투자", "amount": "537억 달러", "note": "외화 예금 쟁여둠"},
+    {"from": "보험사", "to": "미국 장기 국채", "amount": "장기 투자", "note": "회수 어려움"}
+  ]
+}
+```
+
+**scale_compare**
+```json
+{
+  "title": "해외 투자 규모 비교",
+  "left": {"label": "국민연금", "value": "370조 원", "amount": 370, "icon": "🏛️"},
+  "right": {"label": "개인 투자자", "value": "80조 원", "amount": 80, "icon": "👤"},
+  "message": "기관이 개인보다 4.6배 더 많은 달러를 해외로 보내고 있음"
+}
+```
+
+**career_timeline**
+```json
+{
+  "name": "케빈 워시",
+  "role": "차기 연준 의장",
+  "avatar": "🎓",
+  "events": [
+    {"year": "1995", "title": "스탠퍼드 졸업", "detail": "공공 정책학 전공"},
+    {"year": "2002", "title": "모건스탠리 부사장", "detail": "30대 초반 승진"},
+    {"year": "2006", "title": "최연소 연준 이사", "detail": "부시 대통령 지명", "highlight": true},
+    {"year": "2008", "title": "금융위기 대응", "detail": "투자은행 구제 핵심 역할", "highlight": true},
+    {"year": "2011", "title": "연준 퇴임", "detail": "양적완화 반대 후 사임"}
+  ]
+}
+```
+
+**price_impact**
+```json
+{
+  "asset": "TRUMP 밈코인",
+  "before_price": "$75.35",
+  "after_price": "$8.24",
+  "change": "-89%",
+  "period": "2025년 1월~6월",
+  "icon": "🪙",
+  "context": "취임 전날 고점 찍고 지속 하락. 개미만 물렸습니다."
+}
+```
+
+**structure_diagram**
+```json
+{
+  "title": "호르무즈 해협 구조",
+  "description": "전 세계 원유 20%가 통과하는 병목 지점",
+  "elements": [
+    {"label": "이란", "position": "top", "icon": "🇮🇷", "note": "북쪽 해안"},
+    {"label": "호르무즈 해협", "position": "center", "icon": "🚢", "note": "폭 54km"},
+    {"label": "오만/UAE", "position": "bottom", "icon": "🇦🇪", "note": "남쪽 해안"},
+    {"label": "페르시아만", "position": "left", "icon": "🛢️", "note": "산유국"},
+    {"label": "인도양", "position": "right", "icon": "🌊", "note": "수출 항로"}
+  ],
+  "connections": [{"from": 3, "to": 1, "label": "원유 수송"}, {"from": 1, "to": 4, "label": "국제 항로"}]
+}
+```
+
+**argument_card**
+```json
+{
+  "topic": "M2 통화량 직계 방식 논쟁",
+  "side_a": {"claim": "통화량 증가율 8%는 과거보다 심하지 않다", "evidence": ["과거 금리 인하기엔 10%도 찍었다", "절대 규모가 아니라 증가율을 봐야 한다"], "label": "한국은행"},
+  "side_b": {"claim": "절대 규모가 문제다. 빚이 너무 많다", "evidence": ["IMF가 수년간 바꾸라고 했는데 이제서야?", "ETF 빼는 건 책임 회피"], "label": "시장 비판"},
+  "verdict": "양쪽 다 일리가 있지만, 타이밍이 석연치 않다는 지적은 유효"
+}
+```
+
+**mechanism**
+```json
+{
+  "title": "레버리지 청산 연쇄 원리",
+  "subtitle": "왜 한번 빠지면 더 빠지는가",
+  "steps": [
+    {"title": "레버리지 투자자 진입", "explanation": "100원으로 1,000원어치 투자. 빚이 900원."},
+    {"title": "가격 10% 하락", "explanation": "1,000원이 900원이 됨. 내 돈 100원이 증발."},
+    {"title": "강제 청산 발동", "explanation": "거래소가 담보 부족으로 기계적 매도."},
+    {"title": "연쇄 청산", "explanation": "청산 물량이 쏟아지면서 추가 하락 → 더 많은 청산."}
+  ]
+}
+```
+
+**debate_card**
+```json
+{
+  "speaker": "이창용",
+  "role": "한국은행 총재",
+  "quote": "젊은 사람들이 쿨하다고 하면서 유행처럼 해외 투자를 하고 있어서 걱정이다",
+  "reactions": [
+    {"side": "oppose", "text": "환율에 영향 끼친 요소가 한둘이 아닌데 왜 청년만 탓하냐"},
+    {"side": "oppose", "text": "국민연금이 해외 투자 규모가 훨씬 큰데?"},
+    {"side": "support", "text": "사실 개인 투자자의 해외 투자가 늘어난 것은 팩트"}
+  ]
+}
+```
+
+**scenario_card**
+```json
+{
+  "title": "환율 전망 3가지 시나리오",
+  "scenarios": [
+    {"label": "낙관", "icon": "🕊️", "condition": "중동 안정 + 연준 인하", "outcome": "환율 1,350원대 복귀", "probability": "25%", "color": "#52D68A"},
+    {"label": "기본", "icon": "⚖️", "condition": "현상 유지, 점진 개선", "outcome": "1,400~1,500원 박스권", "probability": "50%", "color": "#FFB347"},
+    {"label": "비관", "icon": "⚠️", "condition": "전쟁 확전 + 관세 전쟁", "outcome": "1,600원 돌파", "probability": "25%", "color": "#FF6B6B"}
+  ]
+}
+```
+
+**split_screen**
+```json
+{
+  "title": "환율 상승 수혜 vs 피해",
+  "before_label": "수혜 섹터",
+  "before_color": "#52D68A",
+  "before_items": ["수출 대형주 (현대차·기아)", "조선·방산", "해외 매출 비중 높은 IT"],
+  "after_label": "피해 섹터",
+  "after_color": "#FF6B6B",
+  "after_items": ["항공사 (연료비 달러)", "수입 원자재 의존 기업", "내수 중소기업"]
+}
+```
+
+**world_stats**
+```json
+{
+  "title": "주요국 기준금리 현황",
+  "subtitle": "2025년 3월 기준",
+  "items": [
+    {"flag": "🇺🇸", "country": "미국", "value": "3.75%", "change": "-0.5%p", "note": "2회 인하"},
+    {"flag": "🇰🇷", "country": "한국", "value": "2.50%", "change": "-0.25%p", "note": "1회 인하"},
+    {"flag": "🇯🇵", "country": "일본", "value": "0.50%", "change": "+0.25%p", "note": "인상 기조"}
+  ]
+}
+```
+
+**dual_stat**
+```json
+{
+  "title": "달러 유출 규모 비교",
+  "left_number": "663",
+  "left_unit": "억$",
+  "left_label": "서학개미 해외 투자",
+  "left_sub": "2025년 누적",
+  "left_color": "#FF6B6B",
+  "right_number": "537",
+  "right_unit": "억$",
+  "right_label": "기업 외화 예금",
+  "right_sub": "5대 시중은행",
+  "right_color": "#FFB347"
+}
+```
+
+**icon_grid**
+```json
+{
+  "title": "환율 상승 4가지 원인",
+  "items": [
+    {"icon": "🏦", "label": "한미 금리차", "desc": "1.25%p 격차"},
+    {"icon": "✈️", "label": "서학개미", "desc": "663억 달러 유출"},
+    {"icon": "🏭", "label": "기업 달러 쟁여두기", "desc": "537억 달러 예금"},
+    {"icon": "⛽", "label": "중동 리스크", "desc": "유가 급등 압력"}
+  ]
+}
+```
+
+**percentage_bar**
+```json
+{
+  "title": "국민연금 자산 배분 비중",
+  "unit": "%",
+  "items": [
+    {"label": "해외 주식", "value": 37},
+    {"label": "국내 채권", "value": 28},
+    {"label": "국내 주식", "value": 15},
+    {"label": "대체투자", "value": 12},
+    {"label": "해외 채권", "value": 8}
+  ]
+}
+```
+
 ### 5단계: JSON 출력
 
 반드시 아래 형식의 JSON만 출력하세요 (코드블록, 다른 텍스트 없이 순수 JSON):
