@@ -847,11 +847,14 @@ def _validate_visual_data(script: ScriptOutput) -> ScriptOutput:
     broken_scenes = []
 
     # 문자열 배열이어야 하는 필드 목록
+    # items는 visual_type에 따라 문자열/객체 배열이 다름 → 별도 처리
     STRING_ARRAY_FIELDS = {
-        "card_items", "items", "pros", "cons", "left_items", "right_items",
+        "card_items", "pros", "cons", "left_items", "right_items",
         "before_items", "after_items", "sub_points", "strengths", "weaknesses",
         "opportunities", "threats", "do_items", "dont_items",
     }
+    # items가 문자열 배열이어야 하는 visual_type
+    STRING_ITEMS_TYPES = {"bullet_list", "warning_card"}
 
     for scene in script.scenes:
         vt = scene.visual_type
@@ -885,7 +888,10 @@ def _validate_visual_data(script: ScriptOutput) -> ScriptOutput:
                 issues.append(f"{key}가 객체 (문자열이어야 함)")
 
         # 타입 검증: 문자열 배열 자리에 객체 배열이 들어간 경우
-        for key in STRING_ARRAY_FIELDS:
+        check_fields = set(STRING_ARRAY_FIELDS)
+        if vt in STRING_ITEMS_TYPES:
+            check_fields.add("items")
+        for key in check_fields:
             if key in vd and isinstance(vd[key], list) and vd[key]:
                 if isinstance(vd[key][0], dict):
                     issues.append(f"{key}가 객체 배열 (문자열 배열이어야 함)")
@@ -991,11 +997,14 @@ def _build_schema_example(vt: str, schema: list[str]) -> str:
 
 def _fallback_fix(script: ScriptOutput, broken_scenes: list):
     """API 수정 실패 시 기본값으로 채우고 타입도 자동 수정."""
+    # items는 visual_type에 따라 문자열/객체 배열이 다름 → 별도 처리
     STRING_ARRAY_FIELDS = {
-        "card_items", "items", "pros", "cons", "left_items", "right_items",
+        "card_items", "pros", "cons", "left_items", "right_items",
         "before_items", "after_items", "sub_points", "strengths", "weaknesses",
         "opportunities", "threats", "do_items", "dont_items",
     }
+    # items가 문자열 배열이어야 하는 visual_type
+    STRING_ITEMS_TYPES = {"bullet_list", "warning_card"}
 
     for scene, schema, _ in broken_scenes:
         if scene.visual_data is None:
@@ -1019,6 +1028,9 @@ def _fallback_fix(script: ScriptOutput, broken_scenes: list):
                 vd[key] = f"{vd[key].get('label', '')} {vd[key].get('value', '')}".strip()
 
         # 타입 자동 수정: 문자열 배열 자리에 객체 배열
-        for key in STRING_ARRAY_FIELDS:
+        fix_fields = set(STRING_ARRAY_FIELDS)
+        if scene.visual_type in STRING_ITEMS_TYPES:
+            fix_fields.add("items")
+        for key in fix_fields:
             if key in vd and isinstance(vd[key], list) and vd[key] and isinstance(vd[key][0], dict):
                 vd[key] = [f"{item.get('label', '')} {item.get('value', '')}".strip() if isinstance(item, dict) else str(item) for item in vd[key]]

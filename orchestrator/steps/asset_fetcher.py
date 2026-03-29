@@ -13,7 +13,7 @@ FFMPEG = imageio_ffmpeg.get_ffmpeg_exe()
 from orchestrator.models.script import ScriptOutput
 
 VEO_MODEL = "veo-3.1-fast-generate-preview"
-IMAGE_MODEL = "nano-banana-pro-preview"
+IMAGE_MODEL = "gemini-3.1-flash-image-preview"  # Nano Banana 2
 
 
 def fetch_assets(script: ScriptOutput, workspace_path: Path) -> dict[int, str]:
