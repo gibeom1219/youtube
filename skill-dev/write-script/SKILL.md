@@ -1133,19 +1133,35 @@ narration 내용을 기준으로 아래 결정 트리를 따르세요:
 - 각 content 장면 duration: 10~20초 (narration 길이에 맞게 조정)
 - total_duration_seconds = 모든 scene duration의 합계 (목표: 580~650초)
 
-## 실행 방법
+## 실행 방법 (Claude Code가 직접 수행 — Claude API 사용 안 함)
 
-1. 위 프로세스대로 JSON 대본을 생성하세요
-2. 새 workspace 디렉토리를 만드세요:
+1. **WebSearch로 주제 리서치** — 최신 데이터, 수치, 전문가 발언, 시장 반응 등 수집
+2. **주제 재구성** → 사용자에게 영상 구조 제안 → 확인 받기
+3. **샘플 대본 참고** — `/home/user/workspaces/youtube/sample/` 하위 7개 파일의 문체와 스토리텔링 패턴 참고
+4. **script.json 직접 작성** (Write 툴로 저장)
    ```bash
+   # workspace ID 생성
    python3 -c "import uuid; print(str(uuid.uuid4())[:8])"
-   ```
-3. 생성된 ID로 디렉토리 생성 및 JSON 저장:
-   ```bash
+   # 디렉토리 생성
    mkdir -p /home/user/workspaces/youtube/workspace/<ID>
    ```
-4. script.json 파일로 저장하세요 (Python 없이 Write 툴 직접 사용)
-5. 대본 요약을 사용자에게 표시하세요:
-   - 제목, 훅, 총 길이
+   - Write 툴로 `workspace/<ID>/script.json` 저장
+5. **script.md 생성**:
+   ```bash
+   python3 -c "
+   import json
+   from orchestrator.run_script import generate_script_md
+   from orchestrator.models.script import ScriptOutput
+   from pathlib import Path
+   workspace = Path('workspace/<ID>')
+   script = ScriptOutput(**json.loads((workspace / 'script.json').read_text()))
+   generate_script_md(script, workspace)
+   "
+   ```
+6. 대본 요약을 사용자에게 표시:
+   - 제목, 훅, 총 길이, 나레이션 글자 수
    - 장면 목록 (번호 / visual_type / 나레이션 앞 40자)
-6. 안내: "대본이 괜찮으면 `/make-audio <ID>` 로 음성 생성을 진행하세요"
+7. 안내: "대본이 괜찮으면 `/make-audio <ID>` 로 음성 생성을 진행하세요"
+
+⚠️ `python -m orchestrator.run_script`는 더 이상 사용하지 않음
+⚠️ visual_data는 이 SKILL.md의 4단계 예시를 정확히 따를 것 — 타입 오류 없이 직접 작성
