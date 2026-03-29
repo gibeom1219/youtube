@@ -235,7 +235,7 @@ remotion-project/src/
 - 나레이션 총량: 4,500~5,500자 (미달 시 자동 보강), 씬당 100~150자
 - 유튜브 설명란이 script.md에 자동 포함
 - **대본은 Claude Code가 직접 작성** (Claude API 사용 안 함 — rate limit 없음, 샘플 대본 참고 가능, visual_data 정확)
-- 샘플 대본: `/home/user/workspaces/youtube/sample/` (7개 파일)
+- 샘플 대본: `/home/user/workspaces/youtube/sample/` (10개 파일)
 
 ---
 
