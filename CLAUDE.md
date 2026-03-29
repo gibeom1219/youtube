@@ -234,6 +234,8 @@ remotion-project/src/
 - 주제 재구성: 사용자 주제를 클릭 유발 형태로 자동 재구성
 - 나레이션 총량: 4,500~5,500자 (미달 시 자동 보강), 씬당 100~150자
 - 유튜브 설명란이 script.md에 자동 포함
+- **visual_data 검증 파이프라인**: 대본 생성 후 필수 필드 스키마 체크 → 문제 씬만 Claude API에 수정 요청 (60초 rate limit 대기 포함)
+- SYSTEM_PROMPT는 6,375자로 경량화 (visual_data 예시는 SKILL.md에만 보관)
 
 ---
 
