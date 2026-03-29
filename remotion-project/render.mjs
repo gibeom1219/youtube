@@ -64,6 +64,7 @@ await renderMedia({
   codec: "h264",
   outputLocation: outputPath,
   inputProps: props,
+  timeoutInMilliseconds: 120000,
   onProgress: ({ progress }) => {
     process.stdout.write(`\r[Render] 진행률: ${Math.round(progress * 100)}%`);
   },
