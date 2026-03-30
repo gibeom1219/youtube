@@ -233,7 +233,7 @@ narration 텍스트는 ElevenLabs TTS로 변환되므로 아래 규칙을 지키
 
 **최소 다양성:** 전체에서 **15가지 이상** 서로 다른 visual_type 사용 (총 81종 활용 가능)
 
-**전체 visual_type 목록 (81종):**
+**전체 visual_type 목록 (91종):**
 
 | # | visual_type | 용도 |
 |---|---|---|
@@ -319,6 +319,15 @@ narration 텍스트는 ElevenLabs TTS로 변환되므로 아래 규칙을 지키
 | 80 | `structure_diagram` | 구조/공간 설명도 |
 | 81 | `argument_card` | 데이터 기반 찬반 논쟁 |
 | 82 | `mechanism` | 단계별 메커니즘 교육 |
+| 83 | `candlestick` | 캔들스틱 차트 |
+| 84 | `earnings_card` | 실적 발표 (예상 vs 실제) |
+| 85 | `valuation_table` | 밸류에이션 비교 (PER/PBR/ROE) |
+| 86 | `analyst_rating` | 증권사 목표가·투자의견 |
+| 87 | `etf_compare` | ETF 비교 카드 |
+| 88 | `sector_rotation` | 섹터 순환 맵 |
+| 89 | `law_card` | 법안/규제 카드 |
+| 90 | `liquidation_cascade` | 청산 도미노 (숫자 중심) |
+| 91 | `bubble_indicator` | 버블 지표 비교 |
 
 ### visual_query 작성 규칙 (Veo 3.1 Fast 배경 영상)
 
