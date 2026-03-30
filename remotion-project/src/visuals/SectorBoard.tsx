@@ -50,11 +50,11 @@ export const SectorBoard: React.FC<Props> = ({ data: props }) => {
               background: "rgba(129,216,208,0.04)", border: "1px solid rgba(129,216,208,0.08)",
               opacity: rowOpacity, transform: `translateX(${interpolate(rowP, [0, 1], [30, 0])}px)`,
             }}>
-              <div style={{ width: 220, fontSize: 24, fontWeight: 700, color: theme.white, fontFamily: theme.font, flexShrink: 0 }}>
+              <div style={{ width: 260, fontSize: 24, fontWeight: 700, color: theme.white, fontFamily: theme.font, flexShrink: 0, whiteSpace: "nowrap" }}>
                 {sector.name}
               </div>
               {sector.index && (
-                <div style={{ width: 120, fontSize: 26, color: theme.grayLight, fontFamily: theme.font, flexShrink: 0 }}>
+                <div style={{ width: 140, fontSize: 26, color: theme.grayLight, fontFamily: theme.font, flexShrink: 0, whiteSpace: "nowrap" }}>
                   {sector.index}
                 </div>
               )}

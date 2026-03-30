@@ -59,8 +59,8 @@ export const GaugeMeter: React.FC<Props> = ({ data }) => {
   const currentZone = zones.find(z => pct * 100 >= z.from && pct * 100 <= z.to) ?? zones[2];
   const needleAngle = interpolate(Math.min(1, needleProgress), [0, 1], [-180, -180 + pct * 180]);
 
-  // SVG 반원 게이지 (cx=200, cy=200, r=160)
-  const cx = 200, cy = 200, r = 160;
+  // SVG 반원 게이지
+  const cx = 300, cy = 300, r = 240;
   const arcStart = -Math.PI;
   const arcEnd = 0;
 
@@ -93,7 +93,7 @@ export const GaugeMeter: React.FC<Props> = ({ data }) => {
     }}>
       {/* 제목 */}
       <div style={{
-        fontSize: 40, fontWeight: 900, color: theme.white,
+        fontSize: 48, fontWeight: 900, color: theme.white,
         fontFamily: theme.font, textAlign: "center",
         marginBottom: 16,
         opacity: Math.min(1, titleProgress),
@@ -107,29 +107,29 @@ export const GaugeMeter: React.FC<Props> = ({ data }) => {
         opacity: Math.min(1, needleProgress),
         transform: `scale(${interpolate(Math.min(1, needleProgress), [0, 1], [0.8, 1])})`,
       }}>
-        <svg width={400} height={220} viewBox="0 0 400 210">
+        <svg width={600} height={330} viewBox="0 0 600 320">
           {/* 배경 아크 */}
           <path d={`M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`}
-            fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth={28} strokeLinecap="butt" />
+            fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth={36} strokeLinecap="butt" />
 
           {/* 존별 컬러 아크 */}
           {zoneArcs.map((arc, i) => (
             <path key={i} d={arc.path} fill="none" stroke={arc.color}
-              strokeWidth={28} strokeLinecap="butt" opacity={0.85} />
+              strokeWidth={36} strokeLinecap="butt" opacity={0.85} />
           ))}
 
           {/* 눈금 (0, 25, 50, 75, 100) */}
           {[0, 25, 50, 75, 100].map(tick => {
             const angle = arcStart + (tick / 100) * Math.PI;
-            const inner = polarToXY(angle, r - 20);
-            const outer = polarToXY(angle, r + 8);
-            const label = polarToXY(angle, r - 46);
+            const inner = polarToXY(angle, r - 28);
+            const outer = polarToXY(angle, r + 12);
+            const label = polarToXY(angle, r - 60);
             return (
               <g key={tick}>
                 <line x1={inner.x} y1={inner.y} x2={outer.x} y2={outer.y}
                   stroke="rgba(255,255,255,0.4)" strokeWidth={2} />
                 <text x={label.x} y={label.y + 5} textAnchor="middle"
-                  fill="rgba(255,255,255,0.5)" fontSize={14} fontFamily={theme.font}>
+                  fill="rgba(255,255,255,0.5)" fontSize={22} fontFamily={theme.font}>
                   {tick}
                 </text>
               </g>
@@ -138,21 +138,21 @@ export const GaugeMeter: React.FC<Props> = ({ data }) => {
 
           {/* 바늘 */}
           <line x1={cx} y1={cy} x2={needleTip.x} y2={needleTip.y}
-            stroke={currentZone.color} strokeWidth={4} strokeLinecap="round"
+            stroke={currentZone.color} strokeWidth={5} strokeLinecap="round"
             style={{ filter: `drop-shadow(0 0 ${6 + glowPulse * 4}px ${currentZone.color})` }} />
-          <circle cx={cx} cy={cy} r={10} fill={currentZone.color}
+          <circle cx={cx} cy={cy} r={14} fill={currentZone.color}
             style={{ filter: `drop-shadow(0 0 ${8 + glowPulse * 6}px ${currentZone.color})` }} />
 
           {/* 중앙 숫자 */}
-          <text x={cx} y={cy - 30} textAnchor="middle"
-            fill={currentZone.color} fontSize={52} fontWeight="900"
+          <text x={cx} y={cy - 45} textAnchor="middle"
+            fill={currentZone.color} fontSize={72} fontWeight="900"
             fontFamily={theme.font}
             style={{ filter: `drop-shadow(0 0 ${10 + glowPulse * 8}px ${currentZone.color})` }}>
             {value}
           </text>
           {data.unit && (
-            <text x={cx} y={cy - 4} textAnchor="middle"
-              fill="rgba(255,255,255,0.5)" fontSize={18} fontFamily={theme.font}>
+            <text x={cx} y={cy - 6} textAnchor="middle"
+              fill="rgba(255,255,255,0.5)" fontSize={26} fontFamily={theme.font}>
               {data.unit}
             </text>
           )}
@@ -163,8 +163,8 @@ export const GaugeMeter: React.FC<Props> = ({ data }) => {
       <div style={{
         background: `${currentZone.color}18`,
         border: `2px solid ${currentZone.color}60`,
-        borderRadius: 50, padding: "10px 36px",
-        fontSize: 28, fontWeight: 800, color: currentZone.color,
+        borderRadius: 50, padding: "14px 44px",
+        fontSize: 36, fontWeight: 800, color: currentZone.color,
         fontFamily: theme.font, marginTop: -4,
         opacity: Math.min(1, labelProgress),
         boxShadow: `0 0 ${16 + glowPulse * 12}px ${currentZone.color}30`,
