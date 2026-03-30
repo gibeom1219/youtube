@@ -245,6 +245,16 @@ remotion-project/src/
 - **StockCard/BeforeAfter/PriceImpact**: `data.change`가 undefined일 때 `??""` fallback
 - 모든 컴포넌트에서 optional 필드는 `?? ""` 또는 `?? []`로 방어 처리 권장
 
+### visual_type 추가 시 동시 업데이트 필수 (8개 파일)
+1. `remotion-project/src/visuals/새타입.tsx` — 컴포넌트 생성
+2. `remotion-project/src/compositions/FinanceVideo.tsx` — import + switch case
+3. `remotion-project/src/types/props.ts` — VisualType 추가
+4. `orchestrator/models/script.py` — Literal 추가
+5. `remotion-project/src/styles/theme.ts` — accentColors 추가
+6. `CLAUDE.md` — 비주얼 타입 테이블
+7. `skill-dev/write-script/SKILL.md` — visual_type 목록 테이블 + 총 개수
+8. `skill-dev/write-script/VISUAL_DATA_REFERENCE.md` — visual_data 예시
+
 ### 대본 스타일
 - **완전한 입말 구어체** (뉴스체/리포트체/기사체 절대 금지)
 - 접속사: "근데", "아니", "어쨌든", "한마디로" (문어체 접속사 금지)
