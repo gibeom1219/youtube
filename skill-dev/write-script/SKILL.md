@@ -1131,6 +1131,137 @@ narration 내용을 기준으로 아래 결정 트리를 따르세요:
 }
 ```
 
+**candlestick**
+```json
+{
+  "title": "삼성전자 최근 5일 캔들 차트",
+  "unit": "원",
+  "candles": [
+    {"date": "3/24", "open": 71000, "close": 72500, "high": 73000, "low": 70500},
+    {"date": "3/25", "open": 72500, "close": 71000, "high": 73200, "low": 70800},
+    {"date": "3/26", "open": 71000, "close": 73500, "high": 74000, "low": 70500},
+    {"date": "3/27", "open": 73500, "close": 72000, "high": 74200, "low": 71500},
+    {"date": "3/28", "open": 72000, "close": 74000, "high": 74500, "low": 71800}
+  ]
+}
+```
+
+**earnings_card**
+```json
+{
+  "company": "삼성전자",
+  "ticker": "005930",
+  "period": "2025 Q4",
+  "items": [
+    {"metric": "매출", "expected": "75조 원", "actual": "78조 원"},
+    {"metric": "영업이익", "expected": "10조 원", "actual": "12조 원"},
+    {"metric": "순이익", "expected": "8조 원", "actual": "9.2조 원"}
+  ],
+  "verdict": "AI 반도체 수요 폭증으로 어닝 서프라이즈",
+  "logo": "📱"
+}
+```
+
+**valuation_table**
+```json
+{
+  "title": "반도체 빅3 밸류에이션 비교",
+  "stocks": [
+    {"name": "삼성전자", "ticker": "005930", "per": "12.3x", "pbr": "1.2x", "roe": "9.8%", "rating": "매수"},
+    {"name": "SK하이닉스", "ticker": "000660", "per": "8.5x", "pbr": "1.8x", "roe": "21.2%", "rating": "매수"},
+    {"name": "TSMC", "ticker": "TSM", "per": "22.1x", "pbr": "6.5x", "roe": "29.4%", "rating": "보유"}
+  ],
+  "highlight_metric": "roe"
+}
+```
+
+**analyst_rating**
+```json
+{
+  "ticker": "005930",
+  "name": "삼성전자",
+  "current_price": "72,000원",
+  "analysts": [
+    {"firm": "NH투자증권", "target": "95,000원", "rating": "buy", "date": "2026.3"},
+    {"firm": "삼성증권", "target": "90,000원", "rating": "buy", "date": "2026.3"},
+    {"firm": "키움증권", "target": "85,000원", "rating": "buy", "date": "2026.2"},
+    {"firm": "모건스탠리", "target": "75,000원", "rating": "hold", "date": "2026.2"}
+  ],
+  "consensus": "평균 목표가 86,250원 (상승여력 +19.8%)"
+}
+```
+
+**etf_compare**
+```json
+{
+  "title": "K방산 ETF 3종 비교",
+  "etfs": [
+    {"name": "TIGER K방산·우주", "ticker": "464520", "return_1m": "+24.1%", "return_3m": "+38.5%", "return_ytd": "+52.3%", "expense": "0.45%", "aum": "1.2조"},
+    {"name": "SOL K방산", "ticker": "473590", "return_1m": "+23.4%", "return_3m": "+35.2%", "return_ytd": "+48.7%", "expense": "0.40%", "aum": "8,500억"},
+    {"name": "KODEX K방산TOP10", "ticker": "492050", "return_1m": "+22.3%", "return_3m": "+33.8%", "return_ytd": "+45.1%", "expense": "0.35%", "aum": "6,200억"}
+  ]
+}
+```
+
+**sector_rotation**
+```json
+{
+  "title": "경기 사이클별 유망 섹터",
+  "current_phase": 2,
+  "phases": [
+    {"name": "회복기", "sectors": ["기술주", "소비재", "부동산"], "description": "금리 인하, 유동성 확대"},
+    {"name": "확장기", "sectors": ["산업재", "원자재", "금융"], "description": "기업 실적 개선"},
+    {"name": "과열기", "sectors": ["에너지", "방산", "원자재"], "description": "인플레 압력, 금리 인상"},
+    {"name": "침체기", "sectors": ["헬스케어", "필수소비재", "유틸리티"], "description": "방어적 포지션"}
+  ]
+}
+```
+
+**law_card**
+```json
+{
+  "name": "GENIUS법",
+  "full_name": "Guiding and Establishing National Innovation for U.S. Stablecoins Act",
+  "status": "passed",
+  "date": "2025년 7월 서명",
+  "summary": "미국 역사상 최초의 스테이블코인 규제 프레임워크. 발행사에 준비금 의무화, 제도권 편입 허용",
+  "impacts": ["USD1 같은 스테이블코인이 합법적으로 기관 거래에 사용 가능", "은행·보험사 등 기관 참여 가능해짐", "트럼프 일가 WLFI의 최대 수혜 — 이해충돌 논란"],
+  "icon": "📜"
+}
+```
+
+**liquidation_cascade**
+```json
+{
+  "title": "비트코인 레버리지 청산 도미노",
+  "asset": "BTC",
+  "stages": [
+    {"label": "가격 10% 급락", "amount": "-$7,000", "icon": "📉"},
+    {"label": "롱 포지션 강제 청산", "amount": "4억$ 물량", "cumulative": "4억$", "icon": "💥"},
+    {"label": "청산 매도 → 추가 하락", "amount": "-$3,000", "cumulative": "7억$", "icon": "⬇️"},
+    {"label": "2차 청산 도미노", "amount": "3억$ 추가", "cumulative": "10억$", "icon": "🔥"},
+    {"label": "타 자산(금·은·주식)까지 매도", "amount": "광범위", "icon": "🌊"}
+  ],
+  "total_loss": "24시간 내 20억$ 이상 청산"
+}
+```
+
+**bubble_indicator**
+```json
+{
+  "title": "AI 버블 위험도 체크",
+  "subtitle": "닷컴 버블(2000) vs 현재(2026) 비교",
+  "indicators": [
+    {"label": "나스닥 PER", "past_value": "175x", "current_value": "35x", "status": "safe"},
+    {"label": "기업 실적 뒷받침", "past_value": "적자 기업 다수", "current_value": "빅테크 흑자", "status": "safe"},
+    {"label": "인프라 투자 과잉", "past_value": "공급 과잉 심각", "current_value": "수요 > 공급", "status": "caution"},
+    {"label": "레버리지 수준", "past_value": "낮음", "current_value": "높음", "status": "danger"},
+    {"label": "IPO 과열", "past_value": "극심", "current_value": "보통", "status": "caution"}
+  ],
+  "verdict": "닷컴 때보다는 낫지만, 레버리지 수준이 위험 — 조정 가능성은 열어둬야"
+}
+```
+
 **line_chart**
 ```json
 {

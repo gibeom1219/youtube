@@ -92,6 +92,15 @@ export type VisualType =
   | "structure_diagram"
   | "argument_card"
   | "mechanism"
+  | "candlestick"
+  | "earnings_card"
+  | "valuation_table"
+  | "analyst_rating"
+  | "etf_compare"
+  | "sector_rotation"
+  | "law_card"
+  | "liquidation_cascade"
+  | "bubble_indicator"
   | "intro_card"
   | "outro_card";
 

@@ -153,6 +153,15 @@ remotion-project/src/
 | `structure_diagram` | StructureDiagram | 구조/공간 설명도 |
 | `argument_card` | ArgumentCard | 데이터 기반 찬반 논쟁 |
 | `mechanism` | Mechanism | 단계별 메커니즘 교육 |
+| `candlestick` | Candlestick | 캔들스틱 차트 |
+| `earnings_card` | EarningsCard | 실적 발표 (예상 vs 실제) |
+| `valuation_table` | ValuationTable | 밸류에이션 비교 (PER/PBR/ROE) |
+| `analyst_rating` | AnalystRating | 증권사 목표가·투자의견 |
+| `etf_compare` | EtfCompare | ETF 비교 카드 |
+| `sector_rotation` | SectorRotation | 섹터 순환 맵 |
+| `law_card` | LawCard | 법안/규제 카드 |
+| `liquidation_cascade` | LiquidationCascade | 청산 도미노 (숫자 중심) |
+| `bubble_indicator` | BubbleIndicator | 버블 지표 비교 |
 
 ### 이모지 렌더링 규칙
 

@@ -93,6 +93,15 @@ class Scene(BaseModel):
         "structure_diagram", # 구조/공간 설명도
         "argument_card",   # 데이터 기반 찬반 논쟁
         "mechanism",       # 단계별 메커니즘 교육
+        "candlestick",     # 캔들스틱 차트
+        "earnings_card",   # 실적 발표 (예상 vs 실제)
+        "valuation_table", # 밸류에이션 비교 (PER/PBR/ROE)
+        "analyst_rating",  # 증권사 목표가·투자의견
+        "etf_compare",     # ETF 비교 카드
+        "sector_rotation", # 섹터 순환 맵
+        "law_card",        # 법안/규제 카드
+        "liquidation_cascade", # 청산 도미노 (숫자 중심)
+        "bubble_indicator", # 버블 지표 비교
         "intro_card",      # 인트로 타이틀
         "outro_card",      # 아웃트로
     ] = "keyword"

@@ -83,6 +83,15 @@ import { PriceImpact } from "../visuals/PriceImpact";
 import { StructureDiagram } from "../visuals/StructureDiagram";
 import { ArgumentCard } from "../visuals/ArgumentCard";
 import { Mechanism } from "../visuals/Mechanism";
+import { Candlestick } from "../visuals/Candlestick";
+import { EarningsCard } from "../visuals/EarningsCard";
+import { ValuationTable } from "../visuals/ValuationTable";
+import { AnalystRating } from "../visuals/AnalystRating";
+import { EtfCompare } from "../visuals/EtfCompare";
+import { SectorRotation } from "../visuals/SectorRotation";
+import { LawCard } from "../visuals/LawCard";
+import { LiquidationCascade } from "../visuals/LiquidationCascade";
+import { BubbleIndicator } from "../visuals/BubbleIndicator";
 import { theme, accentColors } from "../styles/theme";
 
 // 전환 효과 타입
@@ -458,6 +467,24 @@ const SceneVisual: React.FC<{
         return visualData ? <ArgumentCard data={visualData as any} /> : null;
       case "mechanism":
         return visualData ? <Mechanism data={visualData as any} /> : null;
+      case "candlestick":
+        return visualData ? <Candlestick data={visualData as any} /> : null;
+      case "earnings_card":
+        return visualData ? <EarningsCard data={visualData as any} /> : null;
+      case "valuation_table":
+        return visualData ? <ValuationTable data={visualData as any} /> : null;
+      case "analyst_rating":
+        return visualData ? <AnalystRating data={visualData as any} /> : null;
+      case "etf_compare":
+        return visualData ? <EtfCompare data={visualData as any} /> : null;
+      case "sector_rotation":
+        return visualData ? <SectorRotation data={visualData as any} /> : null;
+      case "law_card":
+        return visualData ? <LawCard data={visualData as any} /> : null;
+      case "liquidation_cascade":
+        return visualData ? <LiquidationCascade data={visualData as any} /> : null;
+      case "bubble_indicator":
+        return visualData ? <BubbleIndicator data={visualData as any} /> : null;
       default:
         return visualData ? <Keyword data={visualData as any} /> : null;
     }
