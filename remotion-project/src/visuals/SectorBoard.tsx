@@ -22,47 +22,46 @@ export const SectorBoard: React.FC<Props> = ({ data: props }) => {
     return theme.gray;
   };
 
-  const getBarWidth = (change: string) => {
-    const val = Math.abs(parseFloat(change));
-    return Math.min(val * 15, 100);
-  };
+  // 최대값 기준으로 비율 계산
+  const maxChange = Math.max(...sectors.map((s) => Math.abs(parseFloat(s.change) || 0)), 1);
 
   return (
-    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", padding: "60px 120px" }}>
+    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 120px", gap: 16 }}>
       <div style={{
-        display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 40,
+        display: "flex", justifyContent: "space-between", alignItems: "flex-end",
         opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)`,
       }}>
         <div style={{ fontSize: 40, fontWeight: 700, color: theme.gold, fontFamily: theme.font }}>{title}</div>
         {date && <div style={{ fontSize: 20, color: theme.gray, fontFamily: theme.font }}>{date}</div>}
       </div>
 
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 12, justifyContent: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {sectors.map((sector, i) => {
           const rowP = spring({ frame: frame - 8 - i * 4, fps, config: { damping: 100, stiffness: 10 } });
           const rowOpacity = interpolate(frame, [8 + i * 4, 18 + i * 4], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
           const changeColor = getChangeColor(sector.change);
-          const barW = getBarWidth(sector.change) * Math.min(1, rowP);
+          const changeVal = Math.abs(parseFloat(sector.change) || 0);
+          const barW = (changeVal / maxChange) * 100 * Math.min(1, rowP);
 
           return (
             <div key={i} style={{
               display: "flex", alignItems: "center", gap: 20,
-              padding: "16px 24px", borderRadius: 10,
+              padding: "18px 24px", borderRadius: 12,
               background: "rgba(129,216,208,0.04)", border: "1px solid rgba(129,216,208,0.08)",
               opacity: rowOpacity, transform: `translateX(${interpolate(rowP, [0, 1], [30, 0])}px)`,
             }}>
-              <div style={{ width: 200, fontSize: 22, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>
+              <div style={{ width: 220, fontSize: 24, fontWeight: 700, color: theme.white, fontFamily: theme.font, flexShrink: 0 }}>
                 {sector.name}
               </div>
               {sector.index && (
-                <div style={{ width: 120, fontSize: 18, color: theme.grayLight, fontFamily: theme.font }}>
+                <div style={{ width: 120, fontSize: 20, color: theme.grayLight, fontFamily: theme.font, flexShrink: 0 }}>
                   {sector.index}
                 </div>
               )}
-              <div style={{ flex: 1, height: 8, background: "rgba(255,255,255,0.05)", borderRadius: 4, overflow: "hidden" }}>
-                <div style={{ width: `${barW}%`, height: "100%", background: changeColor, borderRadius: 4, transition: "width 0s" }} />
+              <div style={{ flex: 1, height: 12, background: "rgba(255,255,255,0.05)", borderRadius: 6, overflow: "hidden" }}>
+                <div style={{ width: `${barW}%`, height: "100%", background: changeColor, borderRadius: 6 }} />
               </div>
-              <div style={{ width: 100, fontSize: 24, fontWeight: 900, color: changeColor, fontFamily: theme.font, textAlign: "right" }}>
+              <div style={{ width: 120, fontSize: 26, fontWeight: 900, color: changeColor, fontFamily: theme.font, textAlign: "right", flexShrink: 0 }}>
                 {sector.change}%
               </div>
             </div>
