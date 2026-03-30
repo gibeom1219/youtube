@@ -154,12 +154,28 @@ def generate_script_md(script, workspace_path: Path) -> Path:
         f"✅ 이 영상에서 다루는 내용",
     ]
 
-    # 핵심 내용 추출: content 씬의 나레이션 앞 40자를 개조식으로
+    # 핵심 내용 추출: content 씬의 첫 문장 (전환 멘트 제외)
+    skip_starts = ["여기까지", "자,", "자 ", "그럼 ", "코인 얘기", "이제 ", "다음으로", "지금부터"]
     for scene in script.scenes:
         if scene.type == "content":
-            summary = scene.narration[:60].rstrip()
-            if not summary.endswith((".", "요", "죠", "다")):
-                summary = summary.rsplit(" ", 1)[0]
+            text = scene.narration
+            # 전환 멘트로 시작하면 건너뛰기
+            if any(text.startswith(s) for s in skip_starts):
+                continue
+            # 첫 문장 추출
+            summary = None
+            for end_char in ["요.", "죠.", "거든요.", "거예요.", "입니다.", "해요.", "했어요.", "됐어요.", "있어요.", "세요.", "어요."]:
+                idx = text.find(end_char)
+                if idx != -1 and idx < 100:
+                    summary = text[:idx + len(end_char)]
+                    break
+            if not summary:
+                for i, c in enumerate(text):
+                    if c in ".?!" and i > 15:
+                        summary = text[:i + 1]
+                        break
+            if not summary:
+                summary = text[:60]
             lines.append(f"• {summary}")
 
     lines += [
