@@ -33,7 +33,6 @@ export const Background: React.FC<Props> = ({ accentColor = "#81D8D0", videoSrc 
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
             muted
             loop
-            playbackRate={0.8}
           />
           <div style={{
             position: "absolute", inset: 0,
