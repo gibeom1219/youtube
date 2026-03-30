@@ -37,13 +37,13 @@ export const MiniProfile: React.FC<Props> = ({ data }) => {
         {/* Info */}
         <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 16 }}>
           <div style={{ opacity: infoOpacity, transform: `translateX(${interpolate(infoP, [0, 1], [20, 0])}px)` }}>
-            <div style={{ fontSize: 44, fontWeight: 900, color: theme.white, fontFamily: theme.font }}>{data.name}</div>
-            <div style={{ fontSize: 24, color: theme.tiffany, fontFamily: theme.font, fontWeight: 600, marginTop: 4 }}>{data.role}</div>
-            <div style={{ fontSize: 20, color: theme.grayLight, fontFamily: theme.font }}>{data.organization}</div>
+            <div style={{ fontSize: 52, fontWeight: 900, color: theme.white, fontFamily: theme.font }}>{data.name}</div>
+            <div style={{ fontSize: 30, color: theme.tiffany, fontFamily: theme.font, fontWeight: 600, marginTop: 6 }}>{data.role}</div>
+            <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font }}>{data.organization}</div>
           </div>
 
           <div style={{
-            fontSize: 22, color: theme.grayLight, fontFamily: theme.font, lineHeight: 1.6,
+            fontSize: 28, color: theme.grayLight, fontFamily: theme.font, lineHeight: 1.6,
             opacity: bioOpacity, marginTop: 8,
             paddingTop: 16, borderTop: `1px solid rgba(129,216,208,0.15)`,
           }}>
@@ -54,8 +54,8 @@ export const MiniProfile: React.FC<Props> = ({ data }) => {
             <div style={{ display: "flex", gap: 32, marginTop: 12, opacity: statsOpacity }}>
               {data.stats.map((s, i) => (
                 <div key={i} style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: 28, fontWeight: 900, color: theme.tiffany, fontFamily: theme.font }}>{s.value}</div>
-                  <div style={{ fontSize: 16, color: theme.gray, fontFamily: theme.font }}>{s.label}</div>
+                  <div style={{ fontSize: 32, fontWeight: 900, color: theme.tiffany, fontFamily: theme.font }}>{s.value}</div>
+                  <div style={{ fontSize: 20, color: theme.gray, fontFamily: theme.font }}>{s.label}</div>
                 </div>
               ))}
             </div>
