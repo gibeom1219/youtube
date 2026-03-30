@@ -200,6 +200,7 @@ def _generate_video(client, prompt: str, save_path: Path, group_idx: int) -> boo
             subprocess.run([
                 FFMPEG, "-y", "-i", str(temp_path),
                 "-c:v", "libx264", "-preset", "fast",
+                "-r", "60",
                 "-g", "1", "-keyint_min", "1",
                 "-an", str(save_path),
             ], capture_output=True, timeout=60)

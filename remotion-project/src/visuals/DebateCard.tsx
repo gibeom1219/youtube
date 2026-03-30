@@ -13,7 +13,7 @@ export const DebateCard: React.FC<Props> = ({ data }) => {
   const quoteOpacity = interpolate(frame, [0, 14], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   return (
-    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", padding: "60px 100px", gap: 20 }}>
+    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 100px", gap: 20 }}>
       {/* 발언 */}
       <div style={{
         padding: "28px 36px", borderRadius: 16,
@@ -30,7 +30,7 @@ export const DebateCard: React.FC<Props> = ({ data }) => {
       </div>
 
       {/* 반응들 */}
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 12, justifyContent: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {data.reactions.map((r, i) => {
           const rP = spring({ frame: frame - 16 - i * 10, fps, config: { damping: 100, stiffness: 10 } });
           const rOpacity = interpolate(frame, [16 + i * 10, 28 + i * 10], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
