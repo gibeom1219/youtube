@@ -115,6 +115,7 @@ cd /home/user/workspaces/youtube && python -m orchestrator.run_video <workspace_
 - 렌더링 시간도 약간 증가
 - 예상 렌더링 시간: 영상 길이 × 2 ~ 3배
 - 렌더링 타임아웃: 120초 (배경 영상 로딩 대기, `render.mjs`의 `timeoutInMilliseconds`)
+- ⚠️ **동시 렌더링 금지**: 두 대본을 동시에 렌더링하면 public/audio.mp3가 충돌 → 반드시 순차 실행
 
 ## 참고: 컴포넌트 방어 코드
 - AreaChart: `series[].values` 또는 `series[].data` 모두 허용

@@ -102,6 +102,7 @@ make-audio 단계에서 AssetFetcher가 배경 에셋을 자동 생성합니다.
   - 설정: `aspect_ratio="16:9"`, `candidate_count=1`
   - 미지원: `person_generation`, `output_mime_type`, `media_resolution`
   - ⚠️ Veo 1개 그룹이라도 성공하면 자동 폴백 안 됨 → 실패 씬은 별도 이미지 보완 필요
+  - `outro_card` 씬은 배경 생성 자동 건너뜀 (구독&좋아요 화면에 배경 불필요)
 
 ### 영상 스펙 (Veo)
 - 해상도: 720p (1280x720)
