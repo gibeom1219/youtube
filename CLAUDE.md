@@ -266,7 +266,7 @@ remotion-project/src/
 - **주제별 샘플 매칭**: 대본 작성 전 비슷한 샘플 1~2개를 먼저 읽고 문체 체화
 - 유튜브 설명란이 script.md에 자동 포함
 - **대본은 Claude Code가 직접 작성** (Claude API 사용 안 함 — rate limit 없음, 샘플 대본 참고 가능, visual_data 정확)
-- 샘플 대본: `/home/user/workspaces/youtube/sample/` (10개 파일)
+- 샘플 대본: `/home/user/workspaces/youtube/sample/` (18개 파일)
 
 ---
 
