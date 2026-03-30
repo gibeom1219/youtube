@@ -125,7 +125,7 @@ def _generate_image(client, prompt: str, save_path: Path, scene_id: int) -> bool
             contents=f"Generate a cinematic background image for a finance YouTube video. No text overlays. {prompt}",
             config=types.GenerateContentConfig(
                 response_modalities=["IMAGE", "TEXT"],
-                media_resolution="MEDIA_RESOLUTION_MEDIUM",
+                candidate_count=1,
                 image_config=types.ImageConfig(
                     aspect_ratio="16:9",
                 ),
