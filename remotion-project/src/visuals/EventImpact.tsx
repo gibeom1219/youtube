@@ -14,7 +14,7 @@ export const EventImpact: React.FC<Props> = ({ data }) => {
   const pulse = (Math.sin(frame * 0.08) + 1) / 2;
 
   return (
-    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", padding: "60px 100px" }}>
+    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 100px", gap: 16 }}>
       {/* Event header */}
       <div style={{
         alignSelf: "center", padding: "20px 40px", borderRadius: 14,
@@ -22,22 +22,22 @@ export const EventImpact: React.FC<Props> = ({ data }) => {
         opacity: eventOpacity, transform: `scale(${interpolate(eventP, [0, 1], [0.85, 1])})`,
         display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
         boxShadow: `0 0 ${15 + pulse * 15}px ${theme.red}20`,
-        marginBottom: 24,
       }}>
-        <div style={{ fontSize: 16, color: theme.red, fontFamily: theme.font, fontWeight: 600 }}>{data.event_date}</div>
+        <div style={{ fontSize: 18, color: theme.red, fontFamily: theme.font, fontWeight: 600 }}>{data.event_date}</div>
         <div style={{ fontSize: 32, fontWeight: 800, color: theme.white, fontFamily: theme.font }}>⚡ {data.event}</div>
       </div>
 
       {/* Shockwave line */}
-      <div style={{ alignSelf: "center", fontSize: 24, color: `${theme.tiffany}40`, opacity: eventOpacity }}>▼ 시장 충격 ▼</div>
+      <div style={{ alignSelf: "center", fontSize: 20, color: `${theme.tiffany}50`, fontFamily: theme.font, opacity: eventOpacity }}>--- 시장 충격 ---</div>
 
       {/* Impacts */}
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 14, justifyContent: "center", marginTop: 16 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {data.impacts.map((impact, i) => {
           const impP = spring({ frame: frame - 16 - i * 10, fps, config: { damping: 100, stiffness: 10 } });
           const impOpacity = interpolate(frame, [16 + i * 10, 28 + i * 10], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-          const changeVal = parseFloat(impact.change);
-          const changeColor = changeVal > 0 ? theme.green : changeVal < 0 ? theme.red : theme.gray;
+          const changeStr = impact.change ?? "";
+          const changeVal = parseFloat(changeStr);
+          const changeColor = changeVal > 0 ? theme.green : changeVal < 0 ? theme.red : theme.grayLight;
 
           return (
             <div key={i} style={{
@@ -46,10 +46,9 @@ export const EventImpact: React.FC<Props> = ({ data }) => {
               background: "rgba(129,216,208,0.04)", border: "1px solid rgba(129,216,208,0.1)",
               opacity: impOpacity, transform: `translateX(${interpolate(impP, [0, 1], [40, 0])}px)`,
             }}>
-              <div style={{ width: 140, fontSize: 22, fontWeight: 700, color: theme.tiffany, fontFamily: theme.font }}>{impact.market}</div>
-              {impact.delay && <div style={{ fontSize: 16, color: theme.gray, fontFamily: theme.font, padding: "2px 10px", background: "rgba(255,255,255,0.05)", borderRadius: 4 }}>{impact.delay}</div>}
-              <div style={{ flex: 1, fontSize: 20, color: theme.grayLight, fontFamily: theme.font }}>{impact.reaction}</div>
-              <div style={{ fontSize: 28, fontWeight: 900, color: changeColor, fontFamily: theme.font, flexShrink: 0 }}>{impact.change}</div>
+              <div style={{ width: 160, fontSize: 24, fontWeight: 700, color: theme.tiffany, fontFamily: theme.font }}>{impact.market}</div>
+              <div style={{ flex: 1, fontSize: 22, color: theme.grayLight, fontFamily: theme.font }}>{impact.reaction}</div>
+              <div style={{ fontSize: 30, fontWeight: 900, color: changeColor, fontFamily: theme.font, flexShrink: 0 }}>{changeStr}</div>
             </div>
           );
         })}
