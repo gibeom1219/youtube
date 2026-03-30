@@ -128,7 +128,6 @@ def _generate_image(client, prompt: str, save_path: Path, scene_id: int) -> bool
                 media_resolution="MEDIA_RESOLUTION_MEDIUM",
                 image_config=types.ImageConfig(
                     aspect_ratio="16:9",
-                    person_generation="ALLOW_ALL",
                     output_mime_type="image/png",
                 ),
             ),
