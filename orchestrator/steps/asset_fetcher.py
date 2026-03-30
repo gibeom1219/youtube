@@ -60,7 +60,8 @@ def _try_veo(client, scenes, assets_dir, scene_assets) -> bool:
 
     for i in range(0, len(scenes), group_size):
         group = scenes[i:i + group_size]
-        queries = [s.visual_query for s in group if s.visual_query]
+        # outro_card는 배경 에셋 불필요
+        queries = [s.visual_query for s in group if s.visual_query and s.visual_type != "outro_card"]
         if not queries:
             for s in group:
                 scene_assets[s.scene_id] = None
@@ -97,6 +98,11 @@ def _try_veo(client, scenes, assets_dir, scene_assets) -> bool:
 def _generate_images(client, scenes, assets_dir, scene_assets):
     """Nano Banana로 씬마다 이미지 1개 생성."""
     for scene in scenes:
+        # outro_card는 배경 에셋 불필요
+        if scene.visual_type == "outro_card":
+            scene_assets[scene.scene_id] = None
+            continue
+
         prompt = scene.visual_query
         if not prompt:
             scene_assets[scene.scene_id] = None
