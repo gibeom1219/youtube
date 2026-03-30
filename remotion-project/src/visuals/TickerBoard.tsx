@@ -49,11 +49,11 @@ export const TickerBoard: React.FC<Props> = ({ data, durationFrames }) => {
         </div>
         {data.date && (
           <div style={{
-            fontSize: 22, color: theme.grayLight,
+            fontSize: 28, color: theme.grayLight,
             fontFamily: theme.font, fontWeight: 500,
             display: "flex", alignItems: "center", gap: 8,
           }}>
-            <span style={{ color: theme.green, opacity: blinkPulse, fontSize: 14 }}>●</span>
+            <span style={{ color: theme.green, opacity: blinkPulse, fontSize: 20 }}>●</span>
             {data.date}
           </div>
         )}
@@ -69,7 +69,7 @@ export const TickerBoard: React.FC<Props> = ({ data, durationFrames }) => {
         {["종목", "현재가", "전일대비", "등락률"].map((h, i) => (
           <div key={i} style={{
             flex: i === 0 ? 1.8 : 1,
-            fontSize: 20, fontWeight: 700, color: theme.gray,
+            fontSize: 26, fontWeight: 700, color: theme.gray,
             fontFamily: theme.font,
             textAlign: i === 0 ? "left" as const : "right" as const,
           }}>
@@ -111,7 +111,7 @@ export const TickerBoard: React.FC<Props> = ({ data, durationFrames }) => {
                   {item.symbol}
                 </div>
                 <div style={{
-                  fontSize: 20, color: theme.gray,
+                  fontSize: 26, color: theme.gray,
                   fontFamily: theme.font, fontWeight: 500,
                 }}>
                   {item.name}
@@ -134,7 +134,7 @@ export const TickerBoard: React.FC<Props> = ({ data, durationFrames }) => {
                 fontFamily: theme.font,
                 display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 6,
               }}>
-                <span style={{ fontSize: 18 }}>{arrow}</span>
+                <span style={{ fontSize: 24 }}>{arrow}</span>
                 {item.change}
               </div>
 

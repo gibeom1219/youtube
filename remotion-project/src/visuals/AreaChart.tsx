@@ -38,7 +38,7 @@ export const AreaChart: React.FC<Props> = ({ data: props }) => {
           return (
             <div key={si} style={{ display: "flex", alignItems: "center", gap: 8, opacity: legOpacity }}>
               <div style={{ width: 16, height: 16, borderRadius: 4, background: COLORS[si % COLORS.length] }} />
-              <span style={{ fontSize: 18, color: theme.grayLight, fontFamily: theme.font }}>{s.name}</span>
+              <span style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font }}>{s.name}</span>
             </div>
           );
         })}

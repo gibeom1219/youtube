@@ -55,8 +55,8 @@ export const DominoEffect: React.FC<Props> = ({ data: props }) => {
               }}>
                 {item.icon && <span style={{ fontSize: 32, fontFamily: theme.font, flexShrink: 0 }}>{item.icon}</span>}
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 22, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{item.event}</div>
-                  <div style={{ fontSize: 18, color: theme.grayLight, fontFamily: theme.font, marginTop: 4 }}>{item.impact}</div>
+                  <div style={{ fontSize: 28, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{item.event}</div>
+                  <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font, marginTop: 4 }}>{item.impact}</div>
                 </div>
               </div>
             </React.Fragment>

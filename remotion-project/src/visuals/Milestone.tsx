@@ -44,7 +44,7 @@ export const Milestone: React.FC<Props> = ({ data }) => {
       <div style={{ fontSize: 28, fontWeight: 800, color, fontFamily: theme.font, opacity: numOpacity }}>
         {barP.toFixed(1)}% 달성
       </div>
-      <div style={{ fontSize: 22, color: theme.grayLight, fontFamily: theme.font, opacity: numOpacity }}>{data.label}</div>
+      <div style={{ fontSize: 28, color: theme.grayLight, fontFamily: theme.font, opacity: numOpacity }}>{data.label}</div>
     </div>
   );
 };

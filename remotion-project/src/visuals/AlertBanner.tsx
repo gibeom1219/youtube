@@ -72,7 +72,7 @@ export const AlertBanner: React.FC<Props> = ({ data }) => {
           </div>
           {data.time && (
             <div style={{
-              fontSize: 18, color: "rgba(255,255,255,0.5)",
+              fontSize: 24, color: "rgba(255,255,255,0.5)",
               fontFamily: theme.font,
             }}>
               {data.time}
@@ -111,7 +111,7 @@ export const AlertBanner: React.FC<Props> = ({ data }) => {
           <div style={{
             borderTop: `1px solid ${cfg.color}20`,
             padding: "14px 48px",
-            fontSize: 18, color: "rgba(255,255,255,0.4)",
+            fontSize: 24, color: "rgba(255,255,255,0.4)",
             fontFamily: theme.font,
             opacity: Math.min(1, subProgress),
           }}>

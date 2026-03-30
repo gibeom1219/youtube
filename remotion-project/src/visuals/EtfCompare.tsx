@@ -34,29 +34,29 @@ export const EtfCompare: React.FC<Props> = ({ data: props }) => {
               display: "flex", flexDirection: "column", gap: 16,
               opacity: cardOpacity, transform: `translateY(${interpolate(cardP, [0, 1], [20, 0])}px)`,
             }}>
-              <div style={{ fontSize: 18, fontWeight: 800, color, fontFamily: theme.font }}>{etf.ticker}</div>
-              <div style={{ fontSize: 22, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{etf.name}</div>
+              <div style={{ fontSize: 24, fontWeight: 800, color, fontFamily: theme.font }}>{etf.ticker}</div>
+              <div style={{ fontSize: 28, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{etf.name}</div>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: "auto" }}>
                 {etf.return_1m && <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: 17, color: theme.gray, fontFamily: theme.font }}>1개월</span>
-                  <span style={{ fontSize: 19, fontWeight: 700, color: (etf.return_1m ?? "").startsWith("-") ? theme.red : theme.green, fontFamily: theme.font }}>{etf.return_1m}</span>
+                  <span style={{ fontSize: 24, color: theme.gray, fontFamily: theme.font }}>1개월</span>
+                  <span style={{ fontSize: 26, fontWeight: 700, color: (etf.return_1m ?? "").startsWith("-") ? theme.red : theme.green, fontFamily: theme.font }}>{etf.return_1m}</span>
                 </div>}
                 {etf.return_3m && <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: 17, color: theme.gray, fontFamily: theme.font }}>3개월</span>
-                  <span style={{ fontSize: 19, fontWeight: 700, color: (etf.return_3m ?? "").startsWith("-") ? theme.red : theme.green, fontFamily: theme.font }}>{etf.return_3m}</span>
+                  <span style={{ fontSize: 24, color: theme.gray, fontFamily: theme.font }}>3개월</span>
+                  <span style={{ fontSize: 26, fontWeight: 700, color: (etf.return_3m ?? "").startsWith("-") ? theme.red : theme.green, fontFamily: theme.font }}>{etf.return_3m}</span>
                 </div>}
                 {etf.return_ytd && <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: 17, color: theme.gray, fontFamily: theme.font }}>YTD</span>
-                  <span style={{ fontSize: 19, fontWeight: 700, color: (etf.return_ytd ?? "").startsWith("-") ? theme.red : theme.green, fontFamily: theme.font }}>{etf.return_ytd}</span>
+                  <span style={{ fontSize: 24, color: theme.gray, fontFamily: theme.font }}>YTD</span>
+                  <span style={{ fontSize: 26, fontWeight: 700, color: (etf.return_ytd ?? "").startsWith("-") ? theme.red : theme.green, fontFamily: theme.font }}>{etf.return_ytd}</span>
                 </div>}
                 {etf.expense && <div style={{ display: "flex", justifyContent: "space-between", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 8, marginTop: 4 }}>
-                  <span style={{ fontSize: 17, color: theme.gray, fontFamily: theme.font }}>보수</span>
-                  <span style={{ fontSize: 17, color: theme.grayLight, fontFamily: theme.font }}>{etf.expense}</span>
+                  <span style={{ fontSize: 24, color: theme.gray, fontFamily: theme.font }}>보수</span>
+                  <span style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font }}>{etf.expense}</span>
                 </div>}
                 {etf.aum && <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: 17, color: theme.gray, fontFamily: theme.font }}>순자산</span>
-                  <span style={{ fontSize: 17, color: theme.grayLight, fontFamily: theme.font }}>{etf.aum}</span>
+                  <span style={{ fontSize: 24, color: theme.gray, fontFamily: theme.font }}>순자산</span>
+                  <span style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font }}>{etf.aum}</span>
                 </div>}
               </div>
             </div>

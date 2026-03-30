@@ -81,7 +81,7 @@ export const Comparison: React.FC<Props> = ({ data, durationFrames }) => {
               opacity: Math.min(1, itemProgress),
               transform: `translateX(${interpolate(Math.min(1, itemProgress), [0, 1], [fromLeft ? -20 : 20, 0])}px)`,
             }}>
-              <span style={{ color, fontSize: 18, paddingTop: 5, flexShrink: 0 }}>▶</span>
+              <span style={{ color, fontSize: 24, paddingTop: 5, flexShrink: 0 }}>▶</span>
               <span>{item}</span>
             </div>
           );

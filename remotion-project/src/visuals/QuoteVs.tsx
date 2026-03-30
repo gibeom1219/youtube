@@ -30,7 +30,7 @@ export const QuoteVs: React.FC<Props> = ({ data: props }) => {
       opacity, transform: `translateX(${interpolate(progress, [0, 1], [dir * 40, 0])}px)`,
     }}>
       <div style={{
-        fontSize: 20, fontWeight: 800, color, fontFamily: theme.font,
+        fontSize: 26, fontWeight: 800, color, fontFamily: theme.font,
         padding: "6px 16px", background: `${color}18`, borderRadius: 6, alignSelf: "flex-start",
       }}>
         {side.stance}
@@ -39,8 +39,8 @@ export const QuoteVs: React.FC<Props> = ({ data: props }) => {
         "{side.quote}"
       </div>
       <div style={{ marginTop: "auto" }}>
-        <div style={{ fontSize: 22, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{side.speaker}</div>
-        <div style={{ fontSize: 18, color: theme.grayLight, fontFamily: theme.font }}>{side.role}</div>
+        <div style={{ fontSize: 28, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{side.speaker}</div>
+        <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font }}>{side.role}</div>
       </div>
     </div>
   );

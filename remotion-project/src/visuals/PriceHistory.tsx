@@ -44,7 +44,7 @@ export const PriceHistory: React.FC<Props> = ({ data }) => {
       }}>
         {data.asset}
         {data.unit && (
-          <span style={{ fontSize: 22, color: theme.grayLight, marginLeft: 12, fontWeight: 500 }}>
+          <span style={{ fontSize: 28, color: theme.grayLight, marginLeft: 12, fontWeight: 500 }}>
             ({data.unit})
           </span>
         )}
@@ -99,14 +99,14 @@ export const PriceHistory: React.FC<Props> = ({ data }) => {
               }}>
                 <div>
                   <div style={{
-                    fontSize: 18, color: theme.grayLight,
+                    fontSize: 24, color: theme.grayLight,
                     fontFamily: theme.font, marginBottom: 4,
                   }}>
                     {point.date}
                   </div>
                   {point.event && (
                     <div style={{
-                      fontSize: 18, color: theme.grayLight,
+                      fontSize: 24, color: theme.grayLight,
                       fontFamily: theme.font, fontStyle: "italic",
                     }}>
                       {point.event}
@@ -123,7 +123,7 @@ export const PriceHistory: React.FC<Props> = ({ data }) => {
                   </div>
                   {point.change && (
                     <div style={{
-                      fontSize: 18, fontWeight: 700, color: changeColor,
+                      fontSize: 24, fontWeight: 700, color: changeColor,
                       fontFamily: theme.font,
                     }}>
                       {point.change}

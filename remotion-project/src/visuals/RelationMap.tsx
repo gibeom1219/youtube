@@ -62,7 +62,7 @@ export const RelationMap: React.FC<Props> = ({ data: props }) => {
                 opacity: nodeOpacity, transform: `scale(${interpolate(nodeP, [0, 1], [0.7, 1])})`,
               }}>
                 {node.icon && <span style={{ fontSize: 38, fontFamily: theme.font }}>{node.icon}</span>}
-                <span style={{ fontSize: 22, fontWeight: 700, color: theme.white, fontFamily: theme.font, textAlign: "center" }}>{node.label}</span>
+                <span style={{ fontSize: 28, fontWeight: 700, color: theme.white, fontFamily: theme.font, textAlign: "center" }}>{node.label}</span>
               </div>
             </React.Fragment>
           );

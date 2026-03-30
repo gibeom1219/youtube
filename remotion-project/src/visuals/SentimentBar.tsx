@@ -31,7 +31,7 @@ export const SentimentBar: React.FC<Props> = ({ data }) => {
       {/* Labels */}
       <div style={{ display: "flex", justifyContent: "space-between", width: "100%", maxWidth: 1000, opacity: barOpacity }}>
         <span style={{ fontSize: 24, fontWeight: 800, color: theme.green, fontFamily: theme.font }}>{buyLabel}</span>
-        {neutral > 0 && <span style={{ fontSize: 20, color: theme.gray, fontFamily: theme.font }}>중립</span>}
+        {neutral > 0 && <span style={{ fontSize: 26, color: theme.gray, fontFamily: theme.font }}>중립</span>}
         <span style={{ fontSize: 24, fontWeight: 800, color: theme.red, fontFamily: theme.font }}>{sellLabel}</span>
       </div>
 

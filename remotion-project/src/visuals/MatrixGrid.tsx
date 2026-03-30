@@ -30,7 +30,7 @@ export const MatrixGrid: React.FC<Props> = ({ data: props }) => {
 
       <div style={{ flex: 1, display: "flex", position: "relative" }}>
         {/* Y axis label */}
-        <div style={{ position: "absolute", left: -10, top: "50%", transform: "translateY(-50%) rotate(-90deg)", fontSize: 18, color: theme.gray, fontFamily: theme.font, whiteSpace: "nowrap" }}>
+        <div style={{ position: "absolute", left: -10, top: "50%", transform: "translateY(-50%) rotate(-90deg)", fontSize: 24, color: theme.gray, fontFamily: theme.font, whiteSpace: "nowrap" }}>
           {props.y_axis} →
         </div>
 
@@ -49,9 +49,9 @@ export const MatrixGrid: React.FC<Props> = ({ data: props }) => {
                 opacity: qOpacity, transform: `scale(${interpolate(qP, [0, 1], [0.9, 1])})`,
                 display: "flex", flexDirection: "column", gap: 14,
               }}>
-                <div style={{ fontSize: 22, fontWeight: 800, color: style.color, fontFamily: theme.font }}>{q.label}</div>
+                <div style={{ fontSize: 28, fontWeight: 800, color: style.color, fontFamily: theme.font }}>{q.label}</div>
                 {q.items.map((item, ii) => (
-                  <div key={ii} style={{ fontSize: 19, color: theme.white, fontFamily: theme.font, paddingLeft: 14, borderLeft: `2px solid ${style.color}40`, lineHeight: 1.4 }}>
+                  <div key={ii} style={{ fontSize: 26, color: theme.white, fontFamily: theme.font, paddingLeft: 14, borderLeft: `2px solid ${style.color}40`, lineHeight: 1.4 }}>
                     {item}
                   </div>
                 ))}
@@ -61,7 +61,7 @@ export const MatrixGrid: React.FC<Props> = ({ data: props }) => {
         </div>
 
         {/* X axis label */}
-        <div style={{ position: "absolute", bottom: -30, left: "50%", transform: "translateX(-50%)", fontSize: 18, color: theme.gray, fontFamily: theme.font }}>
+        <div style={{ position: "absolute", bottom: -30, left: "50%", transform: "translateX(-50%)", fontSize: 24, color: theme.gray, fontFamily: theme.font }}>
           {props.x_axis} →
         </div>
       </div>

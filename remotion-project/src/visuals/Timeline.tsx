@@ -106,7 +106,7 @@ export const Timeline: React.FC<Props> = ({ data, durationFrames, accentColor = 
                   transform: `translateY(${interpolate(Math.min(1, progress), [0, 1], [16, 0])}px)`,
                 }}>
                   <div style={{
-                    fontSize: 22, fontWeight: 900, color: accentColor,
+                    fontSize: 28, fontWeight: 900, color: accentColor,
                     fontFamily: theme.font, marginBottom: 6,
                   }}>
                     {item.label}
@@ -119,7 +119,7 @@ export const Timeline: React.FC<Props> = ({ data, durationFrames, accentColor = 
                   </div>
                   {item.note && (
                     <div style={{
-                      fontSize: 17, color: theme.gray,
+                      fontSize: 24, color: theme.gray,
                       fontFamily: theme.font, marginTop: 8, lineHeight: 1.4,
                     }}>
                       {item.note}

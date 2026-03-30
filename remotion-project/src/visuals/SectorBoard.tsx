@@ -32,7 +32,7 @@ export const SectorBoard: React.FC<Props> = ({ data: props }) => {
         opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)`,
       }}>
         <div style={{ fontSize: 40, fontWeight: 700, color: theme.gold, fontFamily: theme.font }}>{title}</div>
-        {date && <div style={{ fontSize: 20, color: theme.gray, fontFamily: theme.font }}>{date}</div>}
+        {date && <div style={{ fontSize: 26, color: theme.gray, fontFamily: theme.font }}>{date}</div>}
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -54,7 +54,7 @@ export const SectorBoard: React.FC<Props> = ({ data: props }) => {
                 {sector.name}
               </div>
               {sector.index && (
-                <div style={{ width: 120, fontSize: 20, color: theme.grayLight, fontFamily: theme.font, flexShrink: 0 }}>
+                <div style={{ width: 120, fontSize: 26, color: theme.grayLight, fontFamily: theme.font, flexShrink: 0 }}>
                   {sector.index}
                 </div>
               )}

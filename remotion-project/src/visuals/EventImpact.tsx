@@ -23,12 +23,12 @@ export const EventImpact: React.FC<Props> = ({ data }) => {
         display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
         boxShadow: `0 0 ${15 + pulse * 15}px ${theme.red}20`,
       }}>
-        <div style={{ fontSize: 18, color: theme.red, fontFamily: theme.font, fontWeight: 600 }}>{data.event_date}</div>
+        <div style={{ fontSize: 24, color: theme.red, fontFamily: theme.font, fontWeight: 600 }}>{data.event_date}</div>
         <div style={{ fontSize: 32, fontWeight: 800, color: theme.white, fontFamily: theme.font }}>⚡ {data.event}</div>
       </div>
 
       {/* Shockwave line */}
-      <div style={{ alignSelf: "center", fontSize: 20, color: `${theme.tiffany}50`, fontFamily: theme.font, opacity: eventOpacity }}>--- 시장 충격 ---</div>
+      <div style={{ alignSelf: "center", fontSize: 26, color: `${theme.tiffany}50`, fontFamily: theme.font, opacity: eventOpacity }}>--- 시장 충격 ---</div>
 
       {/* Impacts */}
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -47,7 +47,7 @@ export const EventImpact: React.FC<Props> = ({ data }) => {
               opacity: impOpacity, transform: `translateX(${interpolate(impP, [0, 1], [40, 0])}px)`,
             }}>
               <div style={{ width: 160, fontSize: 24, fontWeight: 700, color: theme.tiffany, fontFamily: theme.font }}>{impact.market}</div>
-              <div style={{ flex: 1, fontSize: 22, color: theme.grayLight, fontFamily: theme.font }}>{impact.reaction}</div>
+              <div style={{ flex: 1, fontSize: 28, color: theme.grayLight, fontFamily: theme.font }}>{impact.reaction}</div>
               <div style={{ fontSize: 30, fontWeight: 900, color: changeColor, fontFamily: theme.font, flexShrink: 0 }}>{changeStr}</div>
             </div>
           );

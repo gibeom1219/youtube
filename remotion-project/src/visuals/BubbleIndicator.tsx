@@ -27,15 +27,15 @@ export const BubbleIndicator: React.FC<Props> = ({ data: props }) => {
     <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", padding: "60px 100px" }}>
       <div style={{ textAlign: "center", marginBottom: 30, opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)` }}>
         <div style={{ fontSize: 40, fontWeight: 700, color: theme.gold, fontFamily: theme.font }}>{props.title}</div>
-        {props.subtitle && <div style={{ fontSize: 20, color: theme.grayLight, fontFamily: theme.font, marginTop: 6 }}>{props.subtitle}</div>}
+        {props.subtitle && <div style={{ fontSize: 26, color: theme.grayLight, fontFamily: theme.font, marginTop: 6 }}>{props.subtitle}</div>}
       </div>
 
       {/* Header */}
       <div style={{ display: "flex", padding: "16px 24px", background: `${theme.tiffany}08`, borderRadius: "10px 10px 0 0" }}>
-        <div style={{ flex: 2, fontSize: 22, fontWeight: 700, color: theme.gray, fontFamily: theme.font }}>지표</div>
-        <div style={{ flex: 1, fontSize: 22, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>과거(닷컴)</div>
-        <div style={{ flex: 1, fontSize: 22, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>현재</div>
-        <div style={{ flex: 1, fontSize: 22, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>판단</div>
+        <div style={{ flex: 2, fontSize: 28, fontWeight: 700, color: theme.gray, fontFamily: theme.font }}>지표</div>
+        <div style={{ flex: 1, fontSize: 28, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>과거(닷컴)</div>
+        <div style={{ flex: 1, fontSize: 28, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>현재</div>
+        <div style={{ flex: 1, fontSize: 28, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>판단</div>
       </div>
 
       {props.indicators.map((ind, i) => {
@@ -54,7 +54,7 @@ export const BubbleIndicator: React.FC<Props> = ({ data: props }) => {
             <div style={{ flex: 1, fontSize: 24, color: theme.grayLight, fontFamily: theme.font, textAlign: "center" }}>{ind.past_value}</div>
             <div style={{ flex: 1, fontSize: 24, fontWeight: 700, color: style.color, fontFamily: theme.font, textAlign: "center" }}>{ind.current_value}</div>
             <div style={{ flex: 1, textAlign: "center" }}>
-              <span style={{ fontSize: 22, fontWeight: 800, color: style.color, fontFamily: theme.font, padding: "6px 16px", background: `${style.color}15`, borderRadius: 8 }}>{style.label}</span>
+              <span style={{ fontSize: 28, fontWeight: 800, color: style.color, fontFamily: theme.font, padding: "6px 16px", background: `${style.color}15`, borderRadius: 8 }}>{style.label}</span>
             </div>
           </div>
         );

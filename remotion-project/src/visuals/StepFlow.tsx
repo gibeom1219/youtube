@@ -81,7 +81,7 @@ export const StepFlow: React.FC<Props> = ({ data, durationFrames }) => {
                 position: "relative" as const,
               }}>
                 <div style={{
-                  fontSize: 22, fontWeight: 900, color: theme.tiffany,
+                  fontSize: 28, fontWeight: 900, color: theme.tiffany,
                   fontFamily: theme.font,
                 }}>
                   {step.step}

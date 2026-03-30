@@ -29,19 +29,19 @@ export const PriceImpact: React.FC<Props> = ({ data }) => {
         display: "flex", alignItems: "center", gap: 16,
         opacity: assetOpacity, transform: `translateY(${interpolate(assetP, [0, 1], [-16, 0])}px)`,
       }}>
-        {data.icon && <span style={{ fontSize: 48, fontFamily: theme.font }}>{data.icon}</span>}
-        <span style={{ fontSize: 36, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{data.asset}</span>
-        <span style={{ fontSize: 18, color: theme.gray, fontFamily: theme.font }}>{data.period}</span>
+        {data.icon && <span style={{ fontSize: 56, fontFamily: theme.font }}>{data.icon}</span>}
+        <span style={{ fontSize: 44, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{data.asset}</span>
+        <span style={{ fontSize: 26, color: theme.gray, fontFamily: theme.font }}>{data.period}</span>
       </div>
 
       {/* Before price */}
-      <div style={{ fontSize: 36, color: theme.grayLight, fontFamily: theme.font, opacity: beforeOpacity, textDecoration: isNegative ? "line-through" : "none", textDecorationColor: `${theme.red}60` }}>
+      <div style={{ fontSize: 44, color: theme.grayLight, fontFamily: theme.font, opacity: beforeOpacity, textDecoration: isNegative ? "line-through" : "none", textDecorationColor: `${theme.red}60` }}>
         {data.before_price}
       </div>
 
       {/* Change - the big impact */}
       <div style={{
-        fontSize: 120, fontWeight: 900, color, fontFamily: theme.font,
+        fontSize: 140, fontWeight: 900, color, fontFamily: theme.font,
         opacity: changeOpacity, transform: `scale(${interpolate(changeP, [0, 1], [0.5, 1])})`,
         textShadow: `0 0 ${30 + pulse * 40}px ${color}50`,
         lineHeight: 1,
@@ -50,12 +50,12 @@ export const PriceImpact: React.FC<Props> = ({ data }) => {
       </div>
 
       {/* After price */}
-      <div style={{ fontSize: 48, fontWeight: 800, color: theme.white, fontFamily: theme.font, opacity: changeOpacity }}>
+      <div style={{ fontSize: 56, fontWeight: 800, color: theme.white, fontFamily: theme.font, opacity: changeOpacity }}>
         → {data.after_price}
       </div>
 
       {data.context && (
-        <div style={{ fontSize: 22, color: theme.grayLight, fontFamily: theme.font, textAlign: "center", maxWidth: 800, opacity: ctxOpacity, marginTop: 10, lineHeight: 1.5 }}>
+        <div style={{ fontSize: 28, color: theme.grayLight, fontFamily: theme.font, textAlign: "center", maxWidth: 1000, opacity: ctxOpacity, marginTop: 10, lineHeight: 1.5 }}>
           {data.context}
         </div>
       )}

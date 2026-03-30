@@ -55,7 +55,7 @@ export const MiniProfile: React.FC<Props> = ({ data }) => {
               {data.stats.map((s, i) => (
                 <div key={i} style={{ textAlign: "center" }}>
                   <div style={{ fontSize: 32, fontWeight: 900, color: theme.tiffany, fontFamily: theme.font }}>{s.value}</div>
-                  <div style={{ fontSize: 20, color: theme.gray, fontFamily: theme.font }}>{s.label}</div>
+                  <div style={{ fontSize: 26, color: theme.gray, fontFamily: theme.font }}>{s.label}</div>
                 </div>
               ))}
             </div>

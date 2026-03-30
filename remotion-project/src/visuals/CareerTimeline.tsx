@@ -23,7 +23,7 @@ export const CareerTimeline: React.FC<Props> = ({ data }) => {
         {data.avatar && <span style={{ fontSize: 56, fontFamily: theme.font }}>{data.avatar}</span>}
         <div>
           <div style={{ fontSize: 36, fontWeight: 900, color: theme.white, fontFamily: theme.font }}>{data.name}</div>
-          <div style={{ fontSize: 20, color: theme.tiffany, fontFamily: theme.font, fontWeight: 600 }}>{data.role}</div>
+          <div style={{ fontSize: 26, color: theme.tiffany, fontFamily: theme.font, fontWeight: 600 }}>{data.role}</div>
         </div>
       </div>
 
@@ -54,7 +54,7 @@ export const CareerTimeline: React.FC<Props> = ({ data }) => {
               }} />
 
               {/* Year */}
-              <div style={{ width: 80, fontSize: 18, fontWeight: 800, color: isHighlight ? theme.tiffany : theme.grayLight, fontFamily: theme.font, flexShrink: 0, marginTop: 8 }}>
+              <div style={{ width: 80, fontSize: 24, fontWeight: 800, color: isHighlight ? theme.tiffany : theme.grayLight, fontFamily: theme.font, flexShrink: 0, marginTop: 8 }}>
                 {evt.year}
               </div>
 
@@ -64,8 +64,8 @@ export const CareerTimeline: React.FC<Props> = ({ data }) => {
                 background: isHighlight ? `${theme.tiffany}10` : "rgba(129,216,208,0.03)",
                 border: isHighlight ? `1px solid ${theme.tiffany}30` : "1px solid rgba(129,216,208,0.06)",
               }}>
-                <div style={{ fontSize: 20, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{evt.title}</div>
-                {evt.detail && <div style={{ fontSize: 17, color: theme.grayLight, fontFamily: theme.font, marginTop: 4, lineHeight: 1.4 }}>{evt.detail}</div>}
+                <div style={{ fontSize: 26, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{evt.title}</div>
+                {evt.detail && <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font, marginTop: 4, lineHeight: 1.4 }}>{evt.detail}</div>}
               </div>
             </div>
           );

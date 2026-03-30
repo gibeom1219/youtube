@@ -91,7 +91,7 @@ export const Checklist: React.FC<Props> = ({ data }) => {
                 </div>
                 {item.note && (
                   <div style={{
-                    fontSize: 20, color: theme.grayLight,
+                    fontSize: 26, color: theme.grayLight,
                     fontFamily: theme.font, marginTop: 6, lineHeight: 1.4,
                   }}>
                     {item.note}
@@ -100,7 +100,7 @@ export const Checklist: React.FC<Props> = ({ data }) => {
               </div>
               {/* 오른쪽 상태 라벨 */}
               <div style={{
-                fontSize: 18, fontWeight: 800, color,
+                fontSize: 24, fontWeight: 800, color,
                 fontFamily: theme.font, letterSpacing: 0.5,
                 flexShrink: 0, alignSelf: "center",
                 opacity: 0.8 + glowPulse * 0.2,

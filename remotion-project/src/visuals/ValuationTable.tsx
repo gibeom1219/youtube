@@ -23,11 +23,11 @@ export const ValuationTable: React.FC<Props> = ({ data: props }) => {
 
       {/* Header */}
       <div style={{ display: "flex", padding: "14px 20px", background: `${theme.tiffany}10`, borderRadius: "12px 12px 0 0", border: `1px solid ${theme.tiffany}20` }}>
-        <div style={{ flex: 2, fontSize: 20, fontWeight: 800, color: theme.tiffany, fontFamily: theme.font }}>종목</div>
+        <div style={{ flex: 2, fontSize: 26, fontWeight: 800, color: theme.tiffany, fontFamily: theme.font }}>종목</div>
         {metrics.map((m) => (
-          <div key={m} style={{ flex: 1, fontSize: 20, fontWeight: 800, color: props.highlight_metric === m.toLowerCase() ? theme.tiffany : theme.grayLight, fontFamily: theme.font, textAlign: "center" }}>{m}</div>
+          <div key={m} style={{ flex: 1, fontSize: 26, fontWeight: 800, color: props.highlight_metric === m.toLowerCase() ? theme.tiffany : theme.grayLight, fontFamily: theme.font, textAlign: "center" }}>{m}</div>
         ))}
-        <div style={{ flex: 1, fontSize: 20, fontWeight: 800, color: theme.grayLight, fontFamily: theme.font, textAlign: "center" }}>투자의견</div>
+        <div style={{ flex: 1, fontSize: 26, fontWeight: 800, color: theme.grayLight, fontFamily: theme.font, textAlign: "center" }}>투자의견</div>
       </div>
 
       {/* Rows */}
@@ -44,13 +44,13 @@ export const ValuationTable: React.FC<Props> = ({ data: props }) => {
             opacity: rowOpacity, transform: `translateX(${interpolate(rowP, [0, 1], [20, 0])}px)`,
           }}>
             <div style={{ flex: 2 }}>
-              <div style={{ fontSize: 22, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{stock.name}</div>
-              {stock.ticker && <div style={{ fontSize: 16, color: theme.gray, fontFamily: theme.font }}>{stock.ticker}</div>}
+              <div style={{ fontSize: 28, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{stock.name}</div>
+              {stock.ticker && <div style={{ fontSize: 22, color: theme.gray, fontFamily: theme.font }}>{stock.ticker}</div>}
             </div>
-            <div style={{ flex: 1, fontSize: 22, fontWeight: 600, color: theme.white, fontFamily: theme.font, textAlign: "center" }}>{stock.per}</div>
-            <div style={{ flex: 1, fontSize: 22, fontWeight: 600, color: theme.white, fontFamily: theme.font, textAlign: "center" }}>{stock.pbr}</div>
-            <div style={{ flex: 1, fontSize: 22, fontWeight: 600, color: theme.white, fontFamily: theme.font, textAlign: "center" }}>{stock.roe}</div>
-            <div style={{ flex: 1, fontSize: 20, fontWeight: 800, color: ratingColor, fontFamily: theme.font, textAlign: "center" }}>{stock.rating ?? "-"}</div>
+            <div style={{ flex: 1, fontSize: 28, fontWeight: 600, color: theme.white, fontFamily: theme.font, textAlign: "center" }}>{stock.per}</div>
+            <div style={{ flex: 1, fontSize: 28, fontWeight: 600, color: theme.white, fontFamily: theme.font, textAlign: "center" }}>{stock.pbr}</div>
+            <div style={{ flex: 1, fontSize: 28, fontWeight: 600, color: theme.white, fontFamily: theme.font, textAlign: "center" }}>{stock.roe}</div>
+            <div style={{ flex: 1, fontSize: 26, fontWeight: 800, color: ratingColor, fontFamily: theme.font, textAlign: "center" }}>{stock.rating ?? "-"}</div>
           </div>
         );
       })}

@@ -109,7 +109,7 @@ export const WarningCard: React.FC<Props> = ({ data }) => {
           <div style={{
             borderTop: `1px solid ${color}20`,
             padding: "14px 40px",
-            fontSize: 18, color: "rgba(255,255,255,0.4)",
+            fontSize: 24, color: "rgba(255,255,255,0.4)",
             fontFamily: theme.font, lineHeight: 1.4,
           }}>
             ※ {data.disclaimer}

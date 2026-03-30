@@ -72,7 +72,7 @@ export const VsBattle: React.FC<Props> = ({ data }) => {
             background: `${color}06`,
             borderRadius: 10,
           }}>
-            <div style={{ fontSize: 20, color: theme.grayLight, fontFamily: theme.font }}>
+            <div style={{ fontSize: 26, color: theme.grayLight, fontFamily: theme.font }}>
               {stat.label}
             </div>
             <div style={{ fontSize: 24, fontWeight: 800, color, fontFamily: theme.font }}>

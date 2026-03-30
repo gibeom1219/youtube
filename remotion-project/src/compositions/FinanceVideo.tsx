@@ -192,13 +192,13 @@ const IntroCard: React.FC<{ scene: Scene; title: string; hook: string }> = ({ sc
     }}>
       {/* 상단 레이블 */}
       <div style={{
-        fontSize: 22, fontWeight: 700, color: theme.tiffany,
-        fontFamily: theme.font, letterSpacing: 6,
+        fontSize: 30, fontWeight: 700, color: theme.tiffany,
+        fontFamily: theme.font, letterSpacing: 8,
         textTransform: "uppercase" as const,
         opacity: labelOpacity,
         transform: `translateY(${interpolate(labelOpacity, [0, 1], [-12, 0])}px)`,
         border: `1px solid rgba(129,216,208,0.35)`,
-        padding: "8px 24px", borderRadius: 4,
+        padding: "12px 32px", borderRadius: 6,
       }}>
         경제 인사이트
       </div>
@@ -222,7 +222,7 @@ const IntroCard: React.FC<{ scene: Scene; title: string; hook: string }> = ({ sc
 
       {/* 훅 텍스트 */}
       <div style={{
-        fontSize: 38, color: theme.grayLight,
+        fontSize: 46, color: theme.grayLight,
         fontFamily: theme.font, fontWeight: 500,
         opacity: subOpacity,
         transform: `translateY(${subY}px)`,

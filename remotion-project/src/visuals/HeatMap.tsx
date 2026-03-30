@@ -60,13 +60,13 @@ export const HeatMap: React.FC<Props> = ({ data: props }) => {
               transform: `scale(${interpolate(cellP, [0, 1], [0.9, 1])})`,
               display: "flex", flexDirection: "column", gap: 8,
             }}>
-              <div style={{ fontSize: 22, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>
+              <div style={{ fontSize: 28, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>
                 {item.label}
               </div>
               <div style={{ fontSize: 28, fontWeight: 900, color: getTextColor(item.change), fontFamily: theme.font }}>
                 {item.change > 0 ? "+" : ""}{item.change}%
               </div>
-              <div style={{ fontSize: 18, color: theme.grayLight, fontFamily: theme.font }}>
+              <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font }}>
                 {item.value}
               </div>
             </div>

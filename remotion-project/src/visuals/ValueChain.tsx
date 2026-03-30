@@ -37,10 +37,10 @@ export const ValueChain: React.FC<Props> = ({ data: props }) => {
                 minHeight: 200,
               }}>
                 {stage.icon && <span style={{ fontSize: 36, fontFamily: theme.font }}>{stage.icon}</span>}
-                <div style={{ fontSize: 22, fontWeight: 800, color, fontFamily: theme.font, textAlign: "center" }}>{stage.name}</div>
-                {stage.note && <div style={{ fontSize: 16, color: theme.grayLight, fontFamily: theme.font, textAlign: "center" }}>{stage.note}</div>}
+                <div style={{ fontSize: 28, fontWeight: 800, color, fontFamily: theme.font, textAlign: "center" }}>{stage.name}</div>
+                {stage.note && <div style={{ fontSize: 22, color: theme.grayLight, fontFamily: theme.font, textAlign: "center" }}>{stage.note}</div>}
                 {stage.companies && stage.companies.map((c, ci) => (
-                  <div key={ci} style={{ fontSize: 17, color: theme.white, fontFamily: theme.font, padding: "4px 12px", background: `${color}15`, borderRadius: 6 }}>{c}</div>
+                  <div key={ci} style={{ fontSize: 24, color: theme.white, fontFamily: theme.font, padding: "4px 12px", background: `${color}15`, borderRadius: 6 }}>{c}</div>
                 ))}
               </div>
               {i < stages.length - 1 && (

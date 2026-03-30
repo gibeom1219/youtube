@@ -81,7 +81,7 @@ export const ScenarioCard: React.FC<Props> = ({ data, durationFrames }) => {
                   top: -14, right: 20,
                   background: color,
                   color: theme.bg,
-                  fontSize: 18, fontWeight: 900,
+                  fontSize: 24, fontWeight: 900,
                   fontFamily: theme.font,
                   padding: "4px 14px", borderRadius: 20,
                 }}>
@@ -102,7 +102,7 @@ export const ScenarioCard: React.FC<Props> = ({ data, durationFrames }) => {
 
               {/* 조건 */}
               <div style={{
-                fontSize: 20, color: theme.grayLight,
+                fontSize: 26, color: theme.grayLight,
                 fontFamily: theme.font, fontWeight: 500,
                 lineHeight: 1.45,
                 borderLeft: `3px solid ${color}60`,

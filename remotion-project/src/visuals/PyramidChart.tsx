@@ -46,7 +46,7 @@ export const PyramidChart: React.FC<Props> = ({ data }) => {
       </div>
       {data.subtitle && (
         <div style={{
-          fontSize: 22, color: theme.grayLight, fontFamily: theme.font,
+          fontSize: 28, color: theme.grayLight, fontFamily: theme.font,
           textAlign: "center", marginBottom: 8,
           opacity: Math.min(1, titleProgress),
         }}>
@@ -89,7 +89,7 @@ export const PyramidChart: React.FC<Props> = ({ data }) => {
                     width: 30, height: 30, borderRadius: "50%",
                     background: color,
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: 14, fontWeight: 900, color: "#060d0c",
+                    fontSize: 20, fontWeight: 900, color: "#060d0c",
                     fontFamily: theme.font, flexShrink: 0,
                   }}>
                     {i + 1}
@@ -104,7 +104,7 @@ export const PyramidChart: React.FC<Props> = ({ data }) => {
                     </div>
                     {level.description && (
                       <div style={{
-                        fontSize: 18, color: theme.grayLight,
+                        fontSize: 24, color: theme.grayLight,
                         fontFamily: theme.font, marginTop: 2,
                       }}>
                         {level.description}
@@ -114,7 +114,7 @@ export const PyramidChart: React.FC<Props> = ({ data }) => {
                 </div>
                 {level.value && (
                   <div style={{
-                    fontSize: 22, fontWeight: 900, color,
+                    fontSize: 28, fontWeight: 900, color,
                     fontFamily: theme.font, flexShrink: 0,
                     whiteSpace: "nowrap" as const,
                   }}>

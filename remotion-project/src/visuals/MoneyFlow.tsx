@@ -49,14 +49,14 @@ export const MoneyFlow: React.FC<Props> = ({ data: props }) => {
               {/* Arrow + Amount */}
               <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
                 <div style={{ fontSize: 28, color: `${color}80` }}>→</div>
-                {flow.amount && <div style={{ fontSize: 20, fontWeight: 700, color: theme.grayLight, fontFamily: theme.font }}>{flow.amount}</div>}
+                {flow.amount && <div style={{ fontSize: 26, fontWeight: 700, color: theme.grayLight, fontFamily: theme.font }}>{flow.amount}</div>}
                 <div style={{ fontSize: 28, color: `${color}80` }}>→</div>
               </div>
 
               {/* To + Note */}
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: 26, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{flow.to}</div>
-                {flow.note && <div style={{ fontSize: 20, color: theme.grayLight, fontFamily: theme.font, marginTop: 4 }}>{flow.note}</div>}
+                {flow.note && <div style={{ fontSize: 26, color: theme.grayLight, fontFamily: theme.font, marginTop: 4 }}>{flow.note}</div>}
               </div>
             </div>
           );

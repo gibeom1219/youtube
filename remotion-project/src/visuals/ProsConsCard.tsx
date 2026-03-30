@@ -62,7 +62,7 @@ export const ProsConsCard: React.FC<Props> = ({ data, durationFrames }) => {
               opacity: Math.min(1, p),
               transform: `translateX(${interpolate(Math.min(1, p), [0, 1], [fromLeft ? -40 : 40, 0])}px)`,
             }}>
-              <span style={{ fontSize: 22, flexShrink: 0, marginTop: 2, fontFamily: theme.font }}>{icon}</span>
+              <span style={{ fontSize: 28, flexShrink: 0, marginTop: 2, fontFamily: theme.font }}>{icon}</span>
               <span style={{
                 fontSize: 26, fontWeight: 600, color: theme.white,
                 fontFamily: theme.font, lineHeight: 1.4,

@@ -35,7 +35,7 @@ export const StackedBar: React.FC<Props> = ({ data: props }) => {
           return (
             <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, opacity: legOpacity }}>
               <div style={{ width: 16, height: 16, borderRadius: 4, background: COLORS[i % COLORS.length] }} />
-              <span style={{ fontSize: 18, color: theme.grayLight, fontFamily: theme.font }}>{cat}</span>
+              <span style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font }}>{cat}</span>
             </div>
           );
         })}
@@ -52,7 +52,7 @@ export const StackedBar: React.FC<Props> = ({ data: props }) => {
           return (
             <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", height: "100%", justifyContent: "flex-end" }}>
               {/* Value label */}
-              <div style={{ fontSize: 22, fontWeight: 700, color: theme.white, fontFamily: theme.font, marginBottom: 8, opacity: labelOpacity }}>
+              <div style={{ fontSize: 28, fontWeight: 700, color: theme.white, fontFamily: theme.font, marginBottom: 8, opacity: labelOpacity }}>
                 {total}
               </div>
               {/* Stacked segments */}
@@ -65,7 +65,7 @@ export const StackedBar: React.FC<Props> = ({ data: props }) => {
                 })}
               </div>
               {/* Label */}
-              <div style={{ fontSize: 18, color: theme.grayLight, fontFamily: theme.font, fontWeight: 600, marginTop: 14, textAlign: "center", opacity: labelOpacity }}>
+              <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font, fontWeight: 600, marginTop: 14, textAlign: "center", opacity: labelOpacity }}>
                 {bar.label}
               </div>
             </div>

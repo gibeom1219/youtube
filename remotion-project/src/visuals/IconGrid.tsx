@@ -74,7 +74,7 @@ export const IconGrid: React.FC<Props> = ({ data, durationFrames }) => {
               </div>
               {item.desc && (
                 <div style={{
-                  fontSize: 20, color: theme.grayLight,
+                  fontSize: 26, color: theme.grayLight,
                   fontFamily: theme.font, fontWeight: 500,
                   textAlign: "center" as const, lineHeight: 1.4,
                 }}>

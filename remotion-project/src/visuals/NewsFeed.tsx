@@ -90,7 +90,7 @@ export const NewsFeed: React.FC<Props> = ({ data, durationFrames }) => {
                 border: `1px solid ${catColor}60`,
                 borderRadius: 6,
                 padding: "4px 14px",
-                fontSize: 20, fontWeight: 800, color: catColor,
+                fontSize: 26, fontWeight: 800, color: catColor,
                 fontFamily: theme.font,
                 whiteSpace: "nowrap" as const,
                 flexShrink: 0,
@@ -109,7 +109,7 @@ export const NewsFeed: React.FC<Props> = ({ data, durationFrames }) => {
                 </div>
                 {item.sub && (
                   <div style={{
-                    fontSize: 22, color: theme.grayLight,
+                    fontSize: 28, color: theme.grayLight,
                     fontFamily: theme.font, fontWeight: 500,
                   }}>
                     {item.sub}

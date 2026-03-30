@@ -24,16 +24,16 @@ export const BeforeAfter: React.FC<Props> = ({ data }) => {
 
   return (
     <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "70px 120px", gap: 20 }}>
-      <div style={{ fontSize: 38, fontWeight: 700, color: theme.gold, fontFamily: theme.font, opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)` }}>
+      <div style={{ fontSize: 46, fontWeight: 700, color: theme.gold, fontFamily: theme.font, opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)` }}>
         {data.title}
       </div>
-      <div style={{ fontSize: 20, color: theme.gray, fontFamily: theme.font, opacity: titleOpacity }}>{data.period}</div>
+      <div style={{ fontSize: 28, color: theme.gray, fontFamily: theme.font, opacity: titleOpacity }}>{data.period}</div>
 
       <div style={{ display: "flex", alignItems: "center", gap: 50, marginTop: 30 }}>
         <div style={{ textAlign: "center", opacity: beforeOpacity, transform: `translateX(${interpolate(beforeP, [0, 1], [-30, 0])}px)` }}>
-          <div style={{ fontSize: 22, color: theme.gray, fontFamily: theme.font, marginBottom: 12 }}>{data.before.label}</div>
-          <div style={{ fontSize: 72, fontWeight: 900, color: theme.grayLight, fontFamily: theme.font }}>{data.before.value}</div>
-          {data.before.sub && <div style={{ fontSize: 18, color: theme.gray, fontFamily: theme.font, marginTop: 8 }}>{data.before.sub}</div>}
+          <div style={{ fontSize: 30, color: theme.gray, fontFamily: theme.font, marginBottom: 12 }}>{data.before.label}</div>
+          <div style={{ fontSize: 80, fontWeight: 900, color: theme.grayLight, fontFamily: theme.font }}>{data.before.value}</div>
+          {data.before.sub && <div style={{ fontSize: 24, color: theme.gray, fontFamily: theme.font, marginTop: 8 }}>{data.before.sub}</div>}
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, opacity: arrowOpacity }}>
@@ -41,9 +41,9 @@ export const BeforeAfter: React.FC<Props> = ({ data }) => {
         </div>
 
         <div style={{ textAlign: "center", opacity: afterOpacity, transform: `translateX(${interpolate(afterP, [0, 1], [30, 0])}px)` }}>
-          <div style={{ fontSize: 22, color: theme.gray, fontFamily: theme.font, marginBottom: 12 }}>{data.after.label}</div>
-          <div style={{ fontSize: 72, fontWeight: 900, color: theme.white, fontFamily: theme.font }}>{data.after.value}</div>
-          {data.after.sub && <div style={{ fontSize: 18, color: theme.grayLight, fontFamily: theme.font, marginTop: 8 }}>{data.after.sub}</div>}
+          <div style={{ fontSize: 30, color: theme.gray, fontFamily: theme.font, marginBottom: 12 }}>{data.after.label}</div>
+          <div style={{ fontSize: 80, fontWeight: 900, color: theme.white, fontFamily: theme.font }}>{data.after.value}</div>
+          {data.after.sub && <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font, marginTop: 8 }}>{data.after.sub}</div>}
         </div>
       </div>
 

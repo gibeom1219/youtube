@@ -46,8 +46,8 @@ export const PsychologyCard: React.FC<Props> = ({ data }) => {
         background: `${theme.red}08`, borderLeft: `4px solid ${theme.red}60`,
         maxWidth: 900, width: "100%", opacity: exOpacity,
       }}>
-        <div style={{ fontSize: 16, color: theme.red, fontFamily: theme.font, fontWeight: 700, marginBottom: 8 }}>❌ 이런 실수를 합니다</div>
-        <div style={{ fontSize: 21, color: theme.white, fontFamily: theme.font, lineHeight: 1.5 }}>{data.example}</div>
+        <div style={{ fontSize: 22, color: theme.red, fontFamily: theme.font, fontWeight: 700, marginBottom: 8 }}>❌ 이런 실수를 합니다</div>
+        <div style={{ fontSize: 28, color: theme.white, fontFamily: theme.font, lineHeight: 1.5 }}>{data.example}</div>
       </div>
 
       {/* Solution */}
@@ -56,8 +56,8 @@ export const PsychologyCard: React.FC<Props> = ({ data }) => {
         background: `${theme.green}08`, borderLeft: `4px solid ${theme.green}60`,
         maxWidth: 900, width: "100%", opacity: solOpacity,
       }}>
-        <div style={{ fontSize: 16, color: theme.green, fontFamily: theme.font, fontWeight: 700, marginBottom: 8 }}>✅ 이렇게 역이용하세요</div>
-        <div style={{ fontSize: 21, color: theme.white, fontFamily: theme.font, lineHeight: 1.5 }}>{data.solution}</div>
+        <div style={{ fontSize: 22, color: theme.green, fontFamily: theme.font, fontWeight: 700, marginBottom: 8 }}>✅ 이렇게 역이용하세요</div>
+        <div style={{ fontSize: 28, color: theme.white, fontFamily: theme.font, lineHeight: 1.5 }}>{data.solution}</div>
       </div>
     </div>
   );

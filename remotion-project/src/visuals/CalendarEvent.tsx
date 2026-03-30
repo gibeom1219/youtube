@@ -52,7 +52,7 @@ export const CalendarEvent: React.FC<Props> = ({ data }) => {
           </div>
           {data.subtitle && (
             <div style={{
-              fontSize: 22, color: theme.grayLight, fontFamily: theme.font,
+              fontSize: 28, color: theme.grayLight, fontFamily: theme.font,
             }}>
               {data.subtitle}
             </div>
@@ -87,9 +87,9 @@ export const CalendarEvent: React.FC<Props> = ({ data }) => {
                 minWidth: 90, flexShrink: 0,
                 borderRight: `1px solid ${imp.color}20`,
               }}>
-                <div style={{ fontSize: 20, fontFamily: theme.font }}>{imp.dot}</div>
+                <div style={{ fontSize: 26, fontFamily: theme.font }}>{imp.dot}</div>
                 <div style={{
-                  fontSize: 22, fontWeight: 900, color: imp.color,
+                  fontSize: 28, fontWeight: 900, color: imp.color,
                   fontFamily: theme.font, marginTop: 4, textAlign: "center",
                 }}>
                   {evt.date}
@@ -107,14 +107,14 @@ export const CalendarEvent: React.FC<Props> = ({ data }) => {
                 <div style={{ display: "flex", gap: 16, marginTop: 6, flexWrap: "wrap" as const }}>
                   {evt.expected && (
                     <div style={{
-                      fontSize: 18, color: theme.grayLight, fontFamily: theme.font,
+                      fontSize: 24, color: theme.grayLight, fontFamily: theme.font,
                     }}>
                       예상: <span style={{ color: "#FFB347" }}>{evt.expected}</span>
                     </div>
                   )}
                   {evt.result && (
                     <div style={{
-                      fontSize: 18, color: theme.grayLight, fontFamily: theme.font,
+                      fontSize: 24, color: theme.grayLight, fontFamily: theme.font,
                     }}>
                       결과: <span style={{ color: "#52D68A" }}>{evt.result}</span>
                     </div>

@@ -42,7 +42,7 @@ export const RiskScale: React.FC<Props> = ({ data }) => {
               boxShadow: isCurrent ? `0 0 ${15 + pulse * 15}px ${color}40` : "none",
               transition: "box-shadow 0s",
             }}>
-              <span style={{ fontSize: 18, fontWeight: isCurrent ? 800 : 500, color: isActive ? theme.white : theme.gray, fontFamily: theme.font }}>
+              <span style={{ fontSize: 24, fontWeight: isCurrent ? 800 : 500, color: isActive ? theme.white : theme.gray, fontFamily: theme.font }}>
                 {labels[lv - 1]}
               </span>
             </div>

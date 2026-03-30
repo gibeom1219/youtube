@@ -82,7 +82,7 @@ export const StockCard: React.FC<Props> = ({ data }) => {
                   {data.ticker}
                 </div>
                 <div style={{
-                  fontSize: 22, color: theme.grayLight,
+                  fontSize: 28, color: theme.grayLight,
                   fontFamily: theme.font, marginTop: 4,
                 }}>
                   {data.name}
@@ -94,7 +94,7 @@ export const StockCard: React.FC<Props> = ({ data }) => {
                 background: `${theme.tiffany}15`,
                 border: `1px solid ${theme.tiffany}30`,
                 borderRadius: 50, padding: "4px 16px",
-                fontSize: 16, color: theme.tiffany,
+                fontSize: 22, color: theme.tiffany,
                 fontFamily: theme.font, fontWeight: 700,
                 display: "inline-block",
               }}>
@@ -141,12 +141,12 @@ export const StockCard: React.FC<Props> = ({ data }) => {
                 minWidth: 120,
               }}>
                 <div style={{
-                  fontSize: 15, color: theme.grayLight, fontFamily: theme.font,
+                  fontSize: 22, color: theme.grayLight, fontFamily: theme.font,
                 }}>
                   {item.label}
                 </div>
                 <div style={{
-                  fontSize: 22, fontWeight: 800, color: theme.white,
+                  fontSize: 28, fontWeight: 800, color: theme.white,
                   fontFamily: theme.font,
                 }}>
                   {item.value}

@@ -19,7 +19,7 @@ export const LiquidationCascade: React.FC<Props> = ({ data: props }) => {
     <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", padding: "60px 100px" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 30, opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)` }}>
         <div style={{ fontSize: 38, fontWeight: 700, color: theme.gold, fontFamily: theme.font }}>{props.title}</div>
-        <div style={{ fontSize: 22, color: theme.red, fontFamily: theme.font, fontWeight: 700 }}>{props.asset}</div>
+        <div style={{ fontSize: 28, color: theme.red, fontFamily: theme.font, fontWeight: 700 }}>{props.asset}</div>
       </div>
 
       <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8, justifyContent: "center" }}>
@@ -35,7 +35,7 @@ export const LiquidationCascade: React.FC<Props> = ({ data: props }) => {
 
           return (
             <React.Fragment key={i}>
-              {i > 0 && <div style={{ textAlign: "center", fontSize: 22, color: `${theme.red}60`, opacity: arrowOpacity }}>⬇️ 연쇄</div>}
+              {i > 0 && <div style={{ textAlign: "center", fontSize: 28, color: `${theme.red}60`, opacity: arrowOpacity }}>⬇️ 연쇄</div>}
               <div style={{
                 display: "flex", alignItems: "center", gap: 20,
                 padding: "16px 24px", borderRadius: 12,
@@ -45,10 +45,10 @@ export const LiquidationCascade: React.FC<Props> = ({ data: props }) => {
               }}>
                 {stage.icon && <span style={{ fontSize: 28, fontFamily: theme.font }}>{stage.icon}</span>}
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 22, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{stage.label}</div>
+                  <div style={{ fontSize: 28, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{stage.label}</div>
                 </div>
                 <div style={{ fontSize: 26, fontWeight: 900, color: theme.red, fontFamily: theme.font }}>{stage.amount}</div>
-                {stage.cumulative && <div style={{ fontSize: 16, color: theme.gray, fontFamily: theme.font }}>누적: {stage.cumulative}</div>}
+                {stage.cumulative && <div style={{ fontSize: 22, color: theme.gray, fontFamily: theme.font }}>누적: {stage.cumulative}</div>}
               </div>
             </React.Fragment>
           );

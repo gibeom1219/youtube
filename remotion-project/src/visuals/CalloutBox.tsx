@@ -85,7 +85,7 @@ export const CalloutBox: React.FC<Props> = ({ data }) => {
           background: `${color}18`,
           border: `1px solid ${color}50`,
           borderRadius: 50, padding: "8px 28px",
-          fontSize: 22, fontWeight: 800, color,
+          fontSize: 28, fontWeight: 800, color,
           fontFamily: theme.font, letterSpacing: 2,
           opacity: Math.min(1, labelProgress),
           zIndex: 1,

@@ -106,14 +106,14 @@ export const TrendArrow: React.FC<Props> = ({ data }) => {
         transform: `translateY(${interpolate(Math.min(1, valuesProgress), [0, 1], [20, 0])}px)`,
       }}>
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 20, color: theme.grayLight, fontFamily: theme.font }}>시작</div>
+          <div style={{ fontSize: 26, color: theme.grayLight, fontFamily: theme.font }}>시작</div>
           <div style={{ fontSize: 52, fontWeight: 900, color: "rgba(255,255,255,0.7)", fontFamily: theme.font }}>
             {data.from_value}
           </div>
         </div>
         <div style={{ fontSize: 48, color: dirColor, fontFamily: theme.font }}>→</div>
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 20, color: theme.grayLight, fontFamily: theme.font }}>현재</div>
+          <div style={{ fontSize: 26, color: theme.grayLight, fontFamily: theme.font }}>현재</div>
           <div style={{
             fontSize: 52, fontWeight: 900, color: dirColor, fontFamily: theme.font,
             textShadow: `0 0 ${20 + glowPulse * 15}px ${dirColor}50`,

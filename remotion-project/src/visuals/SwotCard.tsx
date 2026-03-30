@@ -56,7 +56,7 @@ export const SwotCard: React.FC<Props> = ({ data: props }) => {
                 const itemOpacity = interpolate(frame, [16 + qi * 8 + ii * 5, 24 + qi * 8 + ii * 5], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
                 return (
                   <div key={ii} style={{
-                    fontSize: 20, color: theme.white, fontFamily: theme.font,
+                    fontSize: 26, color: theme.white, fontFamily: theme.font,
                     paddingLeft: 16, borderLeft: `3px solid ${q.color}50`,
                     opacity: itemOpacity, lineHeight: 1.4,
                   }}>

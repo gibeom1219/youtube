@@ -40,7 +40,7 @@ export const StrategyCard: React.FC<Props> = ({ data }) => {
           {data.do_items.map((item, i) => {
             const itemOpacity = interpolate(frame, [16 + i * 6, 24 + i * 6], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
             return (
-              <div key={i} style={{ fontSize: 20, color: theme.white, fontFamily: theme.font, paddingLeft: 16, borderLeft: `3px solid ${theme.green}40`, opacity: itemOpacity, lineHeight: 1.4 }}>
+              <div key={i} style={{ fontSize: 26, color: theme.white, fontFamily: theme.font, paddingLeft: 16, borderLeft: `3px solid ${theme.green}40`, opacity: itemOpacity, lineHeight: 1.4 }}>
                 {item}
               </div>
             );
@@ -60,7 +60,7 @@ export const StrategyCard: React.FC<Props> = ({ data }) => {
           {data.dont_items.map((item, i) => {
             const itemOpacity = interpolate(frame, [24 + i * 6, 32 + i * 6], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
             return (
-              <div key={i} style={{ fontSize: 20, color: theme.white, fontFamily: theme.font, paddingLeft: 16, borderLeft: `3px solid ${theme.red}40`, opacity: itemOpacity, lineHeight: 1.4 }}>
+              <div key={i} style={{ fontSize: 26, color: theme.white, fontFamily: theme.font, paddingLeft: 16, borderLeft: `3px solid ${theme.red}40`, opacity: itemOpacity, lineHeight: 1.4 }}>
                 {item}
               </div>
             );

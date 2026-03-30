@@ -27,7 +27,7 @@ export const StructureDiagram: React.FC<Props> = ({ data: props }) => {
         {props.title}
       </div>
       {props.description && (
-        <div style={{ fontSize: 20, color: theme.grayLight, fontFamily: theme.font, textAlign: "center", marginBottom: 20, opacity: titleOpacity }}>{props.description}</div>
+        <div style={{ fontSize: 26, color: theme.grayLight, fontFamily: theme.font, textAlign: "center", marginBottom: 20, opacity: titleOpacity }}>{props.description}</div>
       )}
 
       <div style={{ flex: 1, position: "relative" }}>
@@ -74,7 +74,7 @@ export const StructureDiagram: React.FC<Props> = ({ data: props }) => {
             }}>
               {el.icon && <span style={{ fontSize: isCenter ? 32 : 24, fontFamily: theme.font }}>{el.icon}</span>}
               <div style={{ fontSize: isCenter ? 22 : 18, fontWeight: 800, color: isCenter ? color : theme.white, fontFamily: theme.font }}>{el.label}</div>
-              {el.note && <div style={{ fontSize: 14, color: theme.grayLight, fontFamily: theme.font }}>{el.note}</div>}
+              {el.note && <div style={{ fontSize: 20, color: theme.grayLight, fontFamily: theme.font }}>{el.note}</div>}
             </div>
           );
         })}

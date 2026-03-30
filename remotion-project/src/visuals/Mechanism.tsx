@@ -52,7 +52,7 @@ export const Mechanism: React.FC<Props> = ({ data: props }) => {
                 </div>
               </div>
               {!isLast && (
-                <div style={{ textAlign: "center", fontSize: 20, color: `${theme.tiffany}40`, fontFamily: theme.font, opacity: arrowOpacity }}>---</div>
+                <div style={{ textAlign: "center", fontSize: 26, color: `${theme.tiffany}40`, fontFamily: theme.font, opacity: arrowOpacity }}>---</div>
               )}
             </React.Fragment>
           );

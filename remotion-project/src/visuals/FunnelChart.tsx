@@ -66,13 +66,13 @@ export const FunnelChart: React.FC<Props> = ({ data }) => {
                 display: "flex", alignItems: "center", gap: 16, marginBottom: 4,
               }}>
                 <div style={{
-                  fontSize: 20, color, fontFamily: theme.font,
+                  fontSize: 26, color, fontFamily: theme.font,
                   fontWeight: 700, minWidth: 28,
                 }}>
                   {i + 1}
                 </div>
                 <div style={{
-                  fontSize: 22, color: theme.white, fontFamily: theme.font,
+                  fontSize: 28, color: theme.white, fontFamily: theme.font,
                   fontWeight: 700, flex: 1,
                 }}>
                   {stage.label}
@@ -85,7 +85,7 @@ export const FunnelChart: React.FC<Props> = ({ data }) => {
                 </div>
                 {dropPct && (
                   <div style={{
-                    fontSize: 16, color: "#FF6B6B", fontFamily: theme.font,
+                    fontSize: 22, color: "#FF6B6B", fontFamily: theme.font,
                     fontWeight: 700, minWidth: 60, textAlign: "right",
                   }}>
                     ▼ {dropPct}%
@@ -106,7 +106,7 @@ export const FunnelChart: React.FC<Props> = ({ data }) => {
               </div>
               {stage.note && (
                 <div style={{
-                  fontSize: 17, color: theme.grayLight, fontFamily: theme.font,
+                  fontSize: 24, color: theme.grayLight, fontFamily: theme.font,
                   marginTop: 4, marginLeft: 44,
                 }}>
                   {stage.note}

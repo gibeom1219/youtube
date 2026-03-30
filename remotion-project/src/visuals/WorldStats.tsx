@@ -93,7 +93,7 @@ export const WorldStats: React.FC<Props> = ({ data, durationFrames }) => {
                 </div>
                 {item.note && (
                   <div style={{
-                    fontSize: 18, color: theme.gray,
+                    fontSize: 24, color: theme.gray,
                     fontFamily: theme.font,
                   }}>
                     {item.note}
@@ -111,7 +111,7 @@ export const WorldStats: React.FC<Props> = ({ data, durationFrames }) => {
                 </div>
                 {item.change && (
                   <div style={{
-                    fontSize: 20, fontWeight: 700, color: changeColor,
+                    fontSize: 26, fontWeight: 700, color: changeColor,
                     fontFamily: theme.font,
                   }}>
                     {item.change}

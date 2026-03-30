@@ -41,12 +41,12 @@ export const TechStack: React.FC<Props> = ({ data: props }) => {
               opacity: layerOpacity, transform: `translateY(${interpolate(layerP, [0, 1], [20, 0])}px)`,
             }}>
               {layer.icon && <span style={{ fontSize: 32, fontFamily: theme.font, flexShrink: 0 }}>{layer.icon}</span>}
-              <div style={{ fontSize: 22, fontWeight: 800, color, fontFamily: theme.font, width: 140, flexShrink: 0 }}>
+              <div style={{ fontSize: 28, fontWeight: 800, color, fontFamily: theme.font, width: 140, flexShrink: 0 }}>
                 {layer.name}
               </div>
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap", flex: 1 }}>
                 {layer.items.map((item, ii) => (
-                  <span key={ii} style={{ fontSize: 17, color: theme.white, fontFamily: theme.font, padding: "4px 12px", background: `${color}12`, borderRadius: 6, border: `1px solid ${color}20` }}>
+                  <span key={ii} style={{ fontSize: 24, color: theme.white, fontFamily: theme.font, padding: "4px 12px", background: `${color}12`, borderRadius: 6, border: `1px solid ${color}20` }}>
                     {item}
                   </span>
                 ))}

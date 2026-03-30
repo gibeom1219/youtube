@@ -33,14 +33,14 @@ export const StockPick: React.FC<Props> = ({ data: props }) => {
               opacity: rowOpacity, transform: `translateX(${interpolate(rowP, [0, 1], [40, 0])}px)`,
             }}>
               {stock.rank && (
-                <div style={{ width: 44, height: 44, borderRadius: "50%", background: i < 3 ? `${theme.tiffany}20` : "rgba(255,255,255,0.05)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, fontWeight: 900, color: i < 3 ? theme.tiffany : theme.gray, fontFamily: theme.font, flexShrink: 0 }}>
+                <div style={{ width: 44, height: 44, borderRadius: "50%", background: i < 3 ? `${theme.tiffany}20` : "rgba(255,255,255,0.05)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28, fontWeight: 900, color: i < 3 ? theme.tiffany : theme.gray, fontFamily: theme.font, flexShrink: 0 }}>
                   {stock.rank}
                 </div>
               )}
               {stock.logo && <span style={{ fontSize: 36, fontFamily: theme.font, flexShrink: 0 }}>{stock.logo}</span>}
               <div style={{ width: 200, flexShrink: 0 }}>
                 <div style={{ fontSize: 26, fontWeight: 800, color: theme.white, fontFamily: theme.font, whiteSpace: "nowrap" }}>{stock.name}</div>
-                <div style={{ fontSize: 18, color: theme.gray, fontFamily: theme.font }}>{stock.ticker}</div>
+                <div style={{ fontSize: 24, color: theme.gray, fontFamily: theme.font }}>{stock.ticker}</div>
               </div>
               <div style={{ flex: 1, fontSize: 24, color: theme.grayLight, fontFamily: theme.font, textAlign: "right" }}>{stock.reason}</div>
             </div>

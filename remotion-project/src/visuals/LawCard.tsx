@@ -28,14 +28,14 @@ export const LawCard: React.FC<Props> = ({ data }) => {
         <span style={{ fontSize: 48, fontFamily: theme.font }}>{data.icon ?? "📜"}</span>
         <div>
           <div style={{ fontSize: 42, fontWeight: 900, color: theme.white, fontFamily: theme.font }}>{data.name}</div>
-          {data.full_name && <div style={{ fontSize: 20, color: theme.grayLight, fontFamily: theme.font }}>{data.full_name}</div>}
+          {data.full_name && <div style={{ fontSize: 26, color: theme.grayLight, fontFamily: theme.font }}>{data.full_name}</div>}
         </div>
         <div style={{ padding: "8px 20px", borderRadius: 8, background: `${status.color}20`, border: `1px solid ${status.color}50`, marginLeft: 16 }}>
-          <span style={{ fontSize: 20, fontWeight: 800, color: status.color, fontFamily: theme.font }}>{status.icon} {status.label}</span>
+          <span style={{ fontSize: 26, fontWeight: 800, color: status.color, fontFamily: theme.font }}>{status.icon} {status.label}</span>
         </div>
       </div>
 
-      {data.date && <div style={{ fontSize: 18, color: theme.gray, fontFamily: theme.font, opacity: titleOpacity }}>{data.date}</div>}
+      {data.date && <div style={{ fontSize: 24, color: theme.gray, fontFamily: theme.font, opacity: titleOpacity }}>{data.date}</div>}
 
       {/* Summary */}
       <div style={{
@@ -52,7 +52,7 @@ export const LawCard: React.FC<Props> = ({ data }) => {
         {data.impacts.map((impact, i) => {
           const impOpacity = interpolate(frame, [20 + i * 6, 30 + i * 6], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
           return (
-            <div key={i} style={{ fontSize: 21, color: theme.white, fontFamily: theme.font, paddingLeft: 16, borderLeft: `3px solid ${theme.tiffany}50`, opacity: impOpacity, lineHeight: 1.4 }}>
+            <div key={i} style={{ fontSize: 28, color: theme.white, fontFamily: theme.font, paddingLeft: 16, borderLeft: `3px solid ${theme.tiffany}50`, opacity: impOpacity, lineHeight: 1.4 }}>
               {impact}
             </div>
           );

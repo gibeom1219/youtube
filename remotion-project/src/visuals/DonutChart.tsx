@@ -146,13 +146,13 @@ export const DonutChart: React.FC<Props> = ({ data }) => {
               }} />
               <div style={{ display: "flex", gap: 12, alignItems: "baseline" }}>
                 <div style={{
-                  fontSize: 22, fontWeight: 700, color: s.color,
+                  fontSize: 28, fontWeight: 700, color: s.color,
                   fontFamily: theme.font, minWidth: 60,
                 }}>
                   {s.pct}%
                 </div>
                 <div style={{
-                  fontSize: 20, color: theme.white,
+                  fontSize: 26, color: theme.white,
                   fontFamily: theme.font, fontWeight: 500,
                 }}>
                   {s.seg.label}

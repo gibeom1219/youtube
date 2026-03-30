@@ -36,12 +36,12 @@ export const NewsTicker: React.FC<Props> = ({ data: props }) => {
               background: "rgba(129,216,208,0.04)", border: "1px solid rgba(129,216,208,0.08)",
               opacity: itemOpacity, transform: `translateX(${slideX}px)`,
             }}>
-              <span style={{ fontSize: 18, color: typeColor, fontFamily: theme.font, flexShrink: 0 }}>{dot}</span>
+              <span style={{ fontSize: 24, color: typeColor, fontFamily: theme.font, flexShrink: 0 }}>{dot}</span>
               <span style={{ fontSize: 24, fontWeight: 600, color: theme.white, fontFamily: theme.font, flex: 1 }}>
                 {item.headline}
               </span>
               {item.source && (
-                <span style={{ fontSize: 16, color: theme.gray, fontFamily: theme.font, flexShrink: 0 }}>{item.source}</span>
+                <span style={{ fontSize: 22, color: theme.gray, fontFamily: theme.font, flexShrink: 0 }}>{item.source}</span>
               )}
             </div>
           );

@@ -38,7 +38,7 @@ export const StatCard: React.FC<Props> = ({ data, accentColor = theme.tiffany })
         display: "flex", flexDirection: "column", gap: 20,
       }}>
         <div style={{
-          fontSize: 22, fontWeight: 700, color: accentColor,
+          fontSize: 28, fontWeight: 700, color: accentColor,
           fontFamily: theme.font, letterSpacing: 5,
           textTransform: "uppercase" as const,
           border: `1px solid ${accentColor}40`,

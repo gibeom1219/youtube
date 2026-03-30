@@ -97,14 +97,14 @@ export const InterviewCard: React.FC<Props> = ({ data }) => {
         </div>
         <div>
           <div style={{
-            fontSize: 22, fontWeight: 800, color: accentColor,
+            fontSize: 28, fontWeight: 800, color: accentColor,
             fontFamily: theme.font,
           }}>
             {data.speaker}
           </div>
           {data.role && (
             <div style={{
-              fontSize: 18, color: theme.grayLight, fontFamily: theme.font,
+              fontSize: 24, color: theme.grayLight, fontFamily: theme.font,
             }}>
               {data.role}
             </div>

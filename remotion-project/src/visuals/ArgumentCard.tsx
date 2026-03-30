@@ -25,7 +25,7 @@ export const ArgumentCard: React.FC<Props> = ({ data }) => {
       opacity, transform: `translateX(${interpolate(progress, [0, 1], [dir * 30, 0])}px)`,
       display: "flex", flexDirection: "column", gap: 14,
     }}>
-      <div style={{ fontSize: 18, fontWeight: 800, color, fontFamily: theme.font, padding: "4px 14px", background: `${color}15`, borderRadius: 6, alignSelf: "flex-start" }}>
+      <div style={{ fontSize: 24, fontWeight: 800, color, fontFamily: theme.font, padding: "4px 14px", background: `${color}15`, borderRadius: 6, alignSelf: "flex-start" }}>
         {side.label ?? (dir < 0 ? "주장 A" : "주장 B")}
       </div>
       <div style={{ fontSize: 24, fontWeight: 700, color: theme.white, fontFamily: theme.font, lineHeight: 1.4 }}>
@@ -33,7 +33,7 @@ export const ArgumentCard: React.FC<Props> = ({ data }) => {
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 4 }}>
         {side.evidence.map((e, i) => (
-          <div key={i} style={{ fontSize: 18, color: theme.grayLight, fontFamily: theme.font, paddingLeft: 14, borderLeft: `2px solid ${color}40`, lineHeight: 1.4 }}>
+          <div key={i} style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font, paddingLeft: 14, borderLeft: `2px solid ${color}40`, lineHeight: 1.4 }}>
             {e}
           </div>
         ))}
@@ -53,7 +53,7 @@ export const ArgumentCard: React.FC<Props> = ({ data }) => {
       </div>
 
       {data.verdict && (
-        <div style={{ fontSize: 22, color: theme.tiffany, fontFamily: theme.font, textAlign: "center", marginTop: 20, fontWeight: 600, opacity: verdictOpacity, padding: "12px 24px", background: `${theme.tiffany}08`, borderRadius: 10 }}>
+        <div style={{ fontSize: 28, color: theme.tiffany, fontFamily: theme.font, textAlign: "center", marginTop: 20, fontWeight: 600, opacity: verdictOpacity, padding: "12px 24px", background: `${theme.tiffany}08`, borderRadius: 10 }}>
           💡 {data.verdict}
         </div>
       )}

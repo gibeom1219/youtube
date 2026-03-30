@@ -18,16 +18,16 @@ export const EarningsCard: React.FC<Props> = ({ data }) => {
         {data.logo && <span style={{ fontSize: 48, fontFamily: theme.font }}>{data.logo}</span>}
         <div>
           <div style={{ fontSize: 40, fontWeight: 900, color: theme.white, fontFamily: theme.font }}>{data.company} ({data.ticker})</div>
-          <div style={{ fontSize: 22, color: theme.grayLight, fontFamily: theme.font }}>{data.period} 실적</div>
+          <div style={{ fontSize: 28, color: theme.grayLight, fontFamily: theme.font }}>{data.period} 실적</div>
         </div>
       </div>
 
       {/* Header */}
       <div style={{ display: "flex", width: "100%", maxWidth: 900, padding: "12px 0", borderBottom: `2px solid ${theme.tiffany}30` }}>
-        <div style={{ flex: 2, fontSize: 18, fontWeight: 700, color: theme.gray, fontFamily: theme.font }}>항목</div>
-        <div style={{ flex: 1, fontSize: 18, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>예상</div>
-        <div style={{ flex: 1, fontSize: 18, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>실제</div>
-        <div style={{ flex: 1, fontSize: 18, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>결과</div>
+        <div style={{ flex: 2, fontSize: 24, fontWeight: 700, color: theme.gray, fontFamily: theme.font }}>항목</div>
+        <div style={{ flex: 1, fontSize: 24, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>예상</div>
+        <div style={{ flex: 1, fontSize: 24, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>실제</div>
+        <div style={{ flex: 1, fontSize: 24, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>결과</div>
       </div>
 
       {data.items.map((item, i) => {
@@ -43,10 +43,10 @@ export const EarningsCard: React.FC<Props> = ({ data }) => {
             borderBottom: "1px solid rgba(129,216,208,0.08)",
             opacity: rowOpacity, transform: `translateX(${interpolate(rowP, [0, 1], [20, 0])}px)`,
           }}>
-            <div style={{ flex: 2, fontSize: 22, fontWeight: 600, color: theme.white, fontFamily: theme.font }}>{item.metric}</div>
-            <div style={{ flex: 1, fontSize: 22, color: theme.grayLight, fontFamily: theme.font, textAlign: "center" }}>{item.expected}</div>
-            <div style={{ flex: 1, fontSize: 22, fontWeight: 800, color: beat ? theme.green : theme.red, fontFamily: theme.font, textAlign: "center" }}>{item.actual}</div>
-            <div style={{ flex: 1, fontSize: 22, fontFamily: theme.font, textAlign: "center" }}>{beat ? "✅ Beat" : "❌ Miss"}</div>
+            <div style={{ flex: 2, fontSize: 28, fontWeight: 600, color: theme.white, fontFamily: theme.font }}>{item.metric}</div>
+            <div style={{ flex: 1, fontSize: 28, color: theme.grayLight, fontFamily: theme.font, textAlign: "center" }}>{item.expected}</div>
+            <div style={{ flex: 1, fontSize: 28, fontWeight: 800, color: beat ? theme.green : theme.red, fontFamily: theme.font, textAlign: "center" }}>{item.actual}</div>
+            <div style={{ flex: 1, fontSize: 28, fontFamily: theme.font, textAlign: "center" }}>{beat ? "✅ Beat" : "❌ Miss"}</div>
           </div>
         );
       })}

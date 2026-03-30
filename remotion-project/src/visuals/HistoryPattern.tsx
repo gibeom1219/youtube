@@ -38,17 +38,17 @@ export const HistoryPattern: React.FC<Props> = ({ data: props }) => {
               opacity: rowOpacity, transform: `translateX(${interpolate(rowP, [0, 1], [-30, 0])}px)`,
               boxShadow: isLast ? `0 0 ${10 + pulse * 15}px ${theme.tiffany}15` : "none",
             }}>
-              <div style={{ width: 100, fontSize: 20, fontWeight: 800, color: isLast ? theme.tiffany : theme.grayLight, fontFamily: theme.font, flexShrink: 0 }}>
+              <div style={{ width: 100, fontSize: 26, fontWeight: 800, color: isLast ? theme.tiffany : theme.grayLight, fontFamily: theme.font, flexShrink: 0 }}>
                 {p.period}
               </div>
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 21, fontWeight: 600, color: theme.white, fontFamily: theme.font }}>{p.event}</div>
-                <div style={{ fontSize: 17, color: theme.grayLight, fontFamily: theme.font, marginTop: 4 }}>{p.result}</div>
+                <div style={{ fontSize: 28, fontWeight: 600, color: theme.white, fontFamily: theme.font }}>{p.event}</div>
+                <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font, marginTop: 4 }}>{p.result}</div>
               </div>
               {p.change && (
                 <div style={{ fontSize: 24, fontWeight: 900, color: changeColor, fontFamily: theme.font, flexShrink: 0 }}>{p.change}</div>
               )}
-              {isLast && <div style={{ fontSize: 18, fontWeight: 800, color: theme.tiffany, fontFamily: theme.font, padding: "4px 12px", background: `${theme.tiffany}15`, borderRadius: 6 }}>NOW</div>}
+              {isLast && <div style={{ fontSize: 24, fontWeight: 800, color: theme.tiffany, fontFamily: theme.font, padding: "4px 12px", background: `${theme.tiffany}15`, borderRadius: 6 }}>NOW</div>}
             </div>
           );
         })}

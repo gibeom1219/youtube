@@ -90,7 +90,7 @@ export const FlowDiagram: React.FC<Props> = ({ data, durationFrames }) => {
                     transform: "translateX(-50%)",
                     background: theme.tiffany,
                     color: theme.bg,
-                    fontSize: 16, fontWeight: 900,
+                    fontSize: 22, fontWeight: 900,
                     fontFamily: theme.font,
                     width: 36, height: 36, borderRadius: "50%",
                     display: "flex", alignItems: "center", justifyContent: "center",

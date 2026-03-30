@@ -40,19 +40,19 @@ export const SectorRotation: React.FC<Props> = ({ data: props }) => {
             }}>
               {/* Phase header */}
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <div style={{ width: 32, height: 32, borderRadius: "50%", background: `${color}30`, border: `2px solid ${color}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, fontWeight: 900, color, fontFamily: theme.font }}>
+                <div style={{ width: 32, height: 32, borderRadius: "50%", background: `${color}30`, border: `2px solid ${color}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, fontWeight: 900, color, fontFamily: theme.font }}>
                   {i + 1}
                 </div>
-                <div style={{ fontSize: 22, fontWeight: 800, color: isCurrent ? color : theme.grayLight, fontFamily: theme.font }}>{phase.name}</div>
+                <div style={{ fontSize: 28, fontWeight: 800, color: isCurrent ? color : theme.grayLight, fontFamily: theme.font }}>{phase.name}</div>
               </div>
 
-              {isCurrent && <div style={{ fontSize: 14, fontWeight: 800, color, fontFamily: theme.font, padding: "4px 10px", background: `${color}15`, borderRadius: 4, alignSelf: "flex-start" }}>현재 국면</div>}
+              {isCurrent && <div style={{ fontSize: 20, fontWeight: 800, color, fontFamily: theme.font, padding: "4px 10px", background: `${color}15`, borderRadius: 4, alignSelf: "flex-start" }}>현재 국면</div>}
 
-              {phase.description && <div style={{ fontSize: 17, color: theme.grayLight, fontFamily: theme.font, lineHeight: 1.4 }}>{phase.description}</div>}
+              {phase.description && <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font, lineHeight: 1.4 }}>{phase.description}</div>}
 
               <div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: "auto" }}>
                 {phase.sectors.map((s, si) => (
-                  <div key={si} style={{ fontSize: 18, color: isCurrent ? theme.white : theme.gray, fontFamily: theme.font, paddingLeft: 12, borderLeft: `2px solid ${isCurrent ? color : "rgba(255,255,255,0.1)"}` }}>
+                  <div key={si} style={{ fontSize: 24, color: isCurrent ? theme.white : theme.gray, fontFamily: theme.font, paddingLeft: 12, borderLeft: `2px solid ${isCurrent ? color : "rgba(255,255,255,0.1)"}` }}>
                     {s}
                   </div>
                 ))}

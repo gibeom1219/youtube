@@ -86,7 +86,7 @@ export const DualStat: React.FC<Props> = ({ data }) => {
         {/* 서브 */}
         {sub && (
           <div style={{
-            fontSize: 22, color: theme.grayLight,
+            fontSize: 28, color: theme.grayLight,
             fontFamily: theme.font, fontWeight: 500,
             textAlign: "center" as const, marginTop: 8,
           }}>

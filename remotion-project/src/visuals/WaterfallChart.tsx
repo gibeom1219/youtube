@@ -56,10 +56,10 @@ export const WaterfallChart: React.FC<Props> = ({ data: props }) => {
                 background: `linear-gradient(to top, ${color}90, ${color})`,
                 borderRadius: 4, opacity: labelOpacity,
               }} />
-              <div style={{ position: "absolute", top: top - 28, fontSize: 20, fontWeight: 700, color, fontFamily: theme.font, opacity: labelOpacity }}>
+              <div style={{ position: "absolute", top: top - 36, fontSize: 26, fontWeight: 700, color, fontFamily: theme.font, opacity: labelOpacity }}>
                 {bar.value > 0 ? "+" : ""}{bar.value}{unit}
               </div>
-              <div style={{ position: "absolute", bottom: -35, fontSize: 16, color: theme.grayLight, fontFamily: theme.font, textAlign: "center", opacity: labelOpacity, whiteSpace: "nowrap" }}>
+              <div style={{ position: "absolute", bottom: -42, fontSize: 28, color: theme.grayLight, fontFamily: theme.font, textAlign: "center", opacity: labelOpacity, whiteSpace: "nowrap" }}>
                 {bar.label}
               </div>
             </div>

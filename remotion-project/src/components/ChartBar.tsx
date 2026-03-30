@@ -71,7 +71,7 @@ export const ChartBar: React.FC<Props> = ({ data, title, startFrame }) => {
           }}>
             <span style={{
               position: "absolute", right: "calc(100% + 10px)",
-              fontSize: 18, color: theme.gray, fontFamily: theme.font,
+              fontSize: 24, color: theme.gray, fontFamily: theme.font,
               whiteSpace: "nowrap" as const,
               transform: "translateY(50%)",
             }}>
@@ -139,7 +139,7 @@ export const ChartBar: React.FC<Props> = ({ data, title, startFrame }) => {
 
               {/* 레이블 */}
               <div style={{
-                fontSize: 20, color: theme.grayLight,
+                fontSize: 26, color: theme.grayLight,
                 fontFamily: theme.font, fontWeight: 600,
                 marginTop: 14, textAlign: "center" as const,
                 opacity: Math.min(1, labelP),

@@ -73,7 +73,7 @@ export const SplitScreen: React.FC<Props> = ({ data, durationFrames }) => {
               opacity: Math.min(1, itemP),
               transform: `translateX(${interpolate(Math.min(1, itemP), [0, 1], [fromLeft ? -30 : 30, 0])}px)`,
             }}>
-              <span style={{ color, fontSize: 20, flexShrink: 0, marginTop: 3 }}>
+              <span style={{ color, fontSize: 26, flexShrink: 0, marginTop: 3 }}>
                 {fromLeft ? "✗" : "✓"}
               </span>
               <span style={{

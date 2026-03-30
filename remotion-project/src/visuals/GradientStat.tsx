@@ -43,10 +43,10 @@ export const GradientStat: React.FC<Props> = ({ data: props }) => {
               minHeight: 280,
             }}>
               {stat.icon && <span style={{ fontSize: 44, fontFamily: theme.font }}>{stat.icon}</span>}
-              <div style={{ fontSize: 18, color: theme.grayLight, fontFamily: theme.font, fontWeight: 600 }}>{stat.label}</div>
+              <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font, fontWeight: 600 }}>{stat.label}</div>
               <div style={{ fontSize: 48, fontWeight: 900, color: theme.white, fontFamily: theme.font }}>{stat.value}</div>
               {stat.change && (
-                <div style={{ fontSize: 22, fontWeight: 700, color: changeColor, fontFamily: theme.font, padding: "4px 14px", background: `${changeColor}12`, borderRadius: 8 }}>
+                <div style={{ fontSize: 28, fontWeight: 700, color: changeColor, fontFamily: theme.font, padding: "4px 14px", background: `${changeColor}12`, borderRadius: 8 }}>
                   {stat.change}
                 </div>
               )}

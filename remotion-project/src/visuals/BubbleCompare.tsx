@@ -102,7 +102,7 @@ export const BubbleCompare: React.FC<Props> = ({ data }) => {
 
               {/* 라벨 */}
               <div style={{
-                fontSize: 20, fontWeight: 700, color: theme.white,
+                fontSize: 26, fontWeight: 700, color: theme.white,
                 fontFamily: theme.font, textAlign: "center",
                 maxWidth: radius * 2 + 20,
               }}>
@@ -110,7 +110,7 @@ export const BubbleCompare: React.FC<Props> = ({ data }) => {
               </div>
               {item.note && (
                 <div style={{
-                  fontSize: 16, color: theme.grayLight,
+                  fontSize: 22, color: theme.grayLight,
                   fontFamily: theme.font, textAlign: "center",
                 }}>
                   {item.note}

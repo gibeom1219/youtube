@@ -36,7 +36,7 @@ export const TargetPrice: React.FC<Props> = ({ data }) => {
         </div>
         <div style={{
           padding: "8px 20px", borderRadius: 8, background: `${ratingColor}25`,
-          border: `1px solid ${ratingColor}50`, fontSize: 22, fontWeight: 800,
+          border: `1px solid ${ratingColor}50`, fontSize: 28, fontWeight: 800,
           color: ratingColor, fontFamily: theme.font, marginLeft: 20,
         }}>
           {RATING_LABELS[data.rating]}
@@ -50,7 +50,7 @@ export const TargetPrice: React.FC<Props> = ({ data }) => {
       }}>
         {/* Current Price */}
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 22, color: theme.gray, fontFamily: theme.font, marginBottom: 12 }}>현재가</div>
+          <div style={{ fontSize: 28, color: theme.gray, fontFamily: theme.font, marginBottom: 12 }}>현재가</div>
           <div style={{ fontSize: 64, fontWeight: 900, color: theme.white, fontFamily: theme.font }}>{data.current_price}</div>
         </div>
 
@@ -70,14 +70,14 @@ export const TargetPrice: React.FC<Props> = ({ data }) => {
 
         {/* Target Price */}
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 22, color: theme.gray, fontFamily: theme.font, marginBottom: 12 }}>목표가</div>
+          <div style={{ fontSize: 28, color: theme.gray, fontFamily: theme.font, marginBottom: 12 }}>목표가</div>
           <div style={{ fontSize: 64, fontWeight: 900, color: ratingColor, fontFamily: theme.font }}>{data.target_price}</div>
         </div>
       </div>
 
       {/* Analyst */}
       <div style={{
-        marginTop: 40, fontSize: 20, color: theme.grayLight, fontFamily: theme.font,
+        marginTop: 40, fontSize: 26, color: theme.grayLight, fontFamily: theme.font,
         opacity: arrowOpacity,
       }}>
         분석: {data.analyst}
