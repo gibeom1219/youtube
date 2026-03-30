@@ -17,12 +17,12 @@ export const HorizontalBar: React.FC<Props> = ({ data: props }) => {
   const titleP = spring({ frame, fps, config: { damping: 100, stiffness: 25 } });
 
   return (
-    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", padding: "60px 120px" }}>
+    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 120px" }}>
       <div style={{ fontSize: 40, fontWeight: 700, color: theme.gold, fontFamily: theme.font, textAlign: "center", marginBottom: 40, opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)` }}>
         {title}
       </div>
 
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: 18 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
         {items.map((item, i) => {
           const growP = spring({ frame: frame - 10 - i * 5, fps, config: { damping: 200, stiffness: 10 } });
           const rowOpacity = interpolate(frame, [10 + i * 5, 20 + i * 5], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });

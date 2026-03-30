@@ -19,12 +19,12 @@ export const TechStack: React.FC<Props> = ({ data: props }) => {
   const reversed = [...layers].reverse();
 
   return (
-    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", padding: "60px 120px" }}>
+    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 120px" }}>
       <div style={{ fontSize: 40, fontWeight: 700, color: theme.gold, fontFamily: theme.font, textAlign: "center", marginBottom: 36, opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)` }}>
         {title}
       </div>
 
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: 8 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         {reversed.map((layer, ri) => {
           const i = layers.length - 1 - ri; // original index (bottom=0)
           const layerP = spring({ frame: frame - 10 - ri * 10, fps, config: { damping: 100, stiffness: 10 } });

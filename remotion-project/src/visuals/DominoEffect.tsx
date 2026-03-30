@@ -16,7 +16,7 @@ export const DominoEffect: React.FC<Props> = ({ data: props }) => {
   const triggerOpacity = interpolate(frame, [10, 22], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   return (
-    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", padding: "60px 80px" }}>
+    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 80px" }}>
       <div style={{ fontSize: 38, fontWeight: 700, color: theme.gold, fontFamily: theme.font, textAlign: "center", marginBottom: 30, opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)` }}>
         {title}
       </div>
@@ -33,7 +33,7 @@ export const DominoEffect: React.FC<Props> = ({ data: props }) => {
       </div>
 
       {/* Chain */}
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8, justifyContent: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, }}>
         {chain.map((item, i) => {
           const delay = 18 + i * 12;
           const itemP = spring({ frame: frame - delay, fps, config: { damping: 100, stiffness: 10 } });

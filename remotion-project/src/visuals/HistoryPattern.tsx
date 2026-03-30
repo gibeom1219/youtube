@@ -16,12 +16,12 @@ export const HistoryPattern: React.FC<Props> = ({ data: props }) => {
   const msgOpacity = interpolate(frame, [40, 52], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   return (
-    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", padding: "60px 100px" }}>
+    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 100px" }}>
       <div style={{ fontSize: 38, fontWeight: 700, color: theme.gold, fontFamily: theme.font, textAlign: "center", marginBottom: 36, opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)` }}>
         {title}
       </div>
 
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 16, justifyContent: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 16, }}>
         {patterns.map((p, i) => {
           const isLast = i === patterns.length - 1;
           const rowP = spring({ frame: frame - 10 - i * 10, fps, config: { damping: 100, stiffness: 10 } });

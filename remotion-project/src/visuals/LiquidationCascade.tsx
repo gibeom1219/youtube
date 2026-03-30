@@ -16,13 +16,13 @@ export const LiquidationCascade: React.FC<Props> = ({ data: props }) => {
   const pulse = (Math.sin(frame * 0.08) + 1) / 2;
 
   return (
-    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", padding: "60px 100px" }}>
+    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 100px" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 30, opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)` }}>
         <div style={{ fontSize: 38, fontWeight: 700, color: theme.gold, fontFamily: theme.font }}>{props.title}</div>
         <div style={{ fontSize: 28, color: theme.red, fontFamily: theme.font, fontWeight: 700 }}>{props.asset}</div>
       </div>
 
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8, justifyContent: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, }}>
         {props.stages.map((stage, i) => {
           const stageP = spring({ frame: frame - 10 - i * 10, fps, config: { damping: 100, stiffness: 10 } });
           const stageOpacity = interpolate(frame, [10 + i * 10, 22 + i * 10], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });

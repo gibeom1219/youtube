@@ -21,7 +21,7 @@ export const AnalystRating: React.FC<Props> = ({ data }) => {
   const sellCount = data.analysts.filter((a) => a.rating === "sell").length;
 
   return (
-    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", padding: "60px 100px" }}>
+    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 100px" }}>
       {/* Header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24, opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)` }}>
         <div>
@@ -42,7 +42,7 @@ export const AnalystRating: React.FC<Props> = ({ data }) => {
       </div>
 
       {/* Analyst list */}
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 10, justifyContent: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 10, }}>
         {data.analysts.map((a, i) => {
           const rowP = spring({ frame: frame - 10 - i * 6, fps, config: { damping: 100, stiffness: 10 } });
           const rowOpacity = interpolate(frame, [10 + i * 6, 22 + i * 6], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });

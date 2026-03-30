@@ -16,12 +16,12 @@ export const NewsTicker: React.FC<Props> = ({ data: props }) => {
   const scrollSpeed = 4;
 
   return (
-    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", padding: "60px 100px" }}>
+    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 100px" }}>
       <div style={{ fontSize: 40, fontWeight: 700, color: theme.gold, fontFamily: theme.font, textAlign: "center", marginBottom: 40, opacity: titleOpacity }}>
         {title}
       </div>
 
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: 16, overflow: "hidden" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 16, overflow: "hidden" }}>
         {items.map((item, i) => {
           const delay = i * 18;
           const itemOpacity = interpolate(frame, [8 + delay, 16 + delay], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });

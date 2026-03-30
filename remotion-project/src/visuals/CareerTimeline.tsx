@@ -14,7 +14,7 @@ export const CareerTimeline: React.FC<Props> = ({ data }) => {
   const headerOpacity = interpolate(frame, [0, 14], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   return (
-    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", padding: "60px 100px" }}>
+    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 100px" }}>
       {/* Header */}
       <div style={{
         display: "flex", alignItems: "center", gap: 20, marginBottom: 30,
@@ -28,7 +28,7 @@ export const CareerTimeline: React.FC<Props> = ({ data }) => {
       </div>
 
       {/* Timeline */}
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 6, justifyContent: "center", position: "relative", paddingLeft: 30 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 6, position: "relative", paddingLeft: 30 }}>
         {/* Vertical line */}
         <div style={{ position: "absolute", left: 14, top: 0, bottom: 0, width: 2, background: `${theme.tiffany}20` }} />
 
