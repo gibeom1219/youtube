@@ -31,11 +31,11 @@ export const BubbleIndicator: React.FC<Props> = ({ data: props }) => {
       </div>
 
       {/* Header */}
-      <div style={{ display: "flex", padding: "12px 20px", background: `${theme.tiffany}08`, borderRadius: "10px 10px 0 0" }}>
-        <div style={{ flex: 2, fontSize: 18, fontWeight: 700, color: theme.gray, fontFamily: theme.font }}>지표</div>
-        <div style={{ flex: 1, fontSize: 18, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>과거(닷컴)</div>
-        <div style={{ flex: 1, fontSize: 18, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>현재</div>
-        <div style={{ flex: 1, fontSize: 18, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>판단</div>
+      <div style={{ display: "flex", padding: "16px 24px", background: `${theme.tiffany}08`, borderRadius: "10px 10px 0 0" }}>
+        <div style={{ flex: 2, fontSize: 22, fontWeight: 700, color: theme.gray, fontFamily: theme.font }}>지표</div>
+        <div style={{ flex: 1, fontSize: 22, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>과거(닷컴)</div>
+        <div style={{ flex: 1, fontSize: 22, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>현재</div>
+        <div style={{ flex: 1, fontSize: 22, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>판단</div>
       </div>
 
       {props.indicators.map((ind, i) => {
@@ -45,16 +45,16 @@ export const BubbleIndicator: React.FC<Props> = ({ data: props }) => {
 
         return (
           <div key={i} style={{
-            display: "flex", padding: "16px 20px", alignItems: "center",
+            display: "flex", padding: "20px 24px", alignItems: "center",
             background: i % 2 === 0 ? "rgba(129,216,208,0.03)" : "transparent",
             border: "1px solid rgba(129,216,208,0.06)", borderTop: "none",
             opacity: rowOpacity, transform: `translateX(${interpolate(rowP, [0, 1], [20, 0])}px)`,
           }}>
-            <div style={{ flex: 2, fontSize: 21, fontWeight: 600, color: theme.white, fontFamily: theme.font }}>{ind.label}</div>
-            <div style={{ flex: 1, fontSize: 20, color: theme.grayLight, fontFamily: theme.font, textAlign: "center" }}>{ind.past_value}</div>
-            <div style={{ flex: 1, fontSize: 20, fontWeight: 700, color: style.color, fontFamily: theme.font, textAlign: "center" }}>{ind.current_value}</div>
+            <div style={{ flex: 2, fontSize: 26, fontWeight: 600, color: theme.white, fontFamily: theme.font }}>{ind.label}</div>
+            <div style={{ flex: 1, fontSize: 24, color: theme.grayLight, fontFamily: theme.font, textAlign: "center" }}>{ind.past_value}</div>
+            <div style={{ flex: 1, fontSize: 24, fontWeight: 700, color: style.color, fontFamily: theme.font, textAlign: "center" }}>{ind.current_value}</div>
             <div style={{ flex: 1, textAlign: "center" }}>
-              <span style={{ fontSize: 16, fontWeight: 800, color: style.color, fontFamily: theme.font, padding: "4px 12px", background: `${style.color}15`, borderRadius: 6 }}>{style.label}</span>
+              <span style={{ fontSize: 22, fontWeight: 800, color: style.color, fontFamily: theme.font, padding: "6px 16px", background: `${style.color}15`, borderRadius: 8 }}>{style.label}</span>
             </div>
           </div>
         );
