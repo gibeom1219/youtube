@@ -222,10 +222,13 @@ remotion-project/src/
 
 ### 배경 에셋
 - **1차: Veo 3.1 Fast 영상** — 3씬 1영상 그룹화, 720p, 4초, RPM 대기 35초
-- **2차: Nano Banana 2 이미지** (`gemini-3.1-flash-image-preview`) — Veo 실패 시 자동 전환, 씬마다 1개 .png
+- **2차: Nano Banana 2 이미지** (`gemini-3.1-flash-image-preview`) — Veo 실패 시 자동 전환, 씬마다 1개
+  - 지원 파라미터: `response_modalities=["IMAGE","TEXT"]`, `candidate_count=1`, `image_config.aspect_ratio="16:9"`
+  - 미지원 파라미터: `person_generation`, `output_mime_type`, `media_resolution` (INVALID_ARGUMENT)
+  - Veo 1개 그룹이라도 성공하면 나머지 실패 씬은 이미지로 개별 보완 필요
 - 배경 opacity: 20%, 영상은 muted+loop+playbackRate 0.8
 - Veo 영상은 ffmpeg로 매 프레임 키프레임 재인코딩 (seek 떨림 방지)
-- 파일 확장자로 영상/이미지 자동 감지 (.mp4 vs .png)
+- 파일 확장자로 영상/이미지 자동 감지 (.mp4 vs .png/.jpg/.jpeg)
 - 렌더링 타임아웃: 120초 (배경 영상 로딩 대기)
 
 ### 컴포넌트 방어 코드

@@ -74,11 +74,11 @@ cd /home/user/workspaces/youtube && python -m orchestrator.run_audio <workspace_
 다음 단계: /make-video <ID>
 ```
 
-## 배경 에셋 생성 (Veo → Nano Banana 폴백)
-- **1차: Veo 3.1 Fast 영상** — 3씬 1영상 그룹화, 720p, 4초, 16:9
-- **2차: Nano Banana 이미지** — Veo 할당량 초과(429) 시 자동 전환, 씬마다 1개 .png
-- 모델: `nano-banana-pro-preview` (Gemini 이미지 생성)
-- script.json의 `visual_query` 필드를 프롬프트로 사용
+## 배경 에셋 생성 (Veo → Nano Banana 2 폴백)
+- **1차: Veo 3.1 Fast 영상** — 3씬 1영상 그룹화, 720p, 4초, RPM 대기 35초
+- **2차: Nano Banana 2 이미지** (`gemini-3.1-flash-image-preview`) — Veo 실패 시 자동 전환, 씬마다 1개
+- 이미지 설정: `aspect_ratio="16:9"`, `candidate_count=1` (다른 파라미터 미지원)
+- ⚠️ Veo 일부 성공 시 실패 씬은 별도로 이미지 보완 필요
 - 배경은 렌더링 시 opacity 20%, 어둡게 처리 (영상: muted+loop, 이미지: 정적)
 
 ## ElevenLabs 설정 (임의 변경 금지)

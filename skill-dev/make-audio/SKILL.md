@@ -95,11 +95,13 @@ make-audio 단계에서 AssetFetcher가 배경 에셋을 자동 생성합니다.
   - **3개 씬이 1개 영상을 공유**: scene_id 0,1,2 → video_0.mp4 / scene_id 3,4,5 → video_1.mp4 / ...
   - script.json의 `visual_query` 필드를 프롬프트로 사용
   - TTS 생성과 병렬로 실행 (AssetFetcher)
-- **2차 폴백: Nano Banana 이미지 생성** (Veo 실패 시)
+- **2차 폴백: Nano Banana 2 이미지 생성** (Veo 실패 시)
   - Veo 할당량 초과 (429 RESOURCE_EXHAUSTED) 시 자동으로 이미지 생성으로 전환
-  - 모델: `nano-banana-pro-preview`
-  - 씬마다 1개 이미지 생성 (.png)
-  - images saved as .png in videos/ directory
+  - 모델: `gemini-3.1-flash-image-preview` (Nano Banana 2)
+  - 씬마다 1개 이미지 생성, RPM 대기 5초
+  - 설정: `aspect_ratio="16:9"`, `candidate_count=1`
+  - 미지원: `person_generation`, `output_mime_type`, `media_resolution`
+  - ⚠️ Veo 1개 그룹이라도 성공하면 자동 폴백 안 됨 → 실패 씬은 별도 이미지 보완 필요
 
 ### 영상 스펙 (Veo)
 - 해상도: 720p (1280x720)
