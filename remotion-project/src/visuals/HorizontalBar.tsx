@@ -31,7 +31,7 @@ export const HorizontalBar: React.FC<Props> = ({ data: props }) => {
 
           return (
             <div key={i} style={{ display: "flex", alignItems: "center", gap: 16, opacity: rowOpacity }}>
-              <div style={{ width: 180, fontSize: 20, fontWeight: 600, color: theme.white, fontFamily: theme.font, textAlign: "right", flexShrink: 0 }}>
+              <div style={{ width: 220, fontSize: 22, fontWeight: 600, color: theme.white, fontFamily: theme.font, textAlign: "right", flexShrink: 0, whiteSpace: "nowrap" }}>
                 {item.label}
               </div>
               <div style={{ flex: 1, height: 36, background: "rgba(255,255,255,0.04)", borderRadius: 8, overflow: "hidden" }}>
@@ -41,7 +41,7 @@ export const HorizontalBar: React.FC<Props> = ({ data: props }) => {
                   borderRadius: 8, minWidth: growP > 0.01 ? 4 : 0,
                 }} />
               </div>
-              <div style={{ width: 100, fontSize: 22, fontWeight: 800, color, fontFamily: theme.font, textAlign: "right", flexShrink: 0 }}>
+              <div style={{ width: 140, fontSize: 24, fontWeight: 800, color, fontFamily: theme.font, textAlign: "right", flexShrink: 0, whiteSpace: "nowrap" }}>
                 {item.value}{unit}
               </div>
             </div>
