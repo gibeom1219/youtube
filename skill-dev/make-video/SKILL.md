@@ -95,12 +95,13 @@ cd /home/user/workspaces/youtube && python -m orchestrator.run_video <workspace_
 - `intro_card`와 `outro_card`는 **noExit** (exit fade 없음) — 요소가 사라지는 것을 방지
 
 ## 배경 에셋 (영상 + 이미지)
-- make-audio 단계에서 생성된 배경 에셋 사용 (Veo 영상 또는 Nano Banana 이미지)
+- make-audio 단계에서 생성된 배경 에셋 사용
+- **Veo 영상**: 앞쪽 9씬(intro 포함)에만 적용, 3씬 1영상 그룹화 (총 3그룹)
+- **Nano Banana 이미지**: 나머지 씬 전부에 자동 적용, 씬마다 1개
 - `render.mjs`가 배경 에셋을 `remotion-project/public/videos/`에 복사
 - 파일 확장자로 자동 감지: .mp4 → 영상, .png/.jpg → 이미지
-- **영상 배경**: opacity 20%, 음소거(muted), loop, playbackRate 0.8
+- **영상 배경**: opacity 20%, 음소거(muted), loop
 - **이미지 배경**: opacity 20%, 정적 배경 + 다크 오버레이 + 그라데이션 오버레이 (텍스트 가독성)
-- 3개 씬이 1개 배경 영상을 공유 (Veo) / 씬마다 1개 이미지 (Nano Banana 폴백)
 - Veo 영상은 ffmpeg으로 재인코딩 (매 프레임 키프레임) → 부드러운 재생
 
 ## 비주얼 디자인 원칙 (참고용)
@@ -119,5 +120,12 @@ cd /home/user/workspaces/youtube && python -m orchestrator.run_video <workspace_
 
 ## 참고: 컴포넌트 방어 코드
 - AreaChart: `series[].values` 또는 `series[].data` 모두 허용
-- StockCard/BeforeAfter/PriceImpact: `change` 필드 undefined 시 빈 문자열 fallback
+- StockCard/BeforeAfter: `change` 필드 undefined 시 빈 문자열 fallback
+- PriceImpact: scale 애니메이션에 spring 대신 interpolate 사용 (spring 사용 시 요소 사라짐 버그)
+- StrategyCard: `do_list`/`dont_list`/`summary` 또는 `do_items`/`dont_items`/`conclusion` 모두 허용
+- DominoEffect: `dominoes[{label,icon}]` 또는 `trigger`+`chain[{event,impact,icon}]` 모두 허용
+- StockPick: `picks` 또는 `stocks` 모두 허용
+- SentimentBar: `bullish`/`bearish`/`neutral` 또는 `buy_pct`/`sell_pct`/`neutral_pct` 모두 허용
+- PsychologyCard: `tip` 또는 `solution` 모두 허용, `title` 생략 시 기본값 적용
+- EventImpact: `date`/`event_date`, impacts의 `target`/`market`, `direction`/`change` 모두 허용
 - 렌더링 에러 발생 시 에러 로그의 `functionName`으로 문제 컴포넌트 확인 가능

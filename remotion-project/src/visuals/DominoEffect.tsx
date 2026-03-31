@@ -3,13 +3,16 @@ import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
 
 interface Props {
-  data: { title: string; trigger: string; chain: Array<{ event: string; impact: string; icon?: string }> };
+  data: { title: string; trigger?: string; chain?: Array<{ event: string; impact: string; icon?: string }>; dominoes?: Array<{ label: string; icon?: string }> };
 }
 
 export const DominoEffect: React.FC<Props> = ({ data: props }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const { title, trigger, chain } = props;
+  const { title } = props;
+  // dominoes 형식도 허용: { label, icon } → { event: label, impact: "", icon }
+  const chain = props.chain ?? (props.dominoes ?? []).map(d => ({ event: d.label, impact: "", icon: d.icon }));
+  const trigger = props.trigger ?? (chain.length > 0 ? chain[0].event : "");
   const titleOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const titleP = spring({ frame, fps, config: { damping: 100, stiffness: 25 } });
   const triggerP = spring({ frame: frame - 10, fps, config: { damping: 100, stiffness: 10 } });

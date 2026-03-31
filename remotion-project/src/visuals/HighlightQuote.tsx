@@ -46,9 +46,9 @@ export const HighlightQuote: React.FC<Props> = ({ data }) => {
         marginBottom: 30,
       }}>
         {data.icon ? (
-          <span style={{ fontSize: 72, fontFamily: theme.font }}>{data.icon}</span>
+          <span style={{ fontSize: 96, fontFamily: theme.font }}>{data.icon}</span>
         ) : (
-          <div style={{ fontSize: 120, color: `${theme.tiffany}30`, fontFamily: theme.font, lineHeight: 0.6, fontWeight: 900 }}>
+          <div style={{ fontSize: 140, color: `${theme.tiffany}30`, fontFamily: theme.font, lineHeight: 0.6, fontWeight: 900 }}>
             "
           </div>
         )}
@@ -56,7 +56,7 @@ export const HighlightQuote: React.FC<Props> = ({ data }) => {
 
       {/* Main text */}
       <div style={{
-        fontSize: 48, fontWeight: 700, color: theme.white, fontFamily: theme.font,
+        fontSize: 62, fontWeight: 700, color: theme.white, fontFamily: theme.font,
         textAlign: "center", lineHeight: 1.5, maxWidth: 1200,
         opacity: textOpacity, transform: `translateY(${interpolate(textP, [0, 1], [20, 0])}px)`,
         textShadow: `0 0 ${30 + glow * 20}px rgba(129,216,208,${0.05 + glow * 0.1})`,
@@ -67,7 +67,7 @@ export const HighlightQuote: React.FC<Props> = ({ data }) => {
       {/* Sub text */}
       {data.sub && (
         <div style={{
-          fontSize: 26, color: theme.grayLight, fontFamily: theme.font,
+          fontSize: 34, color: theme.grayLight, fontFamily: theme.font,
           textAlign: "center", marginTop: 30, opacity: subOpacity,
           maxWidth: 900, lineHeight: 1.5,
         }}>

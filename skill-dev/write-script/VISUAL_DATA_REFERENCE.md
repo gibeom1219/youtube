@@ -731,16 +731,17 @@ narration 내용을 기준으로 아래 결정 트리를 따르세요:
 ```json
 {
   "title": "미국 금리 인상의 연쇄 효과",
-  "dominoes": [
-    {"label": "금리 인상", "icon": "🏦"},
-    {"label": "달러 강세", "icon": "💵"},
-    {"label": "신흥국 자금 유출", "icon": "📉"},
-    {"label": "원화 약세", "icon": "🇰🇷"},
-    {"label": "수입물가 상승", "icon": "🛒"}
+  "trigger": "금리 인상",
+  "chain": [
+    {"event": "달러 강세", "impact": "기축통화 수요 증가", "icon": "💵"},
+    {"event": "신흥국 자금 유출", "impact": "외국인 투자자 이탈", "icon": "📉"},
+    {"event": "원화 약세", "impact": "환율 1,500원 돌파", "icon": "🇰🇷"},
+    {"event": "수입물가 상승", "impact": "소비자물가 직격탄", "icon": "🛒"}
   ]
 }
 ```
-⚠️ dominoes는 3~6개, label 10자 이내
+⚠️ trigger: 연쇄 반응의 시작점 (1개)
+⚠️ chain은 3~5개, event 10자 이내, impact 15자 이내
 
 **history_pattern**
 ```json

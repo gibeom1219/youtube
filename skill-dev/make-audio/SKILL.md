@@ -91,17 +91,17 @@ cd /home/user/workspaces/youtube && python -m orchestrator.run_audio <workspace_
 make-audio 단계에서 AssetFetcher가 배경 에셋을 자동 생성합니다. Veo를 먼저 시도하고, 실패 시 이미지로 폴백합니다.
 
 ### 동작 방식
-- **1차: Veo 3.1 Fast 영상 생성**
-  - **3개 씬이 1개 영상을 공유**: scene_id 0,1,2 → video_0.mp4 / scene_id 3,4,5 → video_1.mp4 / ...
+- **Veo 3.1 Fast 영상: 앞쪽 9씬만 (intro 포함, 3그룹)**
+  - 3개 씬이 1개 영상을 공유: 앞 9씬 → group_0.mp4, group_1.mp4, group_2.mp4
   - script.json의 `visual_query` 필드를 프롬프트로 사용
   - TTS 생성과 병렬로 실행 (AssetFetcher)
-- **2차 폴백: Nano Banana 2 이미지 생성** (Veo 실패 시)
-  - Veo 할당량 초과 (429 RESOURCE_EXHAUSTED) 시 자동으로 이미지 생성으로 전환
+- **Nano Banana 2 이미지: 나머지 씬 전부**
+  - Veo가 적용되지 않은 모든 씬에 자동으로 이미지 생성
+  - Veo 실패 시에도 해당 씬은 이미지로 자동 보완
   - 모델: `gemini-3.1-flash-image-preview` (Nano Banana 2)
   - 씬마다 1개 이미지 생성, RPM 대기 5초
   - 설정: `aspect_ratio="16:9"`, `candidate_count=1`
   - 미지원: `person_generation`, `output_mime_type`, `media_resolution`
-  - ⚠️ Veo 1개 그룹이라도 성공하면 자동 폴백 안 됨 → 실패 씬은 별도 이미지 보완 필요
   - `outro_card` 씬은 배경 생성 자동 건너뜀 (구독&좋아요 화면에 배경 불필요)
 
 ### 영상 스펙 (Veo)
@@ -127,12 +127,11 @@ make-audio 단계에서 AssetFetcher가 배경 에셋을 자동 생성합니다.
 ```
 workspace/<ID>/
   videos/
-    video_0.mp4   ← scene 0,1,2 공유 (Veo 성공 시)
-    video_1.mp4   ← scene 3,4,5 공유 (Veo 성공 시)
-    ...
-    또는
-    image_0.png   ← scene 0 (Nano Banana 폴백 시)
-    image_1.png   ← scene 1
+    group_0.mp4    ← 앞쪽 씬 0,1,2 공유 (Veo)
+    group_1.mp4    ← 앞쪽 씬 3,4,5 공유 (Veo)
+    group_2.mp4    ← 앞쪽 씬 6,7,8 공유 (Veo)
+    scene_9.png    ← 씬 9 (Nano Banana 이미지)
+    scene_10.png   ← 씬 10
     ...
 ```
 렌더링 시 영상은 **opacity 20%, 음소거, playbackRate 0.8**, 이미지는 **opacity 20%, 정적 배경 + 다크 오버레이**로 적용됩니다.

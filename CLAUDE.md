@@ -230,21 +230,28 @@ remotion-project/src/
 - IN: 30프레임 (0.5초) / OUT: 25프레임 (~0.4초)
 
 ### 배경 에셋
-- **1차: Veo 3.1 Fast 영상** — 3씬 1영상 그룹화, 720p, 4초, RPM 대기 35초
-- **2차: Nano Banana 2 이미지** (`gemini-3.1-flash-image-preview`) — Veo 실패 시 자동 전환, 씬마다 1개
+- **Veo 3.1 Fast 영상**: 앞쪽 9씬(intro 포함)에만 적용, 3씬 1영상 그룹화 (총 3그룹), 720p, 4초, RPM 대기 35초
+- **Nano Banana 2 이미지** (`gemini-3.1-flash-image-preview`): 나머지 씬에 자동 적용, 씬마다 1개
   - 지원 파라미터: `response_modalities=["IMAGE","TEXT"]`, `candidate_count=1`, `image_config.aspect_ratio="16:9"`
   - 미지원 파라미터: `person_generation`, `output_mime_type`, `media_resolution` (INVALID_ARGUMENT)
-  - Veo 1개 그룹이라도 성공하면 나머지 실패 씬은 이미지로 개별 보완 필요
-- 배경 opacity: 20%, 영상은 muted+loop+playbackRate 0.8
+  - Veo 실패 시에도 해당 씬은 이미지로 자동 보완
+- 배경 opacity: 20%, 영상은 muted+loop
 - Veo 영상은 ffmpeg로 매 프레임 키프레임 재인코딩 (seek 떨림 방지)
 - 파일 확장자로 영상/이미지 자동 감지 (.mp4 vs .png/.jpg/.jpeg)
 - 렌더링 타임아웃: 120초 (배경 영상 로딩 대기)
 - ⚠️ **동시 렌더링 금지**: 두 대본을 동시에 렌더링하면 public/audio.mp3가 충돌 → 반드시 순차 실행
-- outro_card는 Veo/Nano Banana 배경 생성에서 자동 건너뜀
+- outro_card는 배경 생성에서 자동 건너뜀
 
 ### 컴포넌트 방어 코드
 - **AreaChart**: `series[].values` 또는 `series[].data` 모두 허용
-- **StockCard/BeforeAfter/PriceImpact**: `data.change`가 undefined일 때 `??""` fallback
+- **StockCard/BeforeAfter**: `data.change`가 undefined일 때 `??""` fallback
+- **PriceImpact**: scale 애니메이션에 spring 대신 interpolate 사용 (spring 사용 시 요소 사라짐 버그)
+- **StrategyCard**: `do_list`/`dont_list`/`summary` 또는 `do_items`/`dont_items`/`conclusion` 모두 허용
+- **DominoEffect**: `dominoes[{label,icon}]` 또는 `trigger`+`chain[{event,impact,icon}]` 모두 허용
+- **StockPick**: `picks` 또는 `stocks` 모두 허용
+- **SentimentBar**: `bullish`/`bearish`/`neutral` 또는 `buy_pct`/`sell_pct`/`neutral_pct` 모두 허용
+- **PsychologyCard**: `tip` 또는 `solution` 모두 허용, `title` 생략 시 기본값 적용
+- **EventImpact**: `date`/`event_date`, impacts의 `target`/`market`, `direction`/`change` 모두 허용
 - 모든 컴포넌트에서 optional 필드는 `?? ""` 또는 `?? []`로 방어 처리 권장
 
 ### visual_type 추가 시 동시 업데이트 필수 (8개 파일)

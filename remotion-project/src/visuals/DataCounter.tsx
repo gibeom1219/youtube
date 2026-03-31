@@ -33,7 +33,7 @@ export const DataCounter: React.FC<Props> = ({ data }) => {
     <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "80px 120px" }}>
       {/* Label */}
       <div style={{
-        fontSize: 32, fontWeight: 600, color: theme.tiffany, fontFamily: theme.font,
+        fontSize: 40, fontWeight: 700, color: theme.tiffany, fontFamily: theme.font,
         opacity: labelOpacity, transform: `translateY(${interpolate(labelP, [0, 1], [-16, 0])}px)`,
         marginBottom: 30, letterSpacing: 2,
       }}>
@@ -49,12 +49,12 @@ export const DataCounter: React.FC<Props> = ({ data }) => {
       }}>
         {data.prefix && <span style={{ fontSize: 80, color: theme.tiffany }}>{data.prefix}</span>}
         <span>{formatted}</span>
-        <span style={{ fontSize: 56, color: theme.grayLight, fontWeight: 600 }}>{data.unit}</span>
+        <span style={{ fontSize: 64, color: theme.grayLight, fontWeight: 600 }}>{data.unit}</span>
       </div>
 
       {/* Description */}
       <div style={{
-        fontSize: 28, color: theme.grayLight, fontFamily: theme.font,
+        fontSize: 34, color: theme.grayLight, fontFamily: theme.font,
         opacity: descOpacity, marginTop: 30, textAlign: "center", lineHeight: 1.5,
         maxWidth: 900,
       }}>

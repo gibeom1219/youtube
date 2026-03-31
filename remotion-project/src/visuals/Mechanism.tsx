@@ -18,7 +18,7 @@ export const Mechanism: React.FC<Props> = ({ data: props }) => {
     <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 100px", gap: 14 }}>
       <div style={{ textAlign: "center", opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)` }}>
         <div style={{ fontSize: 42, fontWeight: 700, color: theme.gold, fontFamily: theme.font }}>{title}</div>
-        {subtitle && <div style={{ fontSize: 24, color: theme.gray, fontFamily: theme.font, marginTop: 6 }}>{subtitle}</div>}
+        {subtitle && <div style={{ fontSize: 30, color: theme.gray, fontFamily: theme.font, marginTop: 6 }}>{subtitle}</div>}
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -42,13 +42,13 @@ export const Mechanism: React.FC<Props> = ({ data: props }) => {
                   background: isLast ? `${theme.tiffany}25` : "rgba(129,216,208,0.08)",
                   border: `1px solid ${isLast ? theme.tiffany : "rgba(129,216,208,0.15)"}`,
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 24, fontWeight: 900, color: isLast ? theme.tiffany : theme.grayLight, fontFamily: theme.font,
+                  fontSize: 28, fontWeight: 900, color: isLast ? theme.tiffany : theme.grayLight, fontFamily: theme.font,
                 }}>
                   {step.icon ?? (i + 1)}
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 28, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{step.title}</div>
-                  <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font, marginTop: 4, lineHeight: 1.4 }}>{step.explanation}</div>
+                  <div style={{ fontSize: 34, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{step.title}</div>
+                  <div style={{ fontSize: 28, color: theme.grayLight, fontFamily: theme.font, marginTop: 4, lineHeight: 1.4 }}>{step.explanation}</div>
                 </div>
               </div>
               {!isLast && (

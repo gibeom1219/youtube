@@ -32,64 +32,66 @@ def fetch_assets(script: ScriptOutput, workspace_path: Path) -> dict[int, str]:
     scenes = script.scenes
     scene_assets: dict[int, str] = {}
 
-    # 1차 시도: Veo 영상 (3씬 1그룹)
-    veo_available = _try_veo(client, scenes, assets_dir, scene_assets)
+    # 1차: Veo 영상 3개 (처음 9씬만, 3씬 1그룹)
+    max_veo_groups = 3
+    veo_available = _try_veo(client, scenes, assets_dir, scene_assets, max_groups=max_veo_groups)
 
-    if veo_available:
-        generated = sum(1 for v in scene_assets.values() if v)
-        print(f"[AssetFetcher] Veo 완료 → {generated}개 씬에 영상 적용")
-        return scene_assets
+    veo_count = sum(1 for v in scene_assets.values() if v and v.endswith(".mp4"))
+    if veo_available and veo_count > 0:
+        print(f"[AssetFetcher] Veo 완료 → {veo_count}개 씬에 영상 적용")
+    elif not veo_available:
+        print("[AssetFetcher] Veo 사용 불가")
 
-    # 2차: Veo 실패 → 이미지로 대체 (씬마다 1개)
-    print("[AssetFetcher] Veo 사용 불가 → Nano Banana 이미지 생성으로 전환")
-    scene_assets = {}
-    _generate_images(client, scenes, assets_dir, scene_assets)
+    # 2차: Veo가 적용되지 않은 나머지 씬에 이미지 생성
+    remaining = [s for s in scenes if s.scene_id not in scene_assets or scene_assets.get(s.scene_id) is None]
+    if remaining:
+        print(f"[AssetFetcher] 나머지 {len(remaining)}개 씬에 Nano Banana 이미지 생성")
+        _generate_images(client, remaining, assets_dir, scene_assets)
 
-    generated = sum(1 for v in scene_assets.values() if v)
-    print(f"[AssetFetcher] 이미지 완료 → {generated}개 씬에 적용")
+    img_count = sum(1 for v in scene_assets.values() if v and v.endswith(".png"))
+    print(f"[AssetFetcher] 최종: Veo 영상 {veo_count}개 씬 + 이미지 {img_count}개 씬")
     return scene_assets
 
 
-def _try_veo(client, scenes, assets_dir, scene_assets) -> bool:
-    """Veo 영상 생성 시도. 첫 그룹 성공 여부로 Veo 사용 가능 판단."""
-    print("[AssetFetcher] Veo 3.1 Fast 배경 영상 시도 중...")
+def _try_veo(client, scenes, assets_dir, scene_assets, max_groups: int = 3) -> bool:
+    """Veo 영상 생성 시도. 앞쪽 content 씬 9개(3그룹)에만 적용."""
+    print(f"[AssetFetcher] Veo 3.1 Fast 배경 영상 시도 중 (앞쪽 {max_groups}그룹 = {max_groups * 3}씬)...")
+
+    # outro 제외, 앞에서 9개 씬 (intro 포함)
+    non_outro = [s for s in scenes if s.visual_type != "outro_card"]
+    veo_scenes = non_outro[:max_groups * 3]
 
     group_size = 3
-    group_idx = 0
     veo_works = False
 
-    for i in range(0, len(scenes), group_size):
-        group = scenes[i:i + group_size]
-        # outro_card는 배경 에셋 불필요
-        queries = [s.visual_query for s in group if s.visual_query and s.visual_type != "outro_card"]
+    for group_idx in range(0, len(veo_scenes), group_size):
+        group = veo_scenes[group_idx:group_idx + group_size]
+        queries = [s.visual_query for s in group if s.visual_query]
         if not queries:
             for s in group:
                 scene_assets[s.scene_id] = None
-            group_idx += 1
             continue
 
         narrations = [s.narration for s in group]
         combined_prompt = _build_group_prompt(narrations, queries)
-        video_path = assets_dir / f"group_{group_idx}.mp4"
-        relative_path = f"videos/group_{group_idx}.mp4"
+        gid = group_idx // group_size
+        video_path = assets_dir / f"group_{gid}.mp4"
+        relative_path = f"videos/group_{gid}.mp4"
 
-        success = _generate_video(client, combined_prompt, video_path, group_idx)
+        success = _generate_video(client, combined_prompt, video_path, gid)
 
         if success:
             veo_works = True
             for s in group:
                 scene_assets[s.scene_id] = relative_path
         else:
-            # 첫 그룹부터 실패하면 Veo 사용 불가 판단
             if not veo_works:
                 return False
             for s in group:
                 scene_assets[s.scene_id] = None
 
-        group_idx += 1
-
         # RPM 한도 방지: 요청 간 35초 대기
-        if i + group_size < len(scenes):
+        if group_idx + group_size < len(veo_scenes):
             time.sleep(35)
 
     return True
