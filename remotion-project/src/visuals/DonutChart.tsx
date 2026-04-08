@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Segment {
   label: string;
@@ -23,7 +24,9 @@ const PALETTE = [
 ];
 
 export const DonutChart: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress  = spring({ frame,         fps, config: { damping: 100, stiffness: 10 } });
@@ -32,7 +35,7 @@ export const DonutChart: React.FC<Props> = ({ data }) => {
 
   const glowPulse = (Math.sin(frame * 0.04) + 1) / 2;
 
-  const total = data.segments.reduce((s, seg) => s + seg.value, 0);
+  const total = (data.segments ?? []).reduce((s, seg) => s + seg.value, 0);
 
   // SVG 도넛 (cx=220, cy=220, outerR=180, innerR=110)
   const cx = 220, cy = 220, outerR = 180, innerR = 110;
@@ -46,7 +49,7 @@ export const DonutChart: React.FC<Props> = ({ data }) => {
 
   // 세그먼트 경로 생성
   let cumulativeAngle = 0;
-  const segments = data.segments.map((seg, i) => {
+  const segments = (data.segments ?? []).map((seg, i) => {
     const angle = (seg.value / total) * 360;
     const visibleAngle = Math.min(angle, Math.max(0, revealAngle - cumulativeAngle));
     const startAngle = cumulativeAngle;
@@ -99,7 +102,7 @@ export const DonutChart: React.FC<Props> = ({ data }) => {
           <svg width={440} height={440} viewBox="0 0 440 440">
             {/* 배경 */}
             <circle cx={cx} cy={cy} r={outerR} fill="none"
-              stroke="rgba(255,255,255,0.06)" strokeWidth={outerR - innerR} />
+              stroke="rgba(255,255,255,0.20)" strokeWidth={outerR - innerR} />
 
             {/* 세그먼트 */}
             {segments.map((s, i) =>

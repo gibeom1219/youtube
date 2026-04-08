@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Event { year: string; title: string; detail?: string; highlight?: boolean }
 interface Props {
@@ -8,7 +9,9 @@ interface Props {
 }
 
 export const CareerTimeline: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
   const headerP = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
   const headerOpacity = interpolate(frame, [0, 14], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
@@ -32,7 +35,7 @@ export const CareerTimeline: React.FC<Props> = ({ data }) => {
         {/* Vertical line */}
         <div style={{ position: "absolute", left: 14, top: 0, bottom: 0, width: 2, background: `${theme.tiffany}20` }} />
 
-        {data.events.map((evt, i) => {
+        {(data.events ?? []).map((evt, i) => {
           const evtP = spring({ frame: frame - 10 - i * 8, fps, config: { damping: 100, stiffness: 10 } });
           const evtOpacity = interpolate(frame, [10 + i * 8, 22 + i * 8], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
           const isHighlight = evt.highlight;
@@ -61,8 +64,8 @@ export const CareerTimeline: React.FC<Props> = ({ data }) => {
               {/* Content */}
               <div style={{
                 flex: 1, padding: "12px 20px", borderRadius: 12,
-                background: isHighlight ? `${theme.tiffany}10` : "rgba(129,216,208,0.03)",
-                border: isHighlight ? `1px solid ${theme.tiffany}30` : "1px solid rgba(129,216,208,0.06)",
+                background: isHighlight ? `${theme.tiffany}25` : "rgba(129,216,208,0.25)",
+                border: isHighlight ? `1px solid ${theme.tiffany}30` : "1px solid rgba(129,216,208,0.30)",
               }}>
                 <div style={{ fontSize: 26, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{evt.title}</div>
                 {evt.detail && <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font, marginTop: 4, lineHeight: 1.4 }}>{evt.detail}</div>}

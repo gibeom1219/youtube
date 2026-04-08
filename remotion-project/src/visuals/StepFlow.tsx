@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Step {
   step: string;
@@ -17,11 +18,13 @@ interface Props {
 }
 
 export const StepFlow: React.FC<Props> = ({ data, durationFrames }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
-  const interval = Math.min((durationFrames * 0.65) / (data.steps.length + 1), 18);
+  const interval = Math.min((durationFrames * 0.65) / ((data.steps ?? []).length + 1), 18);
 
   const glowPulse = (Math.sin(frame * 0.04) + 1) / 2;
 
@@ -44,16 +47,16 @@ export const StepFlow: React.FC<Props> = ({ data, durationFrames }) => {
       {/* 단계 목록 */}
       <div style={{ display: "flex", flexDirection: "column", gap: 0, position: "relative" as const }}>
         {/* 수직 연결선 */}
-        {data.steps.length > 1 && (
+        {(data.steps ?? []).length > 1 && (
           <div style={{
             position: "absolute" as const,
             left: 28, top: 56, bottom: 56,
             width: 2,
-            background: `linear-gradient(180deg, ${theme.tiffany}60, ${theme.tiffany}10)`,
+            background: `linear-gradient(180deg, ${theme.tiffany}60, ${theme.tiffany}25)`,
           }} />
         )}
 
-        {data.steps.map((step, i) => {
+        {(data.steps ?? []).map((step, i) => {
           const startFrame = Math.round(interval * (i + 1));
           const progress = spring({ frame: frame - startFrame, fps, config: { damping: 100, stiffness: 10 } });
 
@@ -64,7 +67,7 @@ export const StepFlow: React.FC<Props> = ({ data, durationFrames }) => {
           return (
             <div key={i} style={{
               display: "flex", alignItems: "flex-start", gap: 36,
-              paddingBottom: i < data.steps.length - 1 ? 28 : 0,
+              paddingBottom: i < (data.steps ?? []).length - 1 ? 28 : 0,
               opacity: Math.min(1, progress),
               transform: `translateX(${interpolate(Math.min(1, progress), [0, 1], [-50, 0])}px)`,
               position: "relative" as const,
@@ -72,7 +75,7 @@ export const StepFlow: React.FC<Props> = ({ data, durationFrames }) => {
               {/* 단계 원형 배지 */}
               <div style={{
                 width: 56, height: 56, borderRadius: "50%",
-                background: `rgba(129,216,208,0.12)`,
+                background: `rgba(129,216,208,0.22)`,
                 border: `2px solid ${theme.tiffany}`,
                 display: "flex", alignItems: "center", justifyContent: "center",
                 flexShrink: 0,
@@ -91,7 +94,7 @@ export const StepFlow: React.FC<Props> = ({ data, durationFrames }) => {
               {/* 내용 */}
               <div style={{
                 flex: 1,
-                background: `rgba(255,255,255,0.03)`,
+                background: `rgba(255,255,255,0.20)`,
                 border: "1px solid rgba(255,255,255,0.07)",
                 borderRadius: 12,
                 padding: "16px 28px",

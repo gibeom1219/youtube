@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: {
@@ -21,7 +22,9 @@ interface Props {
 }
 
 export const StockCard: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const cardProgress  = spring({ frame,         fps, config: { damping: 80,  stiffness: 5 } });
@@ -78,12 +81,14 @@ export const StockCard: React.FC<Props> = ({ data }) => {
                 <div style={{
                   fontSize: 48, fontWeight: 900, color: theme.white,
                   fontFamily: theme.font, lineHeight: 1,
+                  textShadow: theme.textShadow.medium,
                 }}>
                   {data.ticker}
                 </div>
                 <div style={{
                   fontSize: 28, color: theme.grayLight,
                   fontFamily: theme.font, marginTop: 4,
+                  textShadow: theme.textShadow.medium,
                 }}>
                   {data.name}
                 </div>
@@ -91,7 +96,7 @@ export const StockCard: React.FC<Props> = ({ data }) => {
             </div>
             {data.sector && (
               <div style={{
-                background: `${theme.tiffany}15`,
+                background: `${theme.tiffany}30`,
                 border: `1px solid ${theme.tiffany}30`,
                 borderRadius: 50, padding: "4px 16px",
                 fontSize: 22, color: theme.tiffany,
@@ -111,14 +116,15 @@ export const StockCard: React.FC<Props> = ({ data }) => {
           }}>
             <div style={{
               fontSize: 60, fontWeight: 900, color: theme.white,
-              fontFamily: theme.font, lineHeight: 1,
+              fontFamily: theme.fontNum, lineHeight: 1,
+              textShadow: theme.textShadow.medium,
             }}>
               {data.currency ?? "$"}{data.price}
             </div>
             <div style={{
               fontSize: 30, fontWeight: 800, color: changeColor,
-              fontFamily: theme.font, marginTop: 8,
-              textShadow: `0 0 ${12 + glowPulse * 8}px ${changeColor}60`,
+              fontFamily: theme.fontNum, marginTop: 8,
+              textShadow: theme.textShadow.medium,
             }}>
               {changeArrow} {data.change} ({data.change_pct})
             </div>
@@ -135,19 +141,21 @@ export const StockCard: React.FC<Props> = ({ data }) => {
           }}>
             {detailItems.map((item, i) => (
               <div key={i} style={{
-                background: "rgba(255,255,255,0.06)",
+                background: "rgba(255,255,255,0.20)",
                 borderRadius: 12, padding: "10px 20px",
                 display: "flex", flexDirection: "column", gap: 4,
                 minWidth: 120,
               }}>
                 <div style={{
                   fontSize: 22, color: theme.grayLight, fontFamily: theme.font,
+                  textShadow: theme.textShadow.medium,
                 }}>
                   {item.label}
                 </div>
                 <div style={{
                   fontSize: 28, fontWeight: 800, color: theme.white,
                   fontFamily: theme.font,
+                  textShadow: theme.textShadow.medium,
                 }}>
                   {item.value}
                 </div>

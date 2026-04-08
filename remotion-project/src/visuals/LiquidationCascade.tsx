@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Stage { label: string; amount: string; cumulative?: string; icon?: string }
 interface Props {
@@ -8,12 +9,14 @@ interface Props {
 }
 
 export const LiquidationCascade: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
   const titleOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const titleP = spring({ frame, fps, config: { damping: 100, stiffness: 25 } });
   const totalOpacity = interpolate(frame, [40, 52], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const pulse = (Math.sin(frame * 0.08) + 1) / 2;
+  const pulse = (Math.sin(frame * 0.22) + 1) / 2;
 
   return (
     <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 100px" }}>
@@ -39,7 +42,7 @@ export const LiquidationCascade: React.FC<Props> = ({ data: props }) => {
               <div style={{
                 display: "flex", alignItems: "center", gap: 20,
                 padding: "16px 24px", borderRadius: 12,
-                background: `rgba(${r},${g},${b},0.08)`,
+                background: `rgba(${r},${g},${b},0.22)`,
                 borderLeft: `4px solid rgb(${r},${g},${b})`,
                 opacity: stageOpacity, transform: `translateX(${interpolate(stageP, [0, 1], [30, 0])}px)`,
               }}>

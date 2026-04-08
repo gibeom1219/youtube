@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface BarItem {
   label: string;
@@ -22,14 +23,16 @@ const DEFAULT_COLORS = [
 ];
 
 export const PercentageBar: React.FC<Props> = ({ data, durationFrames }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
-  const interval = Math.min((durationFrames * 0.65) / (data.items.length + 1), 18);
+  const interval = Math.min((durationFrames * 0.65) / ((data.items ?? []).length + 1), 18);
   const unit = data.unit ?? "%";
 
-  const maxValue = Math.max(...data.items.map((d) => d.value));
+  const maxValue = Math.max(...(data.items ?? []).map((d) => d.value));
 
   return (
     <div style={{
@@ -47,7 +50,7 @@ export const PercentageBar: React.FC<Props> = ({ data, durationFrames }) => {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-        {data.items.map((item, i) => {
+        {(data.items ?? []).map((item, i) => {
           const startFrame = Math.round(interval * (i + 1));
           const p = spring({ frame: frame - startFrame, fps, config: { damping: 100, stiffness: 10 } });
           const barP = spring({ frame: frame - startFrame - 4, fps, config: { damping: 80, stiffness: 5 } });
@@ -89,7 +92,7 @@ export const PercentageBar: React.FC<Props> = ({ data, durationFrames }) => {
               {/* 막대 */}
               <div style={{
                 width: "100%", height: isTop ? 20 : 14,
-                background: "rgba(255,255,255,0.06)",
+                background: "rgba(255,255,255,0.20)",
                 borderRadius: 10, overflow: "hidden",
               }}>
                 <div style={{

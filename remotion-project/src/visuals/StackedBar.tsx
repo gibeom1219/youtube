@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 const COLORS = ["#81D8D0", "#52D68A", "#FFB347", "#FF6B6B", "#C084FC", "#4FA8A0"];
 
@@ -9,7 +10,9 @@ interface Props {
 }
 
 export const StackedBar: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
 
   const { title, categories, data } = props;

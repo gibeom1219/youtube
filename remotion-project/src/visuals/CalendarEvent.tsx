@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface CalEvent {
   date: string;
@@ -25,7 +26,21 @@ const IMPORTANCE_CONFIG = {
 };
 
 export const CalendarEvent: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
+  // title → month 호환
+  if (!data.month && (data as any).title) {
+    (data as any).month = (data as any).title;
+  }
+  // events: title → event, type → importance 호환
+  (data.events ?? []).forEach((evt: any) => {
+    if (!evt.event && evt.title) evt.event = evt.title;
+    if (!evt.importance && evt.type) {
+      const typeMap: Record<string, string> = { done: "low", upcoming: "medium", highlight: "high" };
+      evt.importance = typeMap[evt.type] ?? "medium";
+    }
+  });
   const { fps } = useVideoConfig();
 
   const headerProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
@@ -61,8 +76,8 @@ export const CalendarEvent: React.FC<Props> = ({ data }) => {
       </div>
 
       {/* 이벤트 목록 */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        {data.events.map((evt, i) => {
+      <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 900 }}>
+        {(data.events ?? []).map((evt, i) => {
           const p = spring({
             frame: frame - 10 - i * 10,
             fps, config: { damping: 100, stiffness: 5 },
@@ -84,7 +99,7 @@ export const CalendarEvent: React.FC<Props> = ({ data }) => {
                 padding: "16px 20px",
                 display: "flex", flexDirection: "column",
                 alignItems: "center", justifyContent: "center",
-                minWidth: 90, flexShrink: 0,
+                width: 160, flexShrink: 0,
                 borderRight: `1px solid ${imp.color}20`,
               }}>
                 <div style={{ fontSize: 26, fontFamily: theme.font }}>{imp.dot}</div>

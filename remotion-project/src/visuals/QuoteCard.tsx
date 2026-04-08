@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: {
@@ -12,7 +13,9 @@ interface Props {
 }
 
 export const QuoteCard: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const markProgress  = spring({ frame,         fps, config: { damping: 100, stiffness: 10 } });
@@ -44,11 +47,11 @@ export const QuoteCard: React.FC<Props> = ({ data }) => {
       {/* 인용구 */}
       <div style={{
         fontSize: 52, fontWeight: 700, color: theme.white,
-        fontFamily: theme.font, textAlign: "center" as const,
+        fontFamily: theme.fontQuote, textAlign: "center" as const,
         lineHeight: 1.55, letterSpacing: -0.5,
         opacity: Math.min(1, quoteProgress),
         transform: `translateY(${interpolate(Math.min(1, quoteProgress), [0, 1], [30, 0])}px)`,
-        textShadow: `0 0 ${40 + glowPulse * 20}px rgba(129,216,208,${0.06 + glowPulse * 0.06})`,
+        textShadow: `${theme.textShadow.medium}, 0 0 ${40 + glowPulse * 20}px rgba(129,216,208,${0.06 + glowPulse * 0.06})`,
         marginTop: -60,
       }}>
         {data.quote}
@@ -72,12 +75,14 @@ export const QuoteCard: React.FC<Props> = ({ data }) => {
         <div style={{
           fontSize: 36, fontWeight: 900, color: theme.tiffany,
           fontFamily: theme.font, letterSpacing: 1,
+          textShadow: theme.textShadow.light,
         }}>
           — {data.speaker}
         </div>
         <div style={{
           fontSize: 26, color: theme.grayLight,
           fontFamily: theme.font, fontWeight: 500,
+          textShadow: theme.textShadow.light,
         }}>
           {data.role}{data.date ? ` · ${data.date}` : ""}
         </div>

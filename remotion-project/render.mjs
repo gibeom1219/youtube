@@ -1,7 +1,7 @@
 import { bundle } from "@remotion/bundler";
 import { renderMedia, selectComposition } from "@remotion/renderer";
 import { createRequire } from "module";
-import { readFileSync, copyFileSync, mkdirSync, existsSync } from "fs";
+import { readFileSync, copyFileSync, mkdirSync, existsSync, rmSync } from "fs";
 import { join, resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -30,8 +30,10 @@ if (existsSync(audioSrc)) {
   console.log(`[Render] 오디오 복사: ${props.audioFile}`);
 }
 
-// 배경 영상 클립 복사
-mkdirSync(join(publicDir, "videos"), { recursive: true });
+// 배경 영상 클립 복사 (이전 워크스페이스 잔여 파일 제거 후 복사)
+const videosDir = join(publicDir, "videos");
+rmSync(videosDir, { recursive: true, force: true });
+mkdirSync(videosDir, { recursive: true });
 for (const scene of props.scenes) {
   if (scene.backgroundVideo) {
     const src = join(workspacePath, scene.backgroundVideo);

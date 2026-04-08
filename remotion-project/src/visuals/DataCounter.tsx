@@ -1,13 +1,16 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: { number: number; unit: string; prefix?: string; label: string; description: string };
 }
 
 export const DataCounter: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const labelOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
@@ -42,9 +45,9 @@ export const DataCounter: React.FC<Props> = ({ data }) => {
 
       {/* Number */}
       <div style={{
-        fontSize: 140, fontWeight: 900, color: theme.white, fontFamily: theme.font,
+        fontSize: 140, fontWeight: 900, color: theme.white, fontFamily: theme.fontNum,
         opacity: numberOpacity,
-        textShadow: `0 0 ${40 + glowIntensity * 40}px rgba(129,216,208,${0.1 + glowIntensity * 0.3})`,
+        textShadow: `${theme.textShadow.strong}, 0 0 ${40 + glowIntensity * 40}px rgba(129,216,208,${0.1 + glowIntensity * 0.3})`,
         display: "flex", alignItems: "baseline", gap: 8,
       }}>
         {data.prefix && <span style={{ fontSize: 80, color: theme.tiffany }}>{data.prefix}</span>}

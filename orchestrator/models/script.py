@@ -102,6 +102,94 @@ class Scene(BaseModel):
         "law_card",        # 법안/규제 카드
         "liquidation_cascade", # 청산 도미노 (숫자 중심)
         "bubble_indicator", # 버블 지표 비교
+        "geo_highlight_map", # 지정학 지도 하이라이트
+        "supply_dependency", # 공급망 의존도 흐름
+        "policy_compare",  # 정권별 정책 비교
+        "pressure_network", # 이해관계자 압력 네트워크
+        "power_shift",     # 파워 역전 차트
+        "escalation_ladder", # 단계별 압박 강도
+        "vicious_cycle",   # 악순환 순환 루프
+        "catch_up_race",   # 기술 추격 경쟁
+        "hook_statement",  # 초반 훅 강렬한 2줄 문장
+        "speech_bubble",   # 말풍선 인용 (발언자+하이라이트)
+        "data_dashboard",  # 차트+수치 대시보드
+        "markup_text",     # 밑줄+동그라미 강조 텍스트
+        "rank_shift",      # 시대별 순위 비교
+        "stock_chart",     # 주가 차트 (라인+거래량+주석)
+        "report_chart",    # 리포트 차트 (흰색 배경+꺾은선+스탯카드)
+        "parliament_chart", # 반원형 의석/비율 분포 차트
+        "process_flow",   # 절차/프로세스 흐름도 (왼쪽 흰색→오른쪽 투명)
+        "side_info",      # 한쪽 정보 패널 (좌/우 선택, 반대쪽 배경 노출)
+        "center_info",    # 중앙 정보 패널 (양쪽 배경 노출)
+        "bottom_info",    # 하단 정보 패널 (위쪽 배경 노출)
+        "top_info",       # 상단 정보 패널 (아래쪽 배경 노출)
+        "white_quote",    # 흰색 배경 인용문 (주변 배경 노출)
+        "split_overlay",  # 좌우 비교 패널 (상하 배경 노출)
+        "white_stat",     # 흰색 배경 큰 숫자 강조 (주변 배경 노출)
+        "white_timeline", # 흰색 배경 타임라인 (상하 배경 노출)
+        "white_callout",  # 흰색 배경 핵심 인사이트 (주변 배경 노출)
+        "white_ranking",  # 흰색 배경 랭킹 리스트 (주변 배경 노출)
+        "diagonal_info",  # 대각선 레이아웃 (좌하단 콘텐츠, 우상단 배경)
+        "white_checklist", # 흰색 체크리스트 (체크/미체크 항목)
+        "white_pros_cons", # 흰색 장단점 비교 (좌우 칼럼)
+        "white_scenario",  # 흰색 시나리오 카드 (2~3개 시나리오)
+        "white_warning",   # 흰색 경고 카드 (주의/위험/긴급)
+        "white_summary",   # 흰색 요약 (번호 포인트 + 결론)
+        "side_quote",      # 좌/우 인용문 (반대쪽 배경 노출)
+        "side_warning",    # 좌/우 경고 항목 (반대쪽 배경 노출)
+        "side_stat",       # 좌/우 큰 숫자 + 항목 (반대쪽 배경 노출)
+        "side_timeline",   # 좌/우 세로 타임라인 (반대쪽 배경 노출)
+        "side_checklist",  # 좌/우 체크리스트 (반대쪽 배경 노출)
+        "dark_side_info",  # 검정 좌/우 정보 패널 (반대쪽 배경 노출)
+        "dark_center_info",# 검정 중앙 정보 패널 (양쪽 배경 노출)
+        "dark_top_info",   # 검정 상단 정보 패널 (아래 배경 노출)
+        "dark_bottom_info",# 검정 하단 정보 패널 (위 배경 노출)
+        "dark_quote",      # 검정 좌/우 인용문 (반대쪽 배경 노출)
+        "dark_stat",       # 검정 좌/우 큰 숫자 (반대쪽 배경 노출)
+        "dark_timeline",   # 검정 좌/우 세로 타임라인 (반대쪽 배경 노출)
+        "dark_warning",    # 검정 좌/우 경고 항목 (반대쪽 배경 노출)
+        "dark_summary",    # 검정 중앙 요약 (번호 포인트 + 결론)
+        "dark_split",      # 검정 좌우 비교 패널 (상하 배경 노출)
+        "side_donut",      # 좌/우 도넛 차트 + 범례 (반대쪽 배경 노출)
+        "side_bar_chart",  # 좌/우 가로 막대 차트 (반대쪽 배경 노출)
+        "side_gauge",      # 좌/우 반원 게이지 + 범례 (반대쪽 배경 노출)
+        "side_line_chart", # 좌/우 꺾은선 차트 (반대쪽 배경 노출)
+        "side_radar",      # 좌/우 레이더 차트 + 수치 (반대쪽 배경 노출)
+        "dark_donut",      # 검정 좌/우 도넛 차트 (반대쪽 배경 노출)
+        "dark_bar_chart",  # 검정 좌/우 가로 막대 (반대쪽 배경 노출)
+        "dark_gauge",      # 검정 좌/우 반원 게이지 (반대쪽 배경 노출)
+        "dark_line_chart", # 검정 좌/우 꺾은선 차트 (반대쪽 배경 노출)
+        "dark_radar",      # 검정 좌/우 레이더 차트 (반대쪽 배경 노출)
+        "glass_card",      # 글래스모피즘 반투명 카드 (배경 블러 비침)
+        "spotlight_reveal", # 스포트라이트 사실 공개 (어둠 속 하나씩 비춤)
+        "newspaper_clip",  # 신문 스크랩 (형광펜 하이라이트 + 테이프)
+        "counter_reveal",  # 슬롯머신 카운터 (숫자가 돌아가다 멈춤)
+        "text_reveal",     # 타자기 효과 (한 글자씩 나타남 + 커서)
+        "postit_board",    # 포스트잇 보드 (색색 메모지가 붙는 효과)
+        "receipt_card",    # 영수증 카드 (톱니+항목+합계 영수증 스타일)
+        "stamp_card",      # 도장 카드 (문서에 도장 찍히는 효과)
+        "xray_reveal",     # 엑스레이 (표면 vs 진실, 스캔 라인)
+        "magnify_reveal",  # 돋보기 (흐린 텍스트에서 핵심 확대)
+        "polaroid_stack",  # 폴라로이드 사진 스택 (캡션 부착)
+        "chat_message",    # 메신저 채팅 (말풍선 대화)
+        "flip_card",       # 카드 뒤집기 (질문→답 공개)
+        "wanted_poster",   # 수배 전단지 (혐의+현상금)
+        "password_crack",  # 해킹 크래킹 (글자 맞추기)
+        "blueprint",       # 청사진 설계도 (구조 분석)
+        "file_folder",     # 기밀 문서 폴더 (검열 해제)
+        "torn_paper",      # 종이 찢기 (공식→진실)
+        "radar_scan",      # 레이더 탐지 (대상 스캔)
+        "ticket_stub",     # 티켓 스텁 (이벤트 정보)
+        "blueprint_anatomy",       # 해부도 (중앙 주제 + 방사형 주석)
+        "blueprint_equation",      # 공식 분해 (큰 공식 + 변수 카드)
+        "blueprint_spec",          # 스펙시트 (그리드 사양서)
+        "blueprint_cross_section", # 단면도 (수평 레이어 계층)
+        "evidence_board",          # 수사 보드 (핀+실 증거물 연결)
+        "terminal_log",            # 터미널 로그 (해커 스타일 데이터)
+        "control_room",            # 관제실 (종합 대시보드 패널)
+        "film_reel",               # 필름 릴 (필름 스트립 이벤트)
+        "scoreboard",              # 전광판 (LED 점수/비교표)
+        "envelope_reveal",         # 봉투 공개 (극적 결과 발표)
         "intro_card",      # 인트로 타이틀
         "outro_card",      # 아웃트로
     ] = "keyword"

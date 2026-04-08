@@ -94,15 +94,10 @@ cd /home/user/workspaces/youtube && python -m orchestrator.run_video <workspace_
 - OUT 전환: 25프레임 (~0.4초 @ 60fps)
 - `intro_card`와 `outro_card`는 **noExit** (exit fade 없음) — 요소가 사라지는 것을 방지
 
-## 배경 에셋 (영상 + 이미지)
-- make-audio 단계에서 생성된 배경 에셋 사용
-- **Veo 영상**: 앞쪽 9씬(intro 포함)에만 적용, 3씬 1영상 그룹화 (총 3그룹)
-- **Nano Banana 이미지**: 나머지 씬 전부에 자동 적용, 씬마다 1개
-- `render.mjs`가 배경 에셋을 `remotion-project/public/videos/`에 복사
-- 파일 확장자로 자동 감지: .mp4 → 영상, .png/.jpg → 이미지
-- **영상 배경**: opacity 20%, 음소거(muted), loop
+## 배경 에셋 (이미지)
+- make-audio 단계에서 Nano Banana 이미지가 생성됨 (씬마다 1개, 병렬)
+- `render.mjs`가 배경 에셋을 `remotion-project/public/videos/`에 복사 (이전 파일 자동 삭제)
 - **이미지 배경**: opacity 20%, 정적 배경 + 다크 오버레이 + 그라데이션 오버레이 (텍스트 가독성)
-- Veo 영상은 ffmpeg으로 재인코딩 (매 프레임 키프레임) → 부드러운 재생
 
 ## 비주얼 디자인 원칙 (참고용)
 - 색상: 티파니 블루 `#81D8D0` / 배경 `#060d0c`

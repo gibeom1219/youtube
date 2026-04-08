@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface HistoryPoint {
   date: string;
@@ -19,7 +20,14 @@ interface Props {
 }
 
 export const PriceHistory: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
+  // items[].period 형태도 수용
+  if (!data.history && (data as any).items) {
+    data = { ...data, asset: data.asset ?? (data as any).title ?? "", history: ((data as any).items ?? []).map((it: any) => ({ date: it.period ?? it.date ?? "", price: it.price ?? it.value ?? "", event: it.event })) };
+  }
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
@@ -53,20 +61,20 @@ export const PriceHistory: React.FC<Props> = ({ data }) => {
       {/* 히스토리 타임라인 */}
       <div style={{
         display: "flex", flexDirection: "column", gap: 0,
-        position: "relative",
+        position: "relative", maxWidth: 900, alignSelf: "center", width: "100%",
       }}>
         {/* 왼쪽 세로 선 */}
         <div style={{
           position: "absolute", left: 19, top: 20, bottom: 20, width: 2,
-          background: `linear-gradient(to bottom, ${trendColor}60, ${trendColor}10)`,
+          background: `linear-gradient(to bottom, ${trendColor}60, ${trendColor}30)`,
         }} />
 
-        {data.history.map((point, i) => {
+        {(data.history ?? []).map((point, i) => {
           const p = spring({
             frame: frame - 8 - i * 12,
             fps, config: { damping: 100, stiffness: 5 },
           });
-          const isLast = i === data.history.length - 1;
+          const isLast = i === (data.history ?? []).length - 1;
           const changeColor = point.change
             ? (point.change.startsWith("+") ? "#52D68A" : point.change.startsWith("-") ? "#FF6B6B" : theme.grayLight)
             : theme.grayLight;
@@ -91,8 +99,8 @@ export const PriceHistory: React.FC<Props> = ({ data }) => {
               {/* 내용 */}
               <div style={{
                 flex: 1,
-                background: isLast ? `${trendColor}10` : "rgba(255,255,255,0.03)",
-                border: `1px solid ${isLast ? `${trendColor}40` : "rgba(255,255,255,0.08)"}`,
+                background: isLast ? `${trendColor}30` : "rgba(255,255,255,0.20)",
+                border: `1px solid ${isLast ? `${trendColor}40` : "rgba(255,255,255,0.22)"}`,
                 borderRadius: 14, padding: "14px 24px",
                 display: "flex", alignItems: "center",
                 justifyContent: "space-between",

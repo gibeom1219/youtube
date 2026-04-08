@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: {
@@ -27,7 +28,16 @@ const TYPE_ICONS: Record<string, string> = {
 };
 
 export const CalloutBox: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
+  // title → label, description → message 호환
+  if (!data.label && (data as any).title) {
+    (data as any).label = (data as any).title;
+  }
+  if (!data.message && (data as any).description) {
+    (data as any).message = (data as any).description;
+  }
   const { fps } = useVideoConfig();
 
   const type = data.type ?? "info";
@@ -51,7 +61,7 @@ export const CalloutBox: React.FC<Props> = ({ data }) => {
     }}>
       <div style={{
         width: "100%",
-        background: `${color}08`,
+        background: `${color}22`,
         border: `2px solid ${color}${Math.round((0.3 + glowPulse * 0.25) * 255).toString(16).padStart(2, "0")}`,
         borderRadius: 24,
         padding: "60px 72px",
@@ -87,6 +97,7 @@ export const CalloutBox: React.FC<Props> = ({ data }) => {
           borderRadius: 50, padding: "8px 28px",
           fontSize: 28, fontWeight: 800, color,
           fontFamily: theme.font, letterSpacing: 2,
+          textShadow: theme.textShadow.medium,
           opacity: Math.min(1, labelProgress),
           zIndex: 1,
         }}>
@@ -100,7 +111,7 @@ export const CalloutBox: React.FC<Props> = ({ data }) => {
           lineHeight: 1.45, zIndex: 1,
           opacity: Math.min(1, msgProgress),
           transform: `translateY(${interpolate(Math.min(1, msgProgress), [0, 1], [24, 0])}px)`,
-          textShadow: `0 0 ${20 + glowPulse * 15}px ${color}30`,
+          textShadow: theme.textShadow.medium,
         }}>
           {data.message}
         </div>

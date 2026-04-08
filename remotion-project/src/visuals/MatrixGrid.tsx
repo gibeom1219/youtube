@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: { title: string; x_axis: string; y_axis: string; quadrants: Array<{ label: string; items: string[]; position: "top_left" | "top_right" | "bottom_left" | "bottom_right" }> };
@@ -14,7 +15,9 @@ const POS_STYLE: Record<string, { color: string }> = {
 };
 
 export const MatrixGrid: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
   const titleOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const titleP = spring({ frame, fps, config: { damping: 100, stiffness: 25 } });

@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Indicator { label: string; past_value: string; current_value: string; status: "safe" | "caution" | "danger" }
 interface Props {
@@ -14,7 +15,9 @@ const STATUS_STYLE = {
 };
 
 export const BubbleIndicator: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
   const titleOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const titleP = spring({ frame, fps, config: { damping: 100, stiffness: 25 } });
@@ -31,7 +34,7 @@ export const BubbleIndicator: React.FC<Props> = ({ data: props }) => {
       </div>
 
       {/* Header */}
-      <div style={{ display: "flex", padding: "16px 24px", background: `${theme.tiffany}08`, borderRadius: "10px 10px 0 0" }}>
+      <div style={{ display: "flex", padding: "16px 24px", background: `${theme.tiffany}22`, borderRadius: "10px 10px 0 0" }}>
         <div style={{ flex: 2, fontSize: 28, fontWeight: 700, color: theme.gray, fontFamily: theme.font }}>지표</div>
         <div style={{ flex: 1, fontSize: 28, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>과거(닷컴)</div>
         <div style={{ flex: 1, fontSize: 28, fontWeight: 700, color: theme.gray, fontFamily: theme.font, textAlign: "center" }}>현재</div>
@@ -46,8 +49,8 @@ export const BubbleIndicator: React.FC<Props> = ({ data: props }) => {
         return (
           <div key={i} style={{
             display: "flex", padding: "20px 24px", alignItems: "center",
-            background: i % 2 === 0 ? "rgba(129,216,208,0.03)" : "transparent",
-            border: "1px solid rgba(129,216,208,0.06)", borderTop: "none",
+            background: i % 2 === 0 ? "rgba(129,216,208,0.25)" : "transparent",
+            border: "1px solid rgba(129,216,208,0.30)", borderTop: "none",
             opacity: rowOpacity, transform: `translateX(${interpolate(rowP, [0, 1], [20, 0])}px)`,
           }}>
             <div style={{ flex: 2, fontSize: 26, fontWeight: 600, color: theme.white, fontFamily: theme.font }}>{ind.label}</div>

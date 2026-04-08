@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface TickerItem {
   symbol: string;
@@ -20,7 +21,9 @@ interface Props {
 }
 
 export const TickerBoard: React.FC<Props> = ({ data, durationFrames }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
@@ -80,7 +83,7 @@ export const TickerBoard: React.FC<Props> = ({ data, durationFrames }) => {
 
       {/* 종목 목록 */}
       <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-        {data.items.map((item, i) => {
+        {(data.items ?? []).map((item, i) => {
           const startFrame = 5 + i * 12;
           const progress = spring({ frame: frame - startFrame, fps, config: { damping: 100, stiffness: 10 } });
 
@@ -98,7 +101,7 @@ export const TickerBoard: React.FC<Props> = ({ data, durationFrames }) => {
               display: "flex", alignItems: "center",
               padding: "18px 24px",
               background: `rgba(255,255,255,${bgAlpha})`,
-              borderBottom: "1px solid rgba(255,255,255,0.05)",
+              borderBottom: "1px solid rgba(255,255,255,0.20)",
               opacity: Math.min(1, progress),
               transform: `translateX(${interpolate(Math.min(1, progress), [0, 1], [-50, 0])}px)`,
             }}>

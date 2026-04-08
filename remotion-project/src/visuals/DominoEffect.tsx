@@ -1,13 +1,16 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: { title: string; trigger?: string; chain?: Array<{ event: string; impact: string; icon?: string }>; dominoes?: Array<{ label: string; icon?: string }> };
 }
 
 export const DominoEffect: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
   const { title } = props;
   // dominoes 형식도 허용: { label, icon } → { event: label, impact: "", icon }
@@ -20,7 +23,7 @@ export const DominoEffect: React.FC<Props> = ({ data: props }) => {
 
   return (
     <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 80px" }}>
-      <div style={{ fontSize: 38, fontWeight: 700, color: theme.gold, fontFamily: theme.font, textAlign: "center", marginBottom: 30, opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)` }}>
+      <div style={{ fontSize: 38, fontWeight: 700, color: theme.gold, fontFamily: theme.font, textAlign: "center", marginBottom: 30, textShadow: theme.textShadow.medium, opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)` }}>
         {title}
       </div>
 
@@ -28,7 +31,7 @@ export const DominoEffect: React.FC<Props> = ({ data: props }) => {
       <div style={{
         alignSelf: "center", padding: "16px 36px", borderRadius: 12,
         background: `${theme.red}18`, border: `2px solid ${theme.red}50`,
-        fontSize: 26, fontWeight: 800, color: theme.red, fontFamily: theme.font,
+        fontSize: 26, fontWeight: 800, color: theme.red, fontFamily: theme.font, textShadow: theme.textShadow.medium,
         opacity: triggerOpacity, transform: `scale(${interpolate(triggerP, [0, 1], [0.8, 1])})`,
         marginBottom: 24,
       }}>
@@ -36,7 +39,7 @@ export const DominoEffect: React.FC<Props> = ({ data: props }) => {
       </div>
 
       {/* Chain */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 8, }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, maxWidth: 900, alignSelf: "center", width: "100%" }}>
         {chain.map((item, i) => {
           const delay = 18 + i * 12;
           const itemP = spring({ frame: frame - delay, fps, config: { damping: 100, stiffness: 10 } });
@@ -52,14 +55,14 @@ export const DominoEffect: React.FC<Props> = ({ data: props }) => {
               <div style={{
                 display: "flex", alignItems: "center", gap: 20,
                 padding: "16px 28px", borderRadius: 12,
-                background: `rgba(255,${Math.round(179 - t * 110)},${Math.round(71 + t * 30)}, 0.08)`,
+                background: `rgba(255,${Math.round(179 - t * 110)},${Math.round(71 + t * 30)}, 0.22)`,
                 borderLeft: `4px solid ${severity}`,
                 opacity: itemOpacity, transform: `translateX(${interpolate(itemP, [0, 1], [i % 2 === 0 ? -30 : 30, 0])}px)`,
               }}>
                 {item.icon && <span style={{ fontSize: 32, fontFamily: theme.font, flexShrink: 0 }}>{item.icon}</span>}
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 28, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{item.event}</div>
-                  <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font, marginTop: 4 }}>{item.impact}</div>
+                  <div style={{ fontSize: 28, fontWeight: 700, color: theme.white, fontFamily: theme.font, textShadow: theme.textShadow.medium }}>{item.event}</div>
+                  <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font, marginTop: 4, textShadow: theme.textShadow.medium }}>{item.impact}</div>
                 </div>
               </div>
             </React.Fragment>

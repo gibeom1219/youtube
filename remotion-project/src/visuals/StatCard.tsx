@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: {
@@ -13,7 +14,19 @@ interface Props {
 }
 
 export const StatCard: React.FC<Props> = ({ data, accentColor = theme.tiffany }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
+  // number/label → big_number/big_label 호환
+  if (!data.big_number && (data as any).number) {
+    (data as any).big_number = (data as any).number;
+  }
+  if (!data.big_label && (data as any).label) {
+    (data as any).big_label = (data as any).label;
+  }
+  if (!data.card_title && (data as any).title) {
+    (data as any).card_title = (data as any).title;
+  }
   const { fps } = useVideoConfig();
 
   const leftProgress = spring({ frame, fps, config: { damping: 100, stiffness: 25 } });
@@ -57,8 +70,8 @@ export const StatCard: React.FC<Props> = ({ data, accentColor = theme.tiffany })
           }} />
           <div style={{
             fontSize: 110, fontWeight: 900, color: accentColor,
-            fontFamily: theme.font, lineHeight: 1,
-            textShadow: `0 0 ${numGlowSize}px rgba(129,216,208,${0.2 + glowPulse * 0.15})`,
+            fontFamily: theme.fontNum, lineHeight: 1,
+            textShadow: `${theme.textShadow.strong}, 0 0 ${numGlowSize}px rgba(129,216,208,${0.2 + glowPulse * 0.15})`,
             position: "relative",
           }}>
             {data.big_number}
@@ -82,7 +95,7 @@ export const StatCard: React.FC<Props> = ({ data, accentColor = theme.tiffany })
       {/* 오른쪽: 정보 카드 */}
       <div style={{
         width: 780,
-        background: "rgba(129,216,208,0.05)",
+        background: "rgba(129,216,208,0.30)",
         border: `1px solid rgba(129,216,208,${0.2 + cardGlow * 0.15})`,
         borderRadius: 24,
         padding: "44px 52px",
@@ -98,22 +111,24 @@ export const StatCard: React.FC<Props> = ({ data, accentColor = theme.tiffany })
         }} />
 
         <div style={{
-          fontSize: 24, color: accentColor,
+          fontSize: 30, color: accentColor,
           fontFamily: theme.font, fontWeight: 900,
           letterSpacing: 2, marginBottom: 20,
+          textShadow: theme.textShadow.medium,
         }}>
           {data.card_title}
         </div>
         <div style={{ width: 48, height: 2, background: `${accentColor}60`, marginBottom: 32 }} />
 
-        {data.card_items.map((item, i) => {
+        {(data.card_items ?? []).map((item, i) => {
           const itemProgress = spring({ frame: frame - 20 - i * 18, fps, config: { damping: 100, stiffness: 10 } });
           return (
             <div key={i} style={{
-              fontSize: 26, color: theme.white,
-              fontFamily: theme.font, fontWeight: 500,
-              marginBottom: 18, lineHeight: 1.3,
+              fontSize: 32, color: theme.white,
+              fontFamily: theme.font, fontWeight: 600,
+              marginBottom: 20, lineHeight: 1.4,
               whiteSpace: "nowrap" as const,
+              textShadow: theme.textShadow.medium,
               opacity: Math.min(1, itemProgress),
               transform: `translateY(${interpolate(Math.min(1, itemProgress), [0, 1], [16, 0])}px)`,
               paddingLeft: 20,

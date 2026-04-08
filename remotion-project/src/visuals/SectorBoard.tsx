@@ -1,13 +1,16 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: { title: string; date?: string; sectors: Array<{ name: string; change: string; index?: string }> };
 }
 
 export const SectorBoard: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
 
   const { title, date, sectors } = props;
@@ -47,7 +50,7 @@ export const SectorBoard: React.FC<Props> = ({ data: props }) => {
             <div key={i} style={{
               display: "flex", alignItems: "center", gap: 20,
               padding: "18px 24px", borderRadius: 12,
-              background: "rgba(129,216,208,0.04)", border: "1px solid rgba(129,216,208,0.08)",
+              background: "rgba(129,216,208,0.25)", border: "1px solid rgba(129,216,208,0.30)",
               opacity: rowOpacity, transform: `translateX(${interpolate(rowP, [0, 1], [30, 0])}px)`,
             }}>
               <div style={{ width: 260, fontSize: 24, fontWeight: 700, color: theme.white, fontFamily: theme.font, flexShrink: 0, whiteSpace: "nowrap" }}>
@@ -58,11 +61,11 @@ export const SectorBoard: React.FC<Props> = ({ data: props }) => {
                   {sector.index}
                 </div>
               )}
-              <div style={{ flex: 1, height: 12, background: "rgba(255,255,255,0.05)", borderRadius: 6, overflow: "hidden" }}>
+              <div style={{ flex: 1, height: 12, background: "rgba(255,255,255,0.20)", borderRadius: 6, overflow: "hidden" }}>
                 <div style={{ width: `${barW}%`, height: "100%", background: changeColor, borderRadius: 6 }} />
               </div>
               <div style={{ width: 120, fontSize: 26, fontWeight: 900, color: changeColor, fontFamily: theme.font, textAlign: "right", flexShrink: 0 }}>
-                {sector.change}%
+                {sector.change}
               </div>
             </div>
           );

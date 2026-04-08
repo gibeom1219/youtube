@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Candle { date: string; open: number; close: number; high: number; low: number }
 interface Props {
@@ -8,7 +9,9 @@ interface Props {
 }
 
 export const Candlestick: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
   const { title, unit = "", candles } = props;
   const titleOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
@@ -35,7 +38,7 @@ export const Candlestick: React.FC<Props> = ({ data: props }) => {
           const y = getY(val);
           return (
             <g key={r}>
-              <line x1={50} y1={y} x2={1450} y2={y} stroke="rgba(255,255,255,0.06)" />
+              <line x1={50} y1={y} x2={1450} y2={y} stroke="rgba(255,255,255,0.20)" />
               <text x={45} y={y + 5} fill={theme.gray} fontSize={14} fontFamily={theme.font} textAnchor="end">{Math.round(val).toLocaleString()}</text>
             </g>
           );

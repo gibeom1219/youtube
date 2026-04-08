@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: { name: string; full_name?: string; status: "passed" | "pending" | "rejected"; date?: string; summary: string; impacts: string[]; icon?: string };
@@ -13,7 +14,9 @@ const STATUS_STYLE = {
 };
 
 export const LawCard: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
   const titleP = spring({ frame, fps, config: { damping: 100, stiffness: 25 } });
   const titleOpacity = interpolate(frame, [0, 14], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
@@ -42,14 +45,14 @@ export const LawCard: React.FC<Props> = ({ data }) => {
         fontSize: 24, color: theme.grayLight, fontFamily: theme.font, textAlign: "center",
         maxWidth: 1000, lineHeight: 1.5, opacity: bodyOpacity,
         padding: "20px 32px", borderRadius: 14,
-        background: "rgba(129,216,208,0.04)", border: "1px solid rgba(129,216,208,0.1)",
+        background: "rgba(129,216,208,0.25)", border: "1px solid rgba(129,216,208,0.1)",
       }}>
         {data.summary}
       </div>
 
       {/* Impacts */}
       <div style={{ display: "flex", flexDirection: "column", gap: 10, width: "100%", maxWidth: 1000 }}>
-        {data.impacts.map((impact, i) => {
+        {(data.impacts ?? []).map((impact, i) => {
           const impOpacity = interpolate(frame, [20 + i * 6, 30 + i * 6], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
           return (
             <div key={i} style={{ fontSize: 28, color: theme.white, fontFamily: theme.font, paddingLeft: 16, borderLeft: `3px solid ${theme.tiffany}50`, opacity: impOpacity, lineHeight: 1.4 }}>

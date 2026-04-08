@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: {
@@ -23,7 +24,9 @@ function parseSimpleNumber(str: string): { value: number; decimals: number } | n
 }
 
 export const NumberHighlight: React.FC<Props> = ({ data, accentColor = theme.tiffany }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const numProgress = spring({ frame, fps, config: { damping: 60, stiffness: 10 } });
@@ -55,6 +58,7 @@ export const NumberHighlight: React.FC<Props> = ({ data, accentColor = theme.tif
         opacity: Math.min(1, labelProgress),
         border: `1px solid ${accentColor}40`,
         padding: "8px 24px", borderRadius: 4,
+        textShadow: theme.textShadow.medium,
       }}>
         {data.label}
       </div>
@@ -73,8 +77,8 @@ export const NumberHighlight: React.FC<Props> = ({ data, accentColor = theme.tif
         <div style={{ display: "flex", alignItems: "flex-end", gap: 16, position: "relative" }}>
           <div style={{
             fontSize: 220, fontWeight: 900, color: accentColor,
-            fontFamily: theme.font, lineHeight: 0.85,
-            textShadow: `0 0 ${numGlow}px rgba(129,216,208,${numGlowOpacity})`,
+            fontFamily: theme.fontNum, lineHeight: 0.85,
+            textShadow: `${theme.textShadow.strong}, 0 0 ${numGlow}px rgba(129,216,208,${numGlowOpacity})`,
           }}>
             {displayNumber}
           </div>

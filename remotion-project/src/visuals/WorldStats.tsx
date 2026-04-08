@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface CountryItem {
   flag: string;
@@ -20,11 +21,13 @@ interface Props {
 }
 
 export const WorldStats: React.FC<Props> = ({ data, durationFrames }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
-  const interval = Math.min((durationFrames * 0.65) / (data.items.length + 1), 18);
+  const interval = Math.min((durationFrames * 0.65) / ((data.items ?? []).length + 1), 18);
 
   return (
     <div style={{
@@ -57,10 +60,11 @@ export const WorldStats: React.FC<Props> = ({ data, durationFrames }) => {
       {/* 국가 목록 - 2열 그리드 */}
       <div style={{
         display: "grid",
-        gridTemplateColumns: data.items.length > 4 ? "1fr 1fr" : "1fr",
+        gridTemplateColumns: (data.items ?? []).length > 6 ? "1fr 1fr" : "1fr",
+        maxWidth: (data.items ?? []).length <= 6 ? 900 : "100%",
         gap: 14,
       }}>
-        {data.items.map((item, i) => {
+        {(data.items ?? []).map((item, i) => {
           const startFrame = Math.round(interval * (i + 1));
           const p = spring({ frame: frame - startFrame, fps, config: { damping: 100, stiffness: 10 } });
           const settled = Math.max(0, frame - (startFrame + 20));

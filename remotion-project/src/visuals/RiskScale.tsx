@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: { title: string; level: 1 | 2 | 3 | 4 | 5; labels?: string[]; description: string };
@@ -10,7 +11,13 @@ const DEFAULT_LABELS = ["매우 낮음", "낮음", "보통", "높음", "매우 �
 const LEVEL_COLORS = ["#52D68A", "#A8E8E2", "#FFB347", "#FF8C42", "#FF6B6B"];
 
 export const RiskScale: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
+  // items[] → description 변환
+  if (!data.description && (data as any).items) {
+    (data as any).description = ((data as any).items as any[]).map((it: any) => `${it.label}: ${it.description}`).join("  |  ");
+  }
   const { fps } = useVideoConfig();
   const labels = data.labels ?? DEFAULT_LABELS;
   const titleOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
@@ -36,8 +43,8 @@ export const RiskScale: React.FC<Props> = ({ data }) => {
           return (
             <div key={lv} style={{
               flex: 1, height: 60, borderRadius: 10,
-              background: isActive ? `${color}${isCurrent ? "cc" : "50"}` : "rgba(255,255,255,0.05)",
-              border: isCurrent ? `2px solid ${color}` : "1px solid rgba(255,255,255,0.08)",
+              background: isActive ? `${color}${isCurrent ? "cc" : "50"}` : "rgba(255,255,255,0.20)",
+              border: isCurrent ? `2px solid ${color}` : "1px solid rgba(255,255,255,0.22)",
               display: "flex", alignItems: "center", justifyContent: "center",
               boxShadow: isCurrent ? `0 0 ${15 + pulse * 15}px ${color}40` : "none",
               transition: "box-shadow 0s",

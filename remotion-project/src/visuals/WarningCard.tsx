@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: {
@@ -19,7 +20,9 @@ const LEVEL_CONFIG = {
 };
 
 export const WarningCard: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const level  = data.level ?? "caution";
@@ -63,13 +66,14 @@ export const WarningCard: React.FC<Props> = ({ data }) => {
           <div style={{
             fontSize: 30, fontWeight: 900, color,
             fontFamily: theme.font, letterSpacing: 1,
-            textShadow: `0 0 ${10 + glowPulse * 8}px ${color}50`,
+            textShadow: theme.textShadow.medium,
           }}>
             {cfg.label}
           </div>
           <div style={{
             flex: 1, fontSize: 28, fontWeight: 700, color: theme.white,
             fontFamily: theme.font,
+            textShadow: theme.textShadow.medium,
           }}>
             {data.title}
           </div>
@@ -77,7 +81,7 @@ export const WarningCard: React.FC<Props> = ({ data }) => {
 
         {/* 항목 목록 */}
         <div style={{ padding: "32px 40px", display: "flex", flexDirection: "column", gap: 16 }}>
-          {data.items.map((item, i) => {
+          {(data.items ?? []).map((item, i) => {
             const p = spring({
               frame: frame - 14 - i * 10,
               fps, config: { damping: 100, stiffness: 10 },
@@ -97,6 +101,7 @@ export const WarningCard: React.FC<Props> = ({ data }) => {
                 <div style={{
                   fontSize: 28, fontWeight: 600, color: theme.white,
                   fontFamily: theme.font, lineHeight: 1.45,
+                  textShadow: theme.textShadow.medium,
                 }}>
                   {item}
                 </div>

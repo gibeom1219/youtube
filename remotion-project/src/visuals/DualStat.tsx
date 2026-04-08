@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: {
@@ -19,7 +20,9 @@ interface Props {
 }
 
 export const DualStat: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame,         fps, config: { damping: 100, stiffness: 10 } });
@@ -59,8 +62,8 @@ export const DualStat: React.FC<Props> = ({ data }) => {
         <div style={{ display: "flex", alignItems: "baseline", gap: 8, position: "relative" as const }}>
           <div style={{
             fontSize: 110, fontWeight: 900, color,
-            fontFamily: theme.font, lineHeight: 1,
-            textShadow: `0 0 ${30 + glowPulse * 20}px ${color}50`,
+            fontFamily: theme.fontNum, lineHeight: 1,
+            textShadow: `${theme.textShadow.strong}, 0 0 ${30 + glowPulse * 20}px ${color}50`,
           }}>
             {number}
           </div>

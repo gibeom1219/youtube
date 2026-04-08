@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Zone {
   label: string;
@@ -40,7 +41,9 @@ const INVERTED_ZONES: Zone[] = [
 ];
 
 export const GaugeMeter: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const zones = data.zones ?? (data.invert ? INVERTED_ZONES : DEFAULT_ZONES);
@@ -110,7 +113,7 @@ export const GaugeMeter: React.FC<Props> = ({ data }) => {
         <svg width={600} height={330} viewBox="0 0 600 320">
           {/* 배경 아크 */}
           <path d={`M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`}
-            fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth={36} strokeLinecap="butt" />
+            fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth={36} strokeLinecap="butt" />
 
           {/* 존별 컬러 아크 */}
           {zoneArcs.map((arc, i) => (

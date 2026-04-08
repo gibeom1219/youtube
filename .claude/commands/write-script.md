@@ -1,80 +1,102 @@
 ---
 name: write-script
-description: 경제/금융 유튜브 채널 대본을 JSON 형식으로 작성합니다. 사용자가 영상 주제나 대본 작성을 요청할 때, 또는 /write-script 명령어를 실행할 때 사용하세요.
+description: 유튜브 대본 작성. 사용자가 대본 작성, 대본 만들기, 스크립트 작성, 영상 대본, 유튜브 대본을 요청하거나 /write-script 명령어를 실행할 때 사용하세요.
 ---
 
-# 유튜브 경제/금융 대본 작성
+# 유튜브 대본 작성
 
-## 핵심 설정
-- 톤: **완전한 입말 구어체** (뉴스체/리포트체/기사체 절대 금지)
-- 영상 길이: 9~10분 (total_duration: 310~340초)
-- 나레이션: **4,500~5,500자** (미달 시 자동 보강), 각 씬 100~150자
-- content 장면 수: 많을수록 좋음 (총량 안에서 최대한)
-- FPS: 60fps
+주제: $ARGUMENTS
 
-## 주제 재구성
-사용자 주제를 그대로 쓰지 말고, 클릭을 유발하는 형태로 재구성:
-- 핵심 갈등/궁금증 부각, "왜?"를 자극하는 구조
-- 예: "환율 상승 영향" → "환율이 안 떨어집니다. 근데 이번엔 좀 특이해요."
+⚠️ `python -m orchestrator.run_script`는 **절대 사용하지 않음** — Claude Code가 직접 작성
 
-## 문체 규칙 (가장 중요)
-- ❌ 금지: "~했습니다"(뉴스체), "이에 따라"(리포트체), "그러나/반면/한편"(문어체)
-- ✅ 사용: "~거예요", "~거든요", "근데", "아니", "어쨌든", "한마디로", "오죽하면"
-- 감정: "환장하는 거죠", "이게 좀 문제예요", "오죽하면"
-- 비유: 즉흥적·재미있게 ("욕조에 페인트 붓는 거", "영화 300 길막")
-- 하나의 주제를 여러 씬에 걸쳐 깊이 있게, 흐름이 자연스럽게 이어지도록
+## 실행 순서
 
-## 비주얼 다양성
-- **81종** visual_type 활용 가능 (intro_card, outro_card 포함)
-- 전체에서 **15가지 이상** 서로 다른 visual_type 사용
-- 같은 type 연속 금지
-- stat_card/bullet_list 최대 4회, keyword/comparison/callout_box/quote_card/flow_diagram 최대 3회, 나머지 2회
+### 1단계: SKILL.md 읽기 (필수)
+```
+skill-dev/write-script/SKILL.md
+```
+이 파일을 **반드시 먼저 읽고** 모든 규칙을 숙지한 후 작성을 시작하세요.
 
-## visual_query (Veo 3.1 Fast 배경 영상)
-- 모든 씬에 `visual_query` 필드 작성 (영어, 상세 프롬프트)
-- **3개 씬이 1개 영상 공유**: 3의 배수 scene_id(0,3,6,9...)에 상세 작성, 나머지는 같은 그룹 query 복사
-- 특정 인물 이름 금지 (설명적 묘사로 대체)
-- 60fps, 720p, 16:9, 4초 영상
+> ⚠️ `VISUAL_DATA_REFERENCE.md`는 전체를 읽지 않음.
+> 5단계에서 script.json 작성 시, 사용할 visual_type의 예시만 선택적으로 검색해서 참조.
 
-## JSON 구조
-```json
-{
-  "title": "제목 (30자 이내)",
-  "hook": "시청자 호기심 자극 한 문장",
-  "scenes": [
-    {
-      "scene_id": 0,
-      "type": "intro",
-      "duration_seconds": 5.0,
-      "narration": "...",
-      "visual_type": "intro_card",
-      "visual_data": {"title": "...", "subtitle": "..."},
-      "visual_query": "Cinematic shot of...",
-      "chart_data": null,
-      "chart_title": null
-    }
-  ],
-  "total_duration_seconds": 320.0,
-  "tags": ["태그1", "태그2"]
-}
+### 2단계: 샘플 대본 읽기
+`/home/user/workspaces/youtube/sample/` 하위 18개 파일 중 주제와 비슷한 1~2개를 읽고 문체를 체화하세요.
+
+### 3단계: WebSearch로 리서치
+최신 데이터, 수치, 전문가 발언을 수집하세요.
+
+### 4단계: 1단계 분석 → 사용자에게 제안
+- 모순/역설, 훅, 이해관계자 맵, 반론, 흐름 패턴, 장면 구성 요약을 제안하고 확인 받기
+
+### 5단계: script.json 직접 작성
+
+**★ 핵심 규칙 (반드시 준수):**
+
+**씬 구성:**
+- content 장면: **50~70개** (빠른 전환)
+- 씬당 duration: **5~12초** (14초 이상 금지)
+- 나레이션: **4,500~5,500자**, 씬당 40~96자
+- total_duration_seconds: **310~340초**
+
+**비주얼 다양성 (★ 핵심):**
+- 180종+ visual_type 중 **80% 이상 서로 다른 타입** 사용
+- 배경 노출 타입(🤍🖤📊) **최소 25%** (60씬 → 15씬+)
+- 특수 효과(✨ 20종) **최소 10%** (60씬 → 6씬+)
+- 중앙 집중 타입 **4씬 연속 금지**
+- 모든 타입 최대 5회
+
+**★★★ 골든 60초 — 초반 이탈 방지 (최우선 규칙):**
+```
+[0~5초]   인트로 훅 — 시청자를 직접 지목하거나 충격적 사실로 주의 끌기
+[5~20초]  공감 유도 — "나도 그래!" 하고 고개를 끄덕이게
+[20~40초] 결론 미리보기 — 핵심 답을 살짝만 (궁금증 유지)
+[40~60초] 로드맵 — 오늘 영상에서 얻을 것을 예고
+```
+3가지 감정 체크리스트:
+- ✅ **공감**: 시청자가 "나도 그래/나도 궁금했어" 할 포인트
+- ✅ **호기심**: "결론이 뭐지?", "왜 그렇지?" 궁금해지는 장치
+- ✅ **동기부여**: "이거 모르면 손해다", "나한테 영향 있다"
+
+**문체:**
+- 완전한 입말 구어체 (뉴스체/리포트체 금지)
+- 접속사: "근데", "아니", "어쨌든", "한마디로"
+- 팩트 → 내 해석 → 내 생각 순서
+- 투자 권유 금지, "내 생각"으로 표현
+
+**TTS 규칙:**
+- 괄호 내 약어 금지, 물결표(~) 범위 금지, 특수문자 최소화
+
+### 6단계: 초반 60초 검증 (★ 필수)
+script.json 작성 후, 초반 60초(씬 0~7 정도)를 분석해서:
+- 공감/호기심/동기부여 3가지가 모두 있는지 점검
+- 없으면 수정 후 진행
+
+### 7단계: script.md 생성
+```python
+python3 -c "
+import json
+from orchestrator.run_script import generate_script_md
+from orchestrator.models.script import ScriptOutput
+from pathlib import Path
+workspace = Path('workspace/<ID>')
+script = ScriptOutput(**json.loads((workspace / 'script.json').read_text()))
+generate_script_md(script, workspace)
+"
 ```
 
-## 실행 방법 (Claude Code가 직접 수행 — API 사용 안 함)
-1. **WebSearch로 주제 리서치** (최신 데이터, 수치, 전문가 발언 수집)
-2. 주제 재구성 → 사용자에게 방향 제안 → 확인 받기
-3. **샘플 대본 참고**: `/home/user/workspaces/youtube/sample/` 하위 18개 파일
-4. 비주얼 다양성 계획 (15종 이상)
-5. **script.json 직접 작성** (Write 툴로 저장)
-   - workspace 생성: `python3 -c "import uuid; print(str(uuid.uuid4())[:8])"`
-   - `mkdir -p /home/user/workspaces/youtube/workspace/<ID>`
-6. **script.md 생성**: `python3 -c "from orchestrator.run_script import generate_script_md; ..."`
-7. 대본 요약 표시 후 안내: `/make-audio <ID>`
+### 8단계: 썸네일 문구 & 유튜브 제목 (★ 필수)
+script.md 상단에 추가:
+- 썸네일 문구 3~4안 (큰 글씨 + 강조색 글씨)
+- 유튜브 제목 3~4안 (30자 이내, 구어체)
 
-⚠️ python -m orchestrator.run_script는 더 이상 사용하지 않음 (Claude API 대신 Claude Code가 직접 작성)
+### 9단계: 유튜브 설명란 (★ 필수)
+script.md의 플레이스홀더를 실제 내용으로 교체:
+- 핵심 포인트 7~10개를 개조식으로 요약
 
-## TTS 음성 품질 규칙
-- 괄호 내 약어 금지: "이슬람혁명수비대(IRGC)" → 하나만 사용
-- 물결표(~) 범위 금지: "1~2개월" → "1에서 2개월"
-- 특수문자 최소화, 자연스러운 구어체
-
-자세한 visual_type 목록, visual_data 형식, 결정 트리는 skill-dev/write-script/SKILL.md 참조.
+### 10단계: 대본 요약 표시
+- 제목, 훅, 총 길이, 나레이션 글자 수
+- 비주얼 타입 분포 (배경 노출 %, 특수효과 %, 기본 %)
+- 초반 60초 공감/호기심/동기부여 체크 결과
+- 장면 목록
+- 안내: `/make-audio <ID>`

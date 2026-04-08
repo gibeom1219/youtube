@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Level {
   label: string;
@@ -20,13 +21,15 @@ interface Props {
 const LEVEL_COLORS = ["#C084FC", "#81D8D0", "#52D68A", "#FFB347", "#FF6B6B", "#FFE66D"];
 
 export const PyramidChart: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
   const glowPulse = (Math.sin(frame * 0.04) + 1) / 2;
 
-  const n = data.levels.length;
+  const n = (data.levels ?? []).length;
 
   return (
     <div style={{
@@ -59,7 +62,7 @@ export const PyramidChart: React.FC<Props> = ({ data }) => {
         display: "flex", flexDirection: "column",
         alignItems: "center", gap: 6, width: "100%",
       }}>
-        {data.levels.map((level, i) => {
+        {(data.levels ?? []).map((level, i) => {
           const levelProgress = spring({
             frame: frame - 10 - i * 10,
             fps, config: { damping: 100, stiffness: 5 },

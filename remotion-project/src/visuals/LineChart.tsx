@@ -1,13 +1,16 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: { title: string; unit?: string; data: Array<{ label: string; value: number }>; trend?: "up" | "down" | "mixed" };
 }
 
 export const LineChart: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
 
   const { title, unit, data, trend = "mixed" } = props;

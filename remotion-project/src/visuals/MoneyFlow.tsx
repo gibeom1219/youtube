@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 const COLORS = ["#81D8D0", "#52D68A", "#FFB347", "#FF6B6B", "#C084FC"];
 
@@ -10,7 +11,13 @@ interface Props {
 }
 
 export const MoneyFlow: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
+  // label → amount 호환
+  (props.flows ?? []).forEach((f: any) => {
+    if (!f.amount && f.label) f.amount = f.label;
+  });
   const { fps } = useVideoConfig();
   const { title, flows } = props;
   const titleOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
@@ -19,12 +26,12 @@ export const MoneyFlow: React.FC<Props> = ({ data: props }) => {
   return (
     <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 100px", gap: 24 }}>
       {/* 제목 */}
-      <div style={{ fontSize: 40, fontWeight: 700, color: theme.gold, fontFamily: theme.font, textAlign: "center", opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)` }}>
+      <div style={{ fontSize: 40, fontWeight: 700, color: theme.gold, fontFamily: theme.font, textAlign: "center", opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)`, textShadow: theme.textShadow.medium }}>
         {title}
       </div>
 
       {/* 흐름 카드들 */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 900, alignSelf: "center", width: "100%" }}>
         {flows.map((flow, i) => {
           const flowP = spring({ frame: frame - 10 - i * 8, fps, config: { damping: 100, stiffness: 10 } });
           const flowOpacity = interpolate(frame, [10 + i * 8, 22 + i * 8], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
@@ -34,7 +41,7 @@ export const MoneyFlow: React.FC<Props> = ({ data: props }) => {
             <div key={i} style={{
               display: "flex", alignItems: "center", gap: 16,
               padding: "18px 28px", borderRadius: 14,
-              background: `${color}08`, border: `1px solid ${color}20`,
+              background: `${color}22`, border: `1px solid ${color}20`,
               opacity: flowOpacity, transform: `translateX(${interpolate(flowP, [0, 1], [30, 0])}px)`,
             }}>
               {/* From */}
@@ -43,20 +50,20 @@ export const MoneyFlow: React.FC<Props> = ({ data: props }) => {
                 background: `${color}18`, border: `1px solid ${color}35`,
                 flexShrink: 0,
               }}>
-                <div style={{ fontSize: 24, fontWeight: 800, color, fontFamily: theme.font }}>{flow.from}</div>
+                <div style={{ fontSize: 24, fontWeight: 800, color, fontFamily: theme.font, textShadow: theme.textShadow.medium }}>{flow.from}</div>
               </div>
 
               {/* Arrow + Amount */}
               <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
                 <div style={{ fontSize: 28, color: `${color}80` }}>→</div>
-                {flow.amount && <div style={{ fontSize: 26, fontWeight: 700, color: theme.grayLight, fontFamily: theme.font }}>{flow.amount}</div>}
+                {flow.amount && <div style={{ fontSize: 26, fontWeight: 700, color: theme.grayLight, fontFamily: theme.font, textShadow: theme.textShadow.medium }}>{flow.amount}</div>}
                 <div style={{ fontSize: 28, color: `${color}80` }}>→</div>
               </div>
 
               {/* To + Note */}
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 26, fontWeight: 700, color: theme.white, fontFamily: theme.font }}>{flow.to}</div>
-                {flow.note && <div style={{ fontSize: 26, color: theme.grayLight, fontFamily: theme.font, marginTop: 4 }}>{flow.note}</div>}
+                <div style={{ fontSize: 26, fontWeight: 700, color: theme.white, fontFamily: theme.font, textShadow: theme.textShadow.medium }}>{flow.to}</div>
+                {flow.note && <div style={{ fontSize: 26, color: theme.grayLight, fontFamily: theme.font, marginTop: 4, textShadow: theme.textShadow.medium }}>{flow.note}</div>}
               </div>
             </div>
           );

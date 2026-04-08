@@ -1,13 +1,16 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: { title: string; items: Array<{ label: string; value: number; type?: "increase" | "decrease" | "total" }>; unit?: string };
 }
 
 export const WaterfallChart: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
   const { title, items, unit = "" } = props;
   const titleOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
@@ -39,7 +42,7 @@ export const WaterfallChart: React.FC<Props> = ({ data: props }) => {
 
       <div style={{ flex: 1, display: "flex", alignItems: "flex-end", gap: 12, position: "relative" }}>
         {/* Zero line */}
-        <div style={{ position: "absolute", left: 0, right: 0, bottom: `${((0 - minVal) / range) * 100}%`, height: 1, background: "rgba(255,255,255,0.15)" }} />
+        <div style={{ position: "absolute", left: 0, right: 0, bottom: `${((0 - minVal) / range) * 100}%`, height: 1, background: "rgba(255,255,255,0.22)" }} />
 
         {bars.map((bar, i) => {
           const growP = spring({ frame: frame - 10 - i * 6, fps, config: { damping: 200, stiffness: 10 } });

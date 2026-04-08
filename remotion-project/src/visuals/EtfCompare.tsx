@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 const COLORS = ["#81D8D0", "#52D68A", "#FFB347", "#C084FC"];
 
@@ -10,7 +11,9 @@ interface Props {
 }
 
 export const EtfCompare: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
   const titleOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const titleP = spring({ frame, fps, config: { damping: 100, stiffness: 25 } });
@@ -30,7 +33,7 @@ export const EtfCompare: React.FC<Props> = ({ data: props }) => {
           return (
             <div key={i} style={{
               flex: 1, padding: "28px 24px", borderRadius: 16,
-              background: `${color}08`, border: `1px solid ${color}25`,
+              background: `${color}22`, border: `1px solid ${color}25`,
               display: "flex", flexDirection: "column", gap: 16,
               opacity: cardOpacity, transform: `translateY(${interpolate(cardP, [0, 1], [20, 0])}px)`,
             }}>
@@ -50,7 +53,7 @@ export const EtfCompare: React.FC<Props> = ({ data: props }) => {
                   <span style={{ fontSize: 24, color: theme.gray, fontFamily: theme.font }}>YTD</span>
                   <span style={{ fontSize: 26, fontWeight: 700, color: (etf.return_ytd ?? "").startsWith("-") ? theme.red : theme.green, fontFamily: theme.font }}>{etf.return_ytd}</span>
                 </div>}
-                {etf.expense && <div style={{ display: "flex", justifyContent: "space-between", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 8, marginTop: 4 }}>
+                {etf.expense && <div style={{ display: "flex", justifyContent: "space-between", borderTop: "1px solid rgba(255,255,255,0.20)", paddingTop: 8, marginTop: 4 }}>
                   <span style={{ fontSize: 24, color: theme.gray, fontFamily: theme.font }}>보수</span>
                   <span style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font }}>{etf.expense}</span>
                 </div>}

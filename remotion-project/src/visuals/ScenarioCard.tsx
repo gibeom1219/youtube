@@ -1,12 +1,15 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Scenario {
   label: string;
-  icon: string;
-  condition: string;
-  outcome: string;
+  icon?: string;
+  condition?: string;
+  outcome?: string;
+  value?: string;
+  description?: string;
   probability?: string;
   color?: string;
 }
@@ -22,11 +25,13 @@ interface Props {
 const DEFAULT_COLORS = ["#81D8D0", "#FFB347", "#FF6B6B"];
 
 export const ScenarioCard: React.FC<Props> = ({ data, durationFrames }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
-  const interval = Math.min((durationFrames * 0.6) / (data.scenarios.length + 1), 18);
+  const interval = Math.min((durationFrames * 0.6) / ((data.scenarios ?? []).length + 1), 18);
 
   const glowPulse = (Math.sin(frame * 0.04) + 1) / 2;
 
@@ -39,6 +44,7 @@ export const ScenarioCard: React.FC<Props> = ({ data, durationFrames }) => {
       <div style={{
         fontSize: 44, fontWeight: 900, color: theme.white,
         fontFamily: theme.font, textAlign: "center" as const,
+        textShadow: theme.textShadow.medium,
         opacity: Math.min(1, titleProgress),
         transform: `translateY(${interpolate(Math.min(1, titleProgress), [0, 1], [-20, 0])}px)`,
       }}>
@@ -50,7 +56,7 @@ export const ScenarioCard: React.FC<Props> = ({ data, durationFrames }) => {
         gap: 24,
         alignItems: "stretch",
       }}>
-        {data.scenarios.map((sc, i) => {
+        {(data.scenarios ?? []).map((sc, i) => {
           const startFrame = Math.round(interval * (i + 1));
           const p = spring({ frame: frame - startFrame, fps, config: { damping: 100, stiffness: 5 } });
           const settled = Math.max(0, frame - (startFrame + 20));
@@ -65,7 +71,7 @@ export const ScenarioCard: React.FC<Props> = ({ data, durationFrames }) => {
               display: "flex", flexDirection: "column",
               gap: 16,
               padding: "28px 28px",
-              background: `${color}08`,
+              background: `${color}22`,
               border: `1px solid ${color}${Math.round(borderAlpha * 255).toString(16).padStart(2, "0")}`,
               borderTop: `3px solid ${color}`,
               borderRadius: 16,
@@ -93,8 +99,9 @@ export const ScenarioCard: React.FC<Props> = ({ data, durationFrames }) => {
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 <span style={{ fontSize: 36, fontFamily: theme.font }}>{sc.icon}</span>
                 <div style={{
-                  fontSize: 28, fontWeight: 900, color,
+                  fontSize: 34, fontWeight: 900, color,
                   fontFamily: theme.font,
+                  textShadow: theme.textShadow.medium,
                 }}>
                   {sc.label}
                 </div>
@@ -102,21 +109,23 @@ export const ScenarioCard: React.FC<Props> = ({ data, durationFrames }) => {
 
               {/* 조건 */}
               <div style={{
-                fontSize: 26, color: theme.grayLight,
+                fontSize: 32, color: theme.grayLight,
                 fontFamily: theme.font, fontWeight: 500,
                 lineHeight: 1.45,
+                textShadow: theme.textShadow.medium,
                 borderLeft: `3px solid ${color}60`,
                 paddingLeft: 12,
               }}>
-                {sc.condition}
+                {sc.condition ?? sc.value ?? ""}
               </div>
 
               {/* 결과 */}
               <div style={{
-                fontSize: 24, fontWeight: 700, color: theme.white,
+                fontSize: 30, fontWeight: 700, color: theme.white,
                 fontFamily: theme.font, lineHeight: 1.4,
+                textShadow: theme.textShadow.medium,
               }}>
-                → {sc.outcome}
+                → {sc.outcome ?? sc.description ?? ""}
               </div>
             </div>
           );

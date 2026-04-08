@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: { ticker: string; name: string; current_price: string; target_price: string; analyst: string; rating: "buy" | "hold" | "sell"; upside: string; logo?: string };
@@ -10,7 +11,9 @@ const RATING_COLORS = { buy: "#52D68A", hold: "#FFB347", sell: "#FF6B6B" };
 const RATING_LABELS = { buy: "매수", hold: "보유", sell: "매도" };
 
 export const TargetPrice: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const ratingColor = RATING_COLORS[data.rating] ?? theme.tiffany;
@@ -31,8 +34,8 @@ export const TargetPrice: React.FC<Props> = ({ data }) => {
       }}>
         {data.logo && <span style={{ fontSize: 48, fontFamily: theme.font }}>{data.logo}</span>}
         <div>
-          <div style={{ fontSize: 48, fontWeight: 900, color: theme.white, fontFamily: theme.font }}>{data.ticker}</div>
-          <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font }}>{data.name}</div>
+          <div style={{ fontSize: 48, fontWeight: 900, color: theme.white, fontFamily: theme.font, textShadow: theme.textShadow.medium }}>{data.name}</div>
+          <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font, textShadow: theme.textShadow.medium }}>{data.ticker}</div>
         </div>
         <div style={{
           padding: "8px 20px", borderRadius: 8, background: `${ratingColor}25`,
@@ -50,8 +53,8 @@ export const TargetPrice: React.FC<Props> = ({ data }) => {
       }}>
         {/* Current Price */}
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 28, color: theme.gray, fontFamily: theme.font, marginBottom: 12 }}>현재가</div>
-          <div style={{ fontSize: 64, fontWeight: 900, color: theme.white, fontFamily: theme.font }}>{data.current_price}</div>
+          <div style={{ fontSize: 28, color: theme.grayLight, fontFamily: theme.font, marginBottom: 12, textShadow: theme.textShadow.medium }}>현재가</div>
+          <div style={{ fontSize: 64, fontWeight: 900, color: theme.white, fontFamily: theme.fontNum, textShadow: theme.textShadow.medium }}>{data.current_price}</div>
         </div>
 
         {/* Arrow */}
@@ -70,8 +73,8 @@ export const TargetPrice: React.FC<Props> = ({ data }) => {
 
         {/* Target Price */}
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 28, color: theme.gray, fontFamily: theme.font, marginBottom: 12 }}>목표가</div>
-          <div style={{ fontSize: 64, fontWeight: 900, color: ratingColor, fontFamily: theme.font }}>{data.target_price}</div>
+          <div style={{ fontSize: 28, color: theme.grayLight, fontFamily: theme.font, marginBottom: 12, textShadow: theme.textShadow.medium }}>목표가</div>
+          <div style={{ fontSize: 64, fontWeight: 900, color: ratingColor, fontFamily: theme.fontNum, textShadow: theme.textShadow.medium }}>{data.target_price}</div>
         </div>
       </div>
 

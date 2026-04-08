@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 const COLORS = ["#81D8D0", "#52D68A", "#FFB347"];
 
@@ -10,7 +11,9 @@ interface Props {
 }
 
 export const AreaChart: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
   const { title, labels, series } = props;
   // values 또는 data 필드 모두 허용
@@ -50,7 +53,7 @@ export const AreaChart: React.FC<Props> = ({ data: props }) => {
           const y = getY(maxVal * r);
           return (
             <g key={r}>
-              <line x1={padL} y1={y} x2={w - 30} y2={y} stroke="rgba(255,255,255,0.06)" />
+              <line x1={padL} y1={y} x2={w - 30} y2={y} stroke="rgba(255,255,255,0.20)" />
               <text x={padL - 10} y={y + 5} fill={theme.gray} fontSize={14} fontFamily={theme.font} textAnchor="end">{Math.round(maxVal * r)}</text>
             </g>
           );

@@ -1,13 +1,16 @@
 import React from "react";
 import { useCurrentFrame, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: { asset: string; before_price: string; after_price: string; change: string; period: string; icon?: string; context?: string };
 }
 
 export const PriceImpact: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const changeStr = data.change ?? "";
   const isNegative = changeStr.startsWith("-");
   const color = isNegative ? theme.red : theme.green;
@@ -23,21 +26,21 @@ export const PriceImpact: React.FC<Props> = ({ data }) => {
       </div>
 
       {/* Before price */}
-      <div style={{ fontSize: 44, color: theme.grayLight, fontFamily: theme.font, textDecoration: isNegative ? "line-through" : "none", textDecorationColor: `${theme.red}60` }}>
+      <div style={{ fontSize: 44, color: theme.grayLight, fontFamily: theme.fontNum, textDecoration: isNegative ? "line-through" : "none", textDecorationColor: `${theme.red}60`, textShadow: theme.textShadow.strong }}>
         {data.before_price}
       </div>
 
       {/* Change - the big impact */}
       <div style={{
-        fontSize: 140, fontWeight: 900, color, fontFamily: theme.font,
-        textShadow: `0 0 ${30 + pulse * 40}px ${color}50`,
+        fontSize: 140, fontWeight: 900, color, fontFamily: theme.fontNum,
+        textShadow: `${theme.textShadow.strong}, 0 0 ${30 + pulse * 40}px ${color}50`,
         lineHeight: 1,
       }}>
         {data.change}
       </div>
 
       {/* After price */}
-      <div style={{ fontSize: 56, fontWeight: 800, color: theme.white, fontFamily: theme.font }}>
+      <div style={{ fontSize: 56, fontWeight: 800, color: theme.white, fontFamily: theme.fontNum, textShadow: theme.textShadow.strong }}>
         → {data.after_price}
       </div>
 

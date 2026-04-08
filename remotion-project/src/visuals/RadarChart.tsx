@@ -1,13 +1,16 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: { title: string; labels: string[]; values: number[]; max?: number };
 }
 
 export const RadarChart: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
   const { title, labels, values, max = 100 } = props;
   const n = labels.length;
@@ -34,11 +37,11 @@ export const RadarChart: React.FC<Props> = ({ data: props }) => {
         {gridLevels.map((lv) => {
           const pts = Array.from({ length: n }, (_, i) => getPoint(i, lv));
           const path = pts.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ") + " Z";
-          return <path key={lv} d={path} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth={1} />;
+          return <path key={lv} d={path} fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth={1} />;
         })}
         {Array.from({ length: n }, (_, i) => {
           const p = getPoint(i, 1);
-          return <line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="rgba(255,255,255,0.06)" />;
+          return <line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="rgba(255,255,255,0.20)" />;
         })}
         <path d={dataPath} fill={`${theme.tiffany}20`} stroke={theme.tiffany} strokeWidth={2.5} />
         {dataPoints.map((p, i) => {

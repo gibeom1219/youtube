@@ -13,6 +13,21 @@ const fontStyle = `
     font-family: 'NotoColorEmoji';
     src: url('${staticFile("fonts/NotoColorEmoji.ttf")}') format('truetype');
   }
+  @font-face {
+    font-family: 'Pretendard';
+    src: url('${staticFile("fonts/Pretendard-Bold.otf")}') format('opentype');
+    font-weight: 700;
+  }
+  @font-face {
+    font-family: 'Pretendard';
+    src: url('${staticFile("fonts/Pretendard-ExtraBold.otf")}') format('opentype');
+    font-weight: 800;
+  }
+  @font-face {
+    font-family: 'NanumMyeongjo';
+    src: url('${staticFile("fonts/NanumMyeongjoBold.ttf")}') format('truetype');
+    font-weight: 700;
+  }
 `;
 
 // 기본 props (Remotion Studio 미리보기용)

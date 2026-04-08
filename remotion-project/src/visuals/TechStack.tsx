@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 const LAYER_COLORS = ["#81D8D0", "#52D68A", "#A8E8E2", "#FFB347", "#C084FC"];
 
@@ -9,7 +10,9 @@ interface Props {
 }
 
 export const TechStack: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
   const { title, layers } = props;
   const titleOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
@@ -20,7 +23,7 @@ export const TechStack: React.FC<Props> = ({ data: props }) => {
 
   return (
     <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 120px" }}>
-      <div style={{ fontSize: 40, fontWeight: 700, color: theme.gold, fontFamily: theme.font, textAlign: "center", marginBottom: 36, opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)` }}>
+      <div style={{ fontSize: 40, fontWeight: 700, color: theme.gold, fontFamily: theme.font, textAlign: "center", marginBottom: 36, textShadow: theme.textShadow.medium, opacity: titleOpacity, transform: `translateY(${interpolate(titleP, [0, 1], [-16, 0])}px)` }}>
         {title}
       </div>
 
@@ -41,12 +44,12 @@ export const TechStack: React.FC<Props> = ({ data: props }) => {
               opacity: layerOpacity, transform: `translateY(${interpolate(layerP, [0, 1], [20, 0])}px)`,
             }}>
               {layer.icon && <span style={{ fontSize: 32, fontFamily: theme.font, flexShrink: 0 }}>{layer.icon}</span>}
-              <div style={{ fontSize: 28, fontWeight: 800, color, fontFamily: theme.font, width: 140, flexShrink: 0 }}>
+              <div style={{ fontSize: 28, fontWeight: 800, color, fontFamily: theme.font, width: 220, flexShrink: 0, whiteSpace: "nowrap" as const, textShadow: theme.textShadow.medium }}>
                 {layer.name}
               </div>
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap", flex: 1 }}>
                 {layer.items.map((item, ii) => (
-                  <span key={ii} style={{ fontSize: 24, color: theme.white, fontFamily: theme.font, padding: "4px 12px", background: `${color}12`, borderRadius: 6, border: `1px solid ${color}20` }}>
+                  <span key={ii} style={{ fontSize: 24, color: theme.white, fontFamily: theme.font, padding: "4px 12px", background: `${color}12`, borderRadius: 6, border: `1px solid ${color}20`, textShadow: theme.textShadow.light }}>
                     {item}
                   </span>
                 ))}

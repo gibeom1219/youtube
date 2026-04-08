@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Side { claim: string; evidence: string[]; label?: string }
 interface Props {
@@ -8,7 +9,9 @@ interface Props {
 }
 
 export const ArgumentCard: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
   const titleOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const titleP = spring({ frame, fps, config: { damping: 100, stiffness: 25 } });
@@ -21,11 +24,11 @@ export const ArgumentCard: React.FC<Props> = ({ data }) => {
   const renderSide = (side: Side, color: string, opacity: number, progress: number, dir: number) => (
     <div style={{
       flex: 1, padding: "24px 28px", borderRadius: 16,
-      background: `${color}08`, border: `1px solid ${color}25`,
+      background: `${color}22`, border: `1px solid ${color}25`,
       opacity, transform: `translateX(${interpolate(progress, [0, 1], [dir * 30, 0])}px)`,
       display: "flex", flexDirection: "column", gap: 14,
     }}>
-      <div style={{ fontSize: 24, fontWeight: 800, color, fontFamily: theme.font, padding: "4px 14px", background: `${color}15`, borderRadius: 6, alignSelf: "flex-start" }}>
+      <div style={{ fontSize: 24, fontWeight: 800, color, fontFamily: theme.font, padding: "4px 14px", background: `${color}30`, borderRadius: 6, alignSelf: "flex-start" }}>
         {side.label ?? (dir < 0 ? "주장 A" : "주장 B")}
       </div>
       <div style={{ fontSize: 24, fontWeight: 700, color: theme.white, fontFamily: theme.font, lineHeight: 1.4 }}>
@@ -53,7 +56,7 @@ export const ArgumentCard: React.FC<Props> = ({ data }) => {
       </div>
 
       {data.verdict && (
-        <div style={{ fontSize: 28, color: theme.tiffany, fontFamily: theme.font, textAlign: "center", marginTop: 20, fontWeight: 600, opacity: verdictOpacity, padding: "12px 24px", background: `${theme.tiffany}08`, borderRadius: 10 }}>
+        <div style={{ fontSize: 28, color: theme.tiffany, fontFamily: theme.font, textAlign: "center", marginTop: 20, fontWeight: 600, opacity: verdictOpacity, padding: "12px 24px", background: `${theme.tiffany}22`, borderRadius: 10 }}>
           💡 {data.verdict}
         </div>
       )}

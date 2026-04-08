@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: {
@@ -13,12 +14,14 @@ interface Props {
 }
 
 export const TableData: React.FC<Props> = ({ data, durationFrames }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
   const headerProgress = spring({ frame: frame - 10, fps, config: { damping: 100, stiffness: 10 } });
-  const interval = Math.min((durationFrames * 0.6) / (data.rows.length + 1), 18);
+  const interval = Math.min((durationFrames * 0.6) / ((data.rows ?? []).length + 1), 18);
 
   const glowPulse = (Math.sin(frame * 0.04) + 1) / 2;
   const highlightCol = data.highlight_col ?? 1;
@@ -44,7 +47,7 @@ export const TableData: React.FC<Props> = ({ data, durationFrames }) => {
         {/* 헤더 */}
         <div style={{
           display: "flex",
-          background: `rgba(129,216,208,0.12)`,
+          background: `rgba(129,216,208,0.22)`,
           border: `1px solid rgba(129,216,208,0.35)`,
           borderBottom: `2px solid ${theme.tiffany}`,
           borderRadius: "12px 12px 0 0",
@@ -52,14 +55,14 @@ export const TableData: React.FC<Props> = ({ data, durationFrames }) => {
           opacity: Math.min(1, headerProgress),
           transform: `translateY(${interpolate(Math.min(1, headerProgress), [0, 1], [-16, 0])}px)`,
         }}>
-          {data.headers.map((header, j) => (
+          {(data.headers ?? []).map((header, j) => (
             <div key={j} style={{
               flex: j === 0 ? 1.4 : 1,
               padding: "18px 28px",
               fontSize: 26, fontWeight: 900, color: theme.tiffany,
               fontFamily: theme.font,
               textAlign: j === 0 ? "left" as const : "center" as const,
-              borderRight: j < data.headers.length - 1 ? "1px solid rgba(129,216,208,0.15)" : "none",
+              borderRight: j < (data.headers ?? []).length - 1 ? "1px solid rgba(129,216,208,0.25)" : "none",
             }}>
               {header}
             </div>
@@ -67,7 +70,7 @@ export const TableData: React.FC<Props> = ({ data, durationFrames }) => {
         </div>
 
         {/* 데이터 행 */}
-        {data.rows.map((row, i) => {
+        {(data.rows ?? []).map((row, i) => {
           const startFrame = Math.round(interval * (i + 1));
           const progress = spring({ frame: frame - startFrame, fps, config: { damping: 100, stiffness: 10 } });
 
@@ -79,9 +82,9 @@ export const TableData: React.FC<Props> = ({ data, durationFrames }) => {
             <div key={i} style={{
               display: "flex",
               background: `rgba(255,255,255,${bgAlpha})`,
-              border: "1px solid rgba(255,255,255,0.06)",
+              border: "1px solid rgba(255,255,255,0.20)",
               borderTop: "none",
-              borderRadius: i === data.rows.length - 1 ? "0 0 12px 12px" : 0,
+              borderRadius: i === (data.rows ?? []).length - 1 ? "0 0 12px 12px" : 0,
               opacity: Math.min(1, progress),
               transform: `translateX(${interpolate(Math.min(1, progress), [0, 1], [-40, 0])}px)`,
               overflow: "hidden",
@@ -96,7 +99,7 @@ export const TableData: React.FC<Props> = ({ data, durationFrames }) => {
                     color: isHighlight ? theme.tiffany : theme.white,
                     fontFamily: theme.font,
                     textAlign: j === 0 ? "left" as const : "center" as const,
-                    borderRight: j < row.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
+                    borderRight: j < row.length - 1 ? "1px solid rgba(255,255,255,0.20)" : "none",
                     background: isHighlight ? `rgba(129,216,208,${0.04 + pulse * 0.04})` : "transparent",
                   }}>
                     {cell}

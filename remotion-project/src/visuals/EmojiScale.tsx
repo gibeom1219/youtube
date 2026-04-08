@@ -1,13 +1,16 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: { title: string; levels: Array<{ emoji: string; label: string }>; active: number; description: string };
 }
 
 export const EmojiScale: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
   const titleOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const titleP = spring({ frame, fps, config: { damping: 100, stiffness: 25 } });
@@ -21,7 +24,7 @@ export const EmojiScale: React.FC<Props> = ({ data }) => {
       </div>
 
       <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
-        {data.levels.map((lv, i) => {
+        {(data.levels ?? []).map((lv, i) => {
           const isActive = i === data.active;
           const lvP = spring({ frame: frame - 10 - i * 6, fps, config: { damping: 100, stiffness: 10 } });
           const lvOpacity = interpolate(frame, [10 + i * 6, 20 + i * 6], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
@@ -31,7 +34,7 @@ export const EmojiScale: React.FC<Props> = ({ data }) => {
               display: "flex", flexDirection: "column", alignItems: "center", gap: 16,
               opacity: lvOpacity, transform: `scale(${interpolate(lvP, [0, 1], [0.7, 1])})`,
               padding: "24px 20px", borderRadius: 16,
-              background: isActive ? `${theme.tiffany}15` : "transparent",
+              background: isActive ? `${theme.tiffany}30` : "transparent",
               border: isActive ? `2px solid ${theme.tiffany}50` : "2px solid transparent",
               boxShadow: isActive ? `0 0 ${15 + pulse * 15}px ${theme.tiffany}25` : "none",
               transition: "box-shadow 0s",

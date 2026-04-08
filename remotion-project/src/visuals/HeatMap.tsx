@@ -1,13 +1,16 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: { title: string; items: Array<{ label: string; value: string; change: number }> };
 }
 
 export const HeatMap: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
 
   const { title, items } = props;
@@ -20,7 +23,7 @@ export const HeatMap: React.FC<Props> = ({ data: props }) => {
     if (change >= 3) return "rgba(82,214,138,0.35)";
     if (change >= 1) return "rgba(82,214,138,0.2)";
     if (change > 0) return "rgba(82,214,138,0.1)";
-    if (change === 0) return "rgba(255,255,255,0.05)";
+    if (change === 0) return "rgba(255,255,255,0.20)";
     if (change > -1) return "rgba(255,107,107,0.1)";
     if (change > -3) return "rgba(255,107,107,0.2)";
     return "rgba(255,107,107,0.35)";

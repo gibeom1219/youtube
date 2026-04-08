@@ -51,43 +51,51 @@ export const Subtitle: React.FC<Props> = ({ words, startSeconds }) => {
   const chunk = chunks[chunkIndex];
   const chunkStart = chunk[0].start_seconds;
 
-  const fadeIn = interpolate(
-    currentSeconds,
-    [chunkStart, chunkStart + 0.15],
-    [0, 1],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-
   return (
     <div style={{
       position: "absolute",
-      bottom: 72,
-      left: 140,
-      right: 140,
-      textAlign: "center",
-      opacity: fadeIn,
+      bottom: 52,
+      left: 0,
+      right: 0,
+      display: "flex",
+      justifyContent: "center",
+      zIndex: 10,
     }}>
-      <span style={{
-        backgroundColor: "rgba(0,0,0,0.82)",
-        borderRadius: 10,
-        padding: "10px 24px",
-        fontSize: 46,
-        fontFamily: "'NotoSansKR', 'NotoColorEmoji', sans-serif",
-        fontWeight: 700,
-        lineHeight: 1.5,
-        color: "#FFFFFF",
-        whiteSpace: "nowrap",
-        display: "inline-block",
-        maxWidth: "100%",
+      <div style={{
+        display: "flex",
+        alignItems: "stretch",
+        borderRadius: 6,
         overflow: "hidden",
-        textOverflow: "ellipsis",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+        width: 1050,
       }}>
-        {chunk.map((w, i) => (
-          <span key={i} style={{ color: "#FFFFFF" }}>
-            {w.word}{" "}
-          </span>
-        ))}
-      </span>
+        {/* 왼쪽 강조 라인 */}
+        <div style={{
+          width: 5,
+          background: "linear-gradient(180deg, #e67e22 0%, #f39c12 100%)",
+          flexShrink: 0,
+        }} />
+
+        {/* 텍스트 영역 */}
+        <div style={{
+          flex: 1,
+          background: "rgba(20,20,20,0.88)",
+          padding: "14px 36px",
+          fontSize: 44,
+          fontFamily: "'NotoSansKR', 'NotoColorEmoji', sans-serif",
+          fontWeight: 700,
+          lineHeight: 1.5,
+          color: "#FFFFFF",
+          whiteSpace: "nowrap",
+          textAlign: "center",
+        }}>
+          {chunk.map((w, i) => (
+            <span key={i} style={{ color: "#FFFFFF" }}>
+              {w.word}{" "}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

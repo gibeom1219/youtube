@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: {
@@ -15,7 +16,24 @@ interface Props {
 }
 
 export const TrendArrow: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
+  // items[] 배열 형태 → 단일 트렌드로 변환
+  const items = (data as any).items;
+  if (!data.metric && items && items.length > 0) {
+    const first = items[0];
+    const last = items[items.length - 1];
+    data = {
+      ...data,
+      metric: (data as any).title ?? "",
+      direction: "up" as const,
+      from_value: `${first.label}: ${first.value}`,
+      to_value: `${last.label}: ${last.value}`,
+      period: `${first.label} → ${last.label}`,
+      insight: items.map((it: any) => `${it.label}: ${it.value}`).join("  /  "),
+    };
+  }
   const { fps } = useVideoConfig();
 
   const metricProgress  = spring({ frame,         fps, config: { damping: 100, stiffness: 10 } });
@@ -46,6 +64,7 @@ export const TrendArrow: React.FC<Props> = ({ data }) => {
       <div style={{
         fontSize: 36, fontWeight: 700, color: theme.tiffany,
         fontFamily: theme.font, textAlign: "center",
+        textShadow: theme.textShadow.medium,
         opacity: Math.min(1, metricProgress),
         transform: `translateY(${interpolate(Math.min(1, metricProgress), [0, 1], [-20, 0])}px)`,
       }}>
@@ -58,7 +77,8 @@ export const TrendArrow: React.FC<Props> = ({ data }) => {
         border: `2px solid ${dirColor}60`,
         borderRadius: 50, padding: "12px 40px",
         fontSize: 36, fontWeight: 900, color: dirColor,
-        fontFamily: theme.font,
+        fontFamily: theme.fontNum,
+        textShadow: theme.textShadow.strong,
         opacity: Math.min(1, arrowProgress),
         transform: `scale(${interpolate(Math.min(1, arrowProgress), [0, 1], [0.6, 1])})`,
         boxShadow: `0 0 ${20 + glowPulse * 16}px ${dirColor}30`,
@@ -72,7 +92,7 @@ export const TrendArrow: React.FC<Props> = ({ data }) => {
         {/* 배경 선 */}
         <div style={{
           position: "absolute", top: "50%", left: 0, right: 0,
-          height: 2, background: "rgba(255,255,255,0.08)",
+          height: 2, background: "rgba(255,255,255,0.22)",
           transform: "translateY(-50%)",
         }} />
         {/* 컬러 화살표 선 */}
@@ -106,17 +126,17 @@ export const TrendArrow: React.FC<Props> = ({ data }) => {
         transform: `translateY(${interpolate(Math.min(1, valuesProgress), [0, 1], [20, 0])}px)`,
       }}>
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 26, color: theme.grayLight, fontFamily: theme.font }}>시작</div>
-          <div style={{ fontSize: 52, fontWeight: 900, color: "rgba(255,255,255,0.7)", fontFamily: theme.font }}>
+          <div style={{ fontSize: 26, color: theme.grayLight, fontFamily: theme.font, textShadow: theme.textShadow.medium }}>시작</div>
+          <div style={{ fontSize: 52, fontWeight: 900, color: "rgba(255,255,255,0.7)", fontFamily: theme.fontNum, textShadow: theme.textShadow.strong }}>
             {data.from_value}
           </div>
         </div>
         <div style={{ fontSize: 48, color: dirColor, fontFamily: theme.font }}>→</div>
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 26, color: theme.grayLight, fontFamily: theme.font }}>현재</div>
+          <div style={{ fontSize: 26, color: theme.grayLight, fontFamily: theme.font, textShadow: theme.textShadow.medium }}>현재</div>
           <div style={{
-            fontSize: 52, fontWeight: 900, color: dirColor, fontFamily: theme.font,
-            textShadow: `0 0 ${20 + glowPulse * 15}px ${dirColor}50`,
+            fontSize: 52, fontWeight: 900, color: dirColor, fontFamily: theme.fontNum,
+            textShadow: theme.textShadow.strong,
           }}>
             {data.to_value}
           </div>
@@ -132,6 +152,7 @@ export const TrendArrow: React.FC<Props> = ({ data }) => {
           fontSize: 24, color: theme.grayLight,
           fontFamily: theme.font, fontWeight: 500,
           textAlign: "center", lineHeight: 1.5,
+          textShadow: theme.textShadow.medium,
           opacity: Math.min(1, insightProgress),
           transform: `translateY(${interpolate(Math.min(1, insightProgress), [0, 1], [20, 0])}px)`,
         }}>

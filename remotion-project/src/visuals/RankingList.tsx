@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface RankItem {
   rank: number;
@@ -21,11 +22,13 @@ interface Props {
 const MEDALS: Record<number, string> = { 1: "🥇", 2: "🥈", 3: "🥉" };
 
 export const RankingList: React.FC<Props> = ({ data, durationFrames }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
-  const interval = Math.min((durationFrames * 0.65) / (data.items.length + 1), 18);
+  const interval = Math.min((durationFrames * 0.65) / ((data.items ?? []).length + 1), 18);
 
   const glowPulse = (Math.sin(frame * 0.04) + 1) / 2;
 
@@ -47,7 +50,7 @@ export const RankingList: React.FC<Props> = ({ data, durationFrames }) => {
 
       {/* 순위 목록 */}
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        {data.items.map((item, i) => {
+        {(data.items ?? []).map((item, i) => {
           const startFrame = Math.round(interval * (i + 1));
           const progress = spring({ frame: frame - startFrame, fps, config: { damping: 100, stiffness: 10 } });
 
@@ -85,13 +88,13 @@ export const RankingList: React.FC<Props> = ({ data, durationFrames }) => {
               {/* 순위 배지 */}
               <div style={{
                 width: 64, height: 64, borderRadius: "50%",
-                background: isTop3 ? `rgba(129,216,208,0.12)` : `rgba(255,255,255,0.06)`,
+                background: isTop3 ? `rgba(129,216,208,0.22)` : `rgba(255,255,255,0.20)`,
                 border: isTop3
                   ? `2px solid rgba(129,216,208,${0.5 + pulse * 0.3})`
-                  : `1px solid rgba(255,255,255,0.15)`,
+                  : `1px solid rgba(255,255,255,0.22)`,
                 display: "flex", alignItems: "center", justifyContent: "center",
                 flexShrink: 0, zIndex: 1,
-                boxShadow: isTop3 ? `0 0 ${8 + pulse * 10}px rgba(129,216,208,0.15)` : "none",
+                boxShadow: isTop3 ? `0 0 ${8 + pulse * 10}px rgba(129,216,208,0.25)` : "none",
               }}>
                 {MEDALS[item.rank] ? (
                   <span style={{ fontSize: 30, fontFamily: theme.font }}>{MEDALS[item.rank]}</span>

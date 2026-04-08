@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: {
@@ -14,7 +15,9 @@ interface Props {
 }
 
 export const InterviewCard: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const qProgress = spring({ frame,         fps, config: { damping: 100, stiffness: 10 } });
@@ -34,8 +37,8 @@ export const InterviewCard: React.FC<Props> = ({ data }) => {
     }}>
       {/* 질문 */}
       <div style={{
-        background: "rgba(255,255,255,0.05)",
-        border: "1px solid rgba(255,255,255,0.15)",
+        background: "rgba(255,255,255,0.20)",
+        border: "1px solid rgba(255,255,255,0.22)",
         borderRadius: "20px 20px 20px 4px",
         padding: "28px 36px",
         opacity: Math.min(1, qProgress),

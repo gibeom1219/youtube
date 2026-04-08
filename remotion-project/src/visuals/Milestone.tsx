@@ -1,13 +1,16 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: { title: string; current: number; target: number; unit: string; label: string; icon?: string };
 }
 
 export const Milestone: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
   const pct = Math.min((data.current / data.target) * 100, 100);
   const titleOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
@@ -32,7 +35,7 @@ export const Milestone: React.FC<Props> = ({ data }) => {
       </div>
 
       {/* Progress bar */}
-      <div style={{ width: "100%", maxWidth: 1000, height: 32, background: "rgba(255,255,255,0.06)", borderRadius: 16, overflow: "hidden", opacity: barOpacity }}>
+      <div style={{ width: "100%", maxWidth: 1000, height: 32, background: "rgba(255,255,255,0.20)", borderRadius: 16, overflow: "hidden", opacity: barOpacity }}>
         <div style={{
           width: `${barP}%`, height: "100%",
           background: `linear-gradient(90deg, ${color}80, ${color})`,

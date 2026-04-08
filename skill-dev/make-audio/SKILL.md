@@ -86,30 +86,18 @@ cd /home/user/workspaces/youtube && python -m orchestrator.run_audio <workspace_
 - 10분 영상 기준 보통 3에서 4개 청크
 - 오디오 실제 길이는 나레이션 글자 수 × 0.12초 수준 (TTS 속도에 따라 대본 예상보다 길게 나올 수 있음)
 
-## 배경 에셋 생성 (Veo → Nano Banana 폴백)
+## 배경 에셋 생성 (Nano Banana 이미지)
 
-make-audio 단계에서 AssetFetcher가 배경 에셋을 자동 생성합니다. Veo를 먼저 시도하고, 실패 시 이미지로 폴백합니다.
+make-audio 단계에서 AssetFetcher가 배경 이미지를 자동 생성합니다.
 
 ### 동작 방식
-- **Veo 3.1 Fast 영상: 앞쪽 9씬만 (intro 포함, 3그룹)**
-  - 3개 씬이 1개 영상을 공유: 앞 9씬 → group_0.mp4, group_1.mp4, group_2.mp4
-  - script.json의 `visual_query` 필드를 프롬프트로 사용
-  - TTS 생성과 병렬로 실행 (AssetFetcher)
-- **Nano Banana 2 이미지: 나머지 씬 전부**
-  - Veo가 적용되지 않은 모든 씬에 자동으로 이미지 생성
-  - Veo 실패 시에도 해당 씬은 이미지로 자동 보완
+- **Nano Banana 2 이미지**: 모든 씬에 이미지 1개씩 생성 (병렬, max_workers=10)
   - 모델: `gemini-3.1-flash-image-preview` (Nano Banana 2)
-  - 씬마다 1개 이미지 생성, RPM 대기 5초
+  - script.json의 `visual_query` 필드를 프롬프트로 사용
   - 설정: `aspect_ratio="16:9"`, `candidate_count=1`
   - 미지원: `person_generation`, `output_mime_type`, `media_resolution`
-  - `outro_card` 씬은 배경 생성 자동 건너뜀 (구독&좋아요 화면에 배경 불필요)
-
-### 영상 스펙 (Veo)
-- 해상도: 720p (1280x720)
-- 길이: 4초
-- 화면비: 16:9
-- 오디오: 제어 불가 (렌더링 시 음소거 처리)
-- FPS: 60fps
+  - `outro_card` 씬은 배경 생성 자동 건너뜀
+  - RPM 100 → 병렬 생성으로 ~10초 이내 완료
 
 ### 필수 환경 변수
 - `GOOGLE_AI_API_KEY`: Google AI API 키 (`.env` 파일에 설정)
@@ -119,19 +107,16 @@ make-audio 단계에서 AssetFetcher가 배경 에셋을 자동 생성합니다.
 | 오류 | 원인 | 해결 방법 |
 |---|---|---|
 | `GOOGLE_AI_API_KEY not set` | .env에 Google AI 키 없음 | `/home/user/workspaces/youtube/.env`에 `GOOGLE_AI_API_KEY=...` 추가 |
-| `Veo quota exceeded (429)` | Google AI API 할당량 초과 | 자동으로 Nano Banana 이미지 폴백 |
-| `video generation timeout` | 영상 생성 시간 초과 | 재시도 (보통 30초~1분 소요) |
+| 이미지 생성 실패 | API 오류 | 해당 씬은 기본 배경(그라데이션)으로 렌더링 |
 
 ### 결과 파일
 배경 에셋은 workspace에 저장됩니다:
 ```
 workspace/<ID>/
   videos/
-    group_0.mp4    ← 앞쪽 씬 0,1,2 공유 (Veo)
-    group_1.mp4    ← 앞쪽 씬 3,4,5 공유 (Veo)
-    group_2.mp4    ← 앞쪽 씬 6,7,8 공유 (Veo)
-    scene_9.png    ← 씬 9 (Nano Banana 이미지)
-    scene_10.png   ← 씬 10
+    scene_0.png    ← 씬 0 (Nano Banana 이미지)
+    scene_1.png    ← 씬 1
+    scene_2.png    ← 씬 2
     ...
 ```
-렌더링 시 영상은 **opacity 20%, 음소거, playbackRate 0.8**, 이미지는 **opacity 20%, 정적 배경 + 다크 오버레이**로 적용됩니다.
+렌더링 시 이미지는 **opacity 20%, 정적 배경 + 다크 오버레이**로 적용됩니다.

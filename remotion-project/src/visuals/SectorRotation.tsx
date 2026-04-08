@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 const PHASE_COLORS = ["#52D68A", "#81D8D0", "#FFB347", "#FF6B6B"];
 
@@ -10,7 +11,9 @@ interface Props {
 }
 
 export const SectorRotation: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
   const titleOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const titleP = spring({ frame, fps, config: { damping: 100, stiffness: 25 } });
@@ -32,8 +35,8 @@ export const SectorRotation: React.FC<Props> = ({ data: props }) => {
           return (
             <div key={i} style={{
               flex: 1, padding: "24px 20px", borderRadius: 16,
-              background: isCurrent ? `${color}15` : "rgba(129,216,208,0.03)",
-              border: isCurrent ? `2px solid ${color}50` : "1px solid rgba(129,216,208,0.08)",
+              background: isCurrent ? `${color}30` : "rgba(129,216,208,0.25)",
+              border: isCurrent ? `2px solid ${color}50` : "1px solid rgba(129,216,208,0.30)",
               boxShadow: isCurrent ? `0 0 ${12 + pulse * 12}px ${color}20` : "none",
               opacity: phaseOpacity, transform: `translateY(${interpolate(phaseP, [0, 1], [20, 0])}px)`,
               display: "flex", flexDirection: "column", gap: 14,
@@ -46,7 +49,7 @@ export const SectorRotation: React.FC<Props> = ({ data: props }) => {
                 <div style={{ fontSize: 28, fontWeight: 800, color: isCurrent ? color : theme.grayLight, fontFamily: theme.font }}>{phase.name}</div>
               </div>
 
-              {isCurrent && <div style={{ fontSize: 20, fontWeight: 800, color, fontFamily: theme.font, padding: "4px 10px", background: `${color}15`, borderRadius: 4, alignSelf: "flex-start" }}>현재 국면</div>}
+              {isCurrent && <div style={{ fontSize: 20, fontWeight: 800, color, fontFamily: theme.font, padding: "4px 10px", background: `${color}30`, borderRadius: 4, alignSelf: "flex-start" }}>현재 국면</div>}
 
               {phase.description && <div style={{ fontSize: 24, color: theme.grayLight, fontFamily: theme.font, lineHeight: 1.4 }}>{phase.description}</div>}
 
@@ -66,7 +69,7 @@ export const SectorRotation: React.FC<Props> = ({ data: props }) => {
       <div style={{ display: "flex", justifyContent: "center", marginTop: 16 }}>
         {props.phases.map((_, i) => (
           <React.Fragment key={i}>
-            <div style={{ width: 12, height: 12, borderRadius: "50%", background: i === props.current_phase ? PHASE_COLORS[i % PHASE_COLORS.length] : "rgba(255,255,255,0.15)" }} />
+            <div style={{ width: 12, height: 12, borderRadius: "50%", background: i === props.current_phase ? PHASE_COLORS[i % PHASE_COLORS.length] : "rgba(255,255,255,0.22)" }} />
             {i < props.phases.length - 1 && <div style={{ width: 40, height: 2, background: "rgba(255,255,255,0.1)", alignSelf: "center" }} />}
           </React.Fragment>
         ))}

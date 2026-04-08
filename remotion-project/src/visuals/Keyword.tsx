@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: {
@@ -11,7 +12,9 @@ interface Props {
 }
 
 export const Keyword: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   // Support both field name variants (keyword/description and term/definition)
@@ -51,7 +54,7 @@ export const Keyword: React.FC<Props> = ({ data }) => {
           fontSize: 100, fontWeight: 900, color: theme.white,
           fontFamily: theme.font, textAlign: "center" as const,
           lineHeight: 1.15,
-          textShadow: `0 0 ${40 + glowPulse * 20}px rgba(129,216,208,${0.1 + glowPulse * 0.08})`,
+          textShadow: `${theme.textShadow.medium}, 0 0 ${40 + glowPulse * 20}px rgba(129,216,208,${0.1 + glowPulse * 0.08})`,
           position: "relative",
         }}>
           {keywordText}
@@ -92,7 +95,7 @@ export const Keyword: React.FC<Props> = ({ data }) => {
       {/* 서브 포인트 태그 */}
       {data.sub_points && (
         <div style={{ display: "flex", gap: 20, marginTop: 8, flexWrap: "wrap" as const, justifyContent: "center" as const }}>
-          {data.sub_points.map((point, i) => {
+          {(data.sub_points ?? []).map((point, i) => {
             const p = spring({ frame: frame - 40 - i * 18, fps, config: { damping: 100, stiffness: 10 } });
             return (
               <div key={i} style={{
@@ -105,6 +108,7 @@ export const Keyword: React.FC<Props> = ({ data }) => {
                 opacity: Math.min(1, p),
                 transform: `scale(${interpolate(Math.min(1, p), [0, 1], [0.75, 1])})`,
                 boxShadow: `0 0 ${10 + glowPulse * 10}px rgba(129,216,208,0.1)`,
+                textShadow: theme.textShadow.light,
               }}>
                 {point}
               </div>

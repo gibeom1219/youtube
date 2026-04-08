@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: {
@@ -14,11 +15,13 @@ interface Props {
 }
 
 export const ProsConsCard: React.FC<Props> = ({ data, durationFrames }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
-  const maxItems = Math.max(data.pros.length, data.cons.length);
+  const maxItems = Math.max((data.pros ?? []).length, (data.cons ?? []).length);
   const interval = Math.min((durationFrames * 0.6) / (maxItems + 1), 18);
 
   const prosLabel = data.pros_label ?? "장점";
@@ -40,6 +43,7 @@ export const ProsConsCard: React.FC<Props> = ({ data, durationFrames }) => {
           <span style={{
             fontSize: 30, fontWeight: 900, color,
             fontFamily: theme.font,
+            textShadow: theme.textShadow.medium,
           }}>
             {fromLeft ? prosLabel : consLabel}
           </span>
@@ -56,7 +60,7 @@ export const ProsConsCard: React.FC<Props> = ({ data, durationFrames }) => {
             <div key={i} style={{
               display: "flex", alignItems: "flex-start", gap: 14,
               padding: "14px 20px",
-              background: `${color}08`,
+              background: `${color}22`,
               border: `1px solid ${color}${Math.round((0.2 + pulse * 0.2) * 255).toString(16).padStart(2, "0")}`,
               borderRadius: 10,
               opacity: Math.min(1, p),
@@ -66,6 +70,7 @@ export const ProsConsCard: React.FC<Props> = ({ data, durationFrames }) => {
               <span style={{
                 fontSize: 26, fontWeight: 600, color: theme.white,
                 fontFamily: theme.font, lineHeight: 1.4,
+                textShadow: theme.textShadow.medium,
               }}>
                 {item}
               </span>
@@ -86,6 +91,7 @@ export const ProsConsCard: React.FC<Props> = ({ data, durationFrames }) => {
       <div style={{
         fontSize: 44, fontWeight: 900, color: theme.white,
         fontFamily: theme.font, textAlign: "center" as const,
+        textShadow: theme.textShadow.medium,
         opacity: Math.min(1, titleProgress),
         transform: `translateY(${interpolate(Math.min(1, titleProgress), [0, 1], [-20, 0])}px)`,
       }}>

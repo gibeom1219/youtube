@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface TimelineItem {
   label: string;
@@ -18,7 +19,9 @@ interface Props {
 }
 
 export const Timeline: React.FC<Props> = ({ data, durationFrames, accentColor = theme.tiffany }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   // Support both field name variants: items[] or events[{date,title,description}]
@@ -41,6 +44,7 @@ export const Timeline: React.FC<Props> = ({ data, durationFrames, accentColor = 
       <div style={{
         fontSize: 44, fontWeight: 900, color: theme.white,
         fontFamily: theme.font, marginBottom: 64, textAlign: "center" as const,
+        textShadow: theme.textShadow.medium,
         opacity: Math.min(1, titleProgress),
         transform: `translateY(${interpolate(Math.min(1, titleProgress), [0, 1], [-20, 0])}px)`,
       }}>
@@ -84,7 +88,7 @@ export const Timeline: React.FC<Props> = ({ data, durationFrames, accentColor = 
                 {/* 도트 */}
                 <div style={{
                   width: 56, height: 56, borderRadius: "50%",
-                  background: `rgba(129,216,208,0.15)`,
+                  background: `rgba(129,216,208,0.25)`,
                   border: `3px solid ${accentColor}`,
                   display: "flex", alignItems: "center", justifyContent: "center",
                   boxShadow: `0 0 ${glowSize}px rgba(129,216,208,${glowOpacity})`,
@@ -97,8 +101,8 @@ export const Timeline: React.FC<Props> = ({ data, durationFrames, accentColor = 
                 {/* 카드 */}
                 <div style={{
                   marginTop: 24,
-                  background: "rgba(129,216,208,0.05)",
-                  border: `1px solid rgba(129,216,208,0.2)`,
+                  background: "rgba(129,216,208,0.20)",
+                  border: `1px solid rgba(129,216,208,0.35)`,
                   borderRadius: 12,
                   padding: "16px 20px",
                   textAlign: "center" as const,
@@ -108,19 +112,22 @@ export const Timeline: React.FC<Props> = ({ data, durationFrames, accentColor = 
                   <div style={{
                     fontSize: 28, fontWeight: 900, color: accentColor,
                     fontFamily: theme.font, marginBottom: 6,
+                    textShadow: theme.textShadow.light,
                   }}>
                     {item.label}
                   </div>
                   <div style={{
                     fontSize: 30, fontWeight: 900, color: theme.white,
                     fontFamily: theme.font, lineHeight: 1.2,
+                    textShadow: theme.textShadow.light,
                   }}>
                     {item.value}
                   </div>
                   {item.note && (
                     <div style={{
-                      fontSize: 24, color: theme.gray,
+                      fontSize: 24, color: theme.grayLight, fontWeight: 600,
                       fontFamily: theme.font, marginTop: 8, lineHeight: 1.4,
+                      textShadow: theme.textShadow.light,
                     }}>
                       {item.note}
                     </div>

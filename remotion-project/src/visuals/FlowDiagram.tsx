@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface FlowStep {
   label: string;
@@ -16,17 +17,23 @@ interface Props {
 }
 
 export const FlowDiagram: React.FC<Props> = ({ data, durationFrames }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
+  // nodes[] (문자열 배열) 형태도 수용
+  if (!data.steps && (data as any).nodes) {
+    (data as any).steps = ((data as any).nodes as string[]).map((n: string) => ({ label: n, note: "" }));
+  }
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
-  const interval = Math.min((durationFrames * 0.65) / data.steps.length, 18);
+  const interval = Math.min((durationFrames * 0.65) / (data.steps ?? []).length, 18);
 
   const glowPulse = (Math.sin(frame * 0.05) + 1) / 2;
 
-  const n = data.steps.length;
-  const stepFontSize = n <= 3 ? 30 : n <= 4 ? 26 : 22;
-  const noteFontSize = n <= 3 ? 22 : n <= 4 ? 20 : 18;
+  const n = (data.steps ?? []).length;
+  const stepFontSize = n <= 3 ? 38 : n <= 4 ? 28 : 24;
+  const noteFontSize = n <= 3 ? 28 : n <= 4 ? 22 : 20;
   const boxPadding   = n <= 3 ? "36px 32px 24px" : n <= 4 ? "32px 24px 20px" : "30px 18px 18px";
   const arrowWidth   = n <= 3 ? 40 : n <= 4 ? 28 : 20;
 
@@ -34,12 +41,13 @@ export const FlowDiagram: React.FC<Props> = ({ data, durationFrames }) => {
     <div style={{
       width: "100%", height: "100%",
       display: "flex", flexDirection: "column",
-      justifyContent: "center", padding: "60px 100px", gap: 48,
+      justifyContent: "center", padding: "60px 100px", gap: 32,
     }}>
       {/* 제목 */}
       <div style={{
         fontSize: 44, fontWeight: 900, color: theme.white,
         fontFamily: theme.font, textAlign: "center" as const,
+        textShadow: theme.textShadow.medium,
         opacity: Math.min(1, titleProgress),
         transform: `translateY(${interpolate(Math.min(1, titleProgress), [0, 1], [-20, 0])}px)`,
       }}>
@@ -51,10 +59,10 @@ export const FlowDiagram: React.FC<Props> = ({ data, durationFrames }) => {
         display: "flex", alignItems: "center",
         justifyContent: "center",
         gap: 0, flexWrap: "nowrap" as const,
-        paddingTop: 24,
+        paddingTop: 0,
       }}>
-        {data.steps.map((step, i) => {
-          const stepStart = Math.round(interval * i + 6);
+        {(data.steps ?? []).map((step, i) => {
+          const stepStart = Math.round(interval * i + 3);
           const stepProgress = spring({ frame: frame - stepStart, fps, config: { damping: 100, stiffness: 10 } });
           const arrowProgress = spring({ frame: frame - stepStart - 4, fps, config: { damping: 120, stiffness: 20 } });
 
@@ -74,7 +82,7 @@ export const FlowDiagram: React.FC<Props> = ({ data, durationFrames }) => {
               }}>
                 {/* 박스 */}
                 <div style={{
-                  background: `rgba(129,216,208,0.08)`,
+                  background: `rgba(129,216,208,0.30)`,
                   border: `2px solid rgba(129,216,208,${borderAlpha})`,
                   borderRadius: 16,
                   padding: boxPadding,
@@ -103,6 +111,7 @@ export const FlowDiagram: React.FC<Props> = ({ data, durationFrames }) => {
                     fontSize: stepFontSize, fontWeight: 800, color: theme.white,
                     fontFamily: theme.font, lineHeight: 1.3,
                     wordBreak: "keep-all" as const,
+                    textShadow: theme.textShadow.medium,
                   }}>
                     {step.label}
                   </div>
@@ -114,6 +123,7 @@ export const FlowDiagram: React.FC<Props> = ({ data, durationFrames }) => {
                     fontFamily: theme.font, fontWeight: 500,
                     textAlign: "center" as const,
                     wordBreak: "keep-all" as const,
+                    textShadow: theme.textShadow.light,
                   }}>
                     {step.note}
                   </div>
@@ -121,7 +131,7 @@ export const FlowDiagram: React.FC<Props> = ({ data, durationFrames }) => {
               </div>
 
               {/* 화살표 (마지막 제외) */}
-              {i < data.steps.length - 1 && (
+              {i < (data.steps ?? []).length - 1 && (
                 <div style={{
                   display: "flex", alignItems: "center",
                   flexShrink: 0, padding: "0 8px",

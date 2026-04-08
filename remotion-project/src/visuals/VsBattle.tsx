@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Side {
   name: string;
@@ -19,7 +20,9 @@ interface Props {
 }
 
 export const VsBattle: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const topicProgress   = spring({ frame,         fps, config: { damping: 100, stiffness: 10 } });
@@ -109,7 +112,7 @@ export const VsBattle: React.FC<Props> = ({ data }) => {
         <div style={{
           display: "flex", alignItems: "center", justifyContent: "center",
           width: 80, flexShrink: 0,
-          background: "rgba(255,255,255,0.04)",
+          background: "rgba(255,255,255,0.20)",
           opacity: Math.min(1, vsProgress),
           transform: `scale(${interpolate(Math.min(1, vsProgress), [0, 1], [0, 1])})`,
         }}>

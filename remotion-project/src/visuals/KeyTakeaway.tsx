@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface TakeawayPoint {
   emoji: string;
@@ -16,12 +17,18 @@ interface Props {
 }
 
 export const KeyTakeaway: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
+  // points가 문자열 배열이면 객체 배열로 변환
+  if (data.points && data.points.length > 0 && typeof data.points[0] === "string") {
+    (data as any).points = (data.points as any[]).map((p: any) => ({ text: p, emoji: "✅" }));
+  }
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
   const conclusionProgress = spring({
-    frame: frame - 10 - data.points.length * 12,
+    frame: frame - 10 - (data.points ?? []).length * 12,
     fps, config: { damping: 100, stiffness: 5 },
   });
 
@@ -47,6 +54,7 @@ export const KeyTakeaway: React.FC<Props> = ({ data }) => {
           }} />
           <div style={{
             fontSize: 40, fontWeight: 900, color: theme.white, fontFamily: theme.font,
+            textShadow: theme.textShadow.medium,
           }}>
             {data.title}
           </div>
@@ -54,8 +62,8 @@ export const KeyTakeaway: React.FC<Props> = ({ data }) => {
       )}
 
       {/* 핵심 포인트들 */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        {data.points.map((pt, i) => {
+      <div style={{ display: "flex", flexDirection: "column", gap: 16, maxWidth: 900 }}>
+        {(data.points ?? []).map((pt, i) => {
           const p = spring({
             frame: frame - 10 - i * 12,
             fps, config: { damping: 100, stiffness: 10 },
@@ -78,6 +86,7 @@ export const KeyTakeaway: React.FC<Props> = ({ data }) => {
               <div style={{
                 fontSize: 28, fontWeight: 600, color: theme.white,
                 fontFamily: theme.font, lineHeight: 1.45, flex: 1,
+                textShadow: theme.textShadow.medium,
               }}>
                 {pt.text}
               </div>
@@ -101,6 +110,7 @@ export const KeyTakeaway: React.FC<Props> = ({ data }) => {
           <div style={{
             fontSize: 28, fontWeight: 800, color: accentColor,
             fontFamily: theme.font, lineHeight: 1.4, flex: 1,
+            textShadow: theme.textShadow.medium,
           }}>
             {data.conclusion}
           </div>

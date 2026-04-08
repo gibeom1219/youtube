@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 const COLORS = ["#81D8D0", "#52D68A", "#A8E8E2", "#4FA8A0", "#FFB347", "#C084FC", "#FF6B6B", "#6BB5FF"];
 
@@ -9,7 +10,9 @@ interface Props {
 }
 
 export const TreeMap: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
   const { title, items } = props;
   const total = items.reduce((a, b) => a + b.value, 0);

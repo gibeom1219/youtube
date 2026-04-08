@@ -1,13 +1,16 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: { text: string; emphasis?: string; sub?: string; icon?: string };
 }
 
 export const HighlightQuote: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const quoteMarkP = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
@@ -56,10 +59,10 @@ export const HighlightQuote: React.FC<Props> = ({ data }) => {
 
       {/* Main text */}
       <div style={{
-        fontSize: 62, fontWeight: 700, color: theme.white, fontFamily: theme.font,
+        fontSize: 62, fontWeight: 700, color: theme.white, fontFamily: theme.fontQuote,
         textAlign: "center", lineHeight: 1.5, maxWidth: 1200,
         opacity: textOpacity, transform: `translateY(${interpolate(textP, [0, 1], [20, 0])}px)`,
-        textShadow: `0 0 ${30 + glow * 20}px rgba(129,216,208,${0.05 + glow * 0.1})`,
+        textShadow: `${theme.textShadow.strong}, 0 0 ${30 + glow * 20}px rgba(129,216,208,${0.05 + glow * 0.1})`,
       }}>
         {renderText()}
       </div>

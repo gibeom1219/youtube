@@ -4,9 +4,11 @@ import { Video, Img, staticFile, useCurrentFrame, interpolate } from "remotion";
 interface Props {
   accentColor?: string;
   videoSrc?: string | null;
+  bright?: boolean;
+  transparent?: boolean; // side_info, process_flow 등: 배경 이미지를 높은 opacity로 표시
 }
 
-export const Background: React.FC<Props> = ({ accentColor = "#81D8D0", videoSrc }) => {
+export const Background: React.FC<Props> = ({ accentColor = "#81D8D0", videoSrc, bright, transparent }) => {
   const frame = useCurrentFrame();
   const bgOpacity = interpolate(frame, [0, 15], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
@@ -14,6 +16,115 @@ export const Background: React.FC<Props> = ({ accentColor = "#81D8D0", videoSrc 
   const isVideo = videoSrc && (videoSrc.endsWith(".mp4") || videoSrc.endsWith(".webm"));
   const isImage = videoSrc && (videoSrc.endsWith(".png") || videoSrc.endsWith(".jpg") || videoSrc.endsWith(".jpeg") || videoSrc.endsWith(".webp"));
 
+  // transparent 모드: 배경 이미지를 높은 opacity로 표시 (side_info, process_flow 등)
+  if (transparent) {
+    return (
+      <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+        {/* 밝은 베이스 */}
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(135deg, #f5f5f0 0%, #eef2f1 50%, #f0f0eb 100%)",
+        }} />
+
+        {/* 배경 이미지 (높은 opacity) */}
+        {isImage && (
+          <div style={{
+            position: "absolute", inset: 0,
+            opacity: bgOpacity * 0.85,
+          }}>
+            <Img
+              src={staticFile(videoSrc!)}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          </div>
+        )}
+
+        {/* 배경 영상 (높은 opacity) */}
+        {isVideo && (
+          <div style={{
+            position: "absolute", inset: 0,
+            opacity: bgOpacity * 0.8,
+          }}>
+            <Video
+              src={staticFile(videoSrc!)}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              muted
+              loop
+            />
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  if (bright) {
+    return (
+      <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+        {/* 밝은 베이스 그라데이션 */}
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(135deg, #f5f5f0 0%, #eef2f1 50%, #f0f0eb 100%)",
+        }} />
+
+        {/* 배경 이미지 (밝은 모드: 낮은 opacity + 밝은 오버레이) */}
+        {isImage && (
+          <div style={{
+            position: "absolute", inset: 0,
+            opacity: bgOpacity * 0.15,
+          }}>
+            <Img
+              src={staticFile(videoSrc!)}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          </div>
+        )}
+
+        {/* 배경 영상 */}
+        {isVideo && (
+          <div style={{
+            position: "absolute", inset: 0,
+            opacity: bgOpacity * 0.12,
+          }}>
+            <Video
+              src={staticFile(videoSrc!)}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              muted
+              loop
+            />
+          </div>
+        )}
+
+        {/* 은은한 그리드 (배경 에셋 없을 때만) */}
+        {!videoSrc && (
+          <svg
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.08 }}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <pattern id="bg-grid-light" width="80" height="80" patternUnits="userSpaceOnUse">
+                <path d="M 80 0 L 0 0 0 80" fill="none" stroke="#888" strokeWidth="0.5" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#bg-grid-light)" />
+          </svg>
+        )}
+
+        {/* 상단 액센트 라인 */}
+        <div style={{
+          position: "absolute", top: 0, left: 0, right: 0, height: 3,
+          background: `linear-gradient(90deg, transparent 0%, ${accentColor}70 25%, ${accentColor}70 75%, transparent 100%)`,
+        }} />
+
+        {/* 하단 라인 */}
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0, height: 1,
+          background: `linear-gradient(90deg, transparent 0%, ${accentColor}25 50%, transparent 100%)`,
+        }} />
+      </div>
+    );
+  }
+
+  // 다크 모드 (기존)
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
       {/* Deep dark base gradient - Tiffany */}
@@ -26,7 +137,7 @@ export const Background: React.FC<Props> = ({ accentColor = "#81D8D0", videoSrc 
       {isVideo && (
         <div style={{
           position: "absolute", inset: 0,
-          opacity: bgOpacity * 0.20,
+          opacity: bgOpacity * 0.25,
         }}>
           <Video
             src={staticFile(videoSrc!)}
@@ -45,7 +156,7 @@ export const Background: React.FC<Props> = ({ accentColor = "#81D8D0", videoSrc 
       {isImage && (
         <div style={{
           position: "absolute", inset: 0,
-          opacity: bgOpacity * 0.20,
+          opacity: bgOpacity * 0.35,
         }}>
           <Img
             src={staticFile(videoSrc!)}
@@ -57,6 +168,26 @@ export const Background: React.FC<Props> = ({ accentColor = "#81D8D0", videoSrc 
           }} />
         </div>
       )}
+
+      {/* 도화지/수채화지 질감 텍스처 오버레이 */}
+      <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.08, pointerEvents: "none" }}>
+        <defs>
+          <filter id="paper-texture" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="turbulence" baseFrequency="0.15" numOctaves="5" seed={3} stitchTiles="stitch" result="noise" />
+            <feDiffuseLighting in="noise" lightingColor="white" surfaceScale="3" result="lit">
+              <feDistantLight azimuth="135" elevation="45" />
+            </feDiffuseLighting>
+          </filter>
+        </defs>
+        <rect width="100%" height="100%" filter="url(#paper-texture)" />
+      </svg>
+
+      {/* 비네팅 (가장자리 어둡게) */}
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.5) 100%)",
+        pointerEvents: "none",
+      }} />
 
       {/* Ambient glow - left side */}
       <div style={{

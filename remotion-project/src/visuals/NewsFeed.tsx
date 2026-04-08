@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface NewsItem {
   category: string;
@@ -29,12 +30,14 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 export const NewsFeed: React.FC<Props> = ({ data, durationFrames }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
   const lineProgress  = spring({ frame: frame - 10, fps, config: { damping: 120, stiffness: 10 } });
-  const interval = Math.min((durationFrames * 0.65) / (data.items.length + 1), 18);
+  const interval = Math.min((durationFrames * 0.65) / ((data.items ?? []).length + 1), 18);
 
   return (
     <div style={{
@@ -63,7 +66,7 @@ export const NewsFeed: React.FC<Props> = ({ data, durationFrames }) => {
 
       {/* 뉴스 목록 */}
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        {data.items.map((item, i) => {
+        {(data.items ?? []).map((item, i) => {
           const startFrame = Math.round(interval * (i + 1));
           const progress = spring({ frame: frame - startFrame, fps, config: { damping: 100, stiffness: 10 } });
 

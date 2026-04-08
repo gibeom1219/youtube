@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: {
@@ -11,12 +12,14 @@ interface Props {
 }
 
 export const BulletList: React.FC<Props> = ({ data, durationFrames }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
   const lineProgress = spring({ frame: frame - 10, fps, config: { damping: 120, stiffness: 10 } });
-  const interval = Math.min((durationFrames * 0.7) / (data.items.length + 1), 18);
+  const interval = Math.min((durationFrames * 0.7) / ((data.items ?? []).length + 1), 18);
 
   return (
     <div style={{
@@ -31,6 +34,7 @@ export const BulletList: React.FC<Props> = ({ data, durationFrames }) => {
         opacity: Math.min(1, titleProgress),
         transform: `translateY(${interpolate(Math.min(1, titleProgress), [0, 1], [-24, 0])}px)`,
         lineHeight: 1.3,
+        textShadow: theme.textShadow.medium,
       }}>
         {data.title}
       </div>
@@ -46,7 +50,7 @@ export const BulletList: React.FC<Props> = ({ data, durationFrames }) => {
 
       {/* 항목들 */}
       <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-        {data.items.map((item, i) => {
+        {(data.items ?? []).map((item, i) => {
           const startFrame = Math.round(interval * (i + 1));
           const progress = spring({ frame: frame - startFrame, fps, config: { damping: 100, stiffness: 10 } });
 
@@ -65,7 +69,7 @@ export const BulletList: React.FC<Props> = ({ data, durationFrames }) => {
               opacity: Math.min(1, progress),
               transform: `translateX(${interpolate(Math.min(1, progress), [0, 1], [-60, 0])}px)`,
               background: `rgba(255,255,255,${bgOpacity})`,
-              border: "1px solid rgba(255,255,255,0.08)",
+              border: "1px solid rgba(255,255,255,0.22)",
               borderLeft: `4px solid rgba(129,216,208,${borderOpacity})`,
               borderRadius: "0 12px 12px 0",
               padding: "18px 36px",
@@ -73,6 +77,7 @@ export const BulletList: React.FC<Props> = ({ data, durationFrames }) => {
               <div style={{
                 fontSize: 36, fontWeight: 700, color: theme.white,
                 fontFamily: theme.font, lineHeight: 1.35,
+                textShadow: theme.textShadow.light,
               }}>
                 {item}
               </div>

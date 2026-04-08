@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: {
@@ -16,14 +17,16 @@ interface Props {
 }
 
 export const SplitScreen: React.FC<Props> = ({ data, durationFrames }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
   const leftProgress  = spring({ frame: frame - 8,  fps, config: { damping: 100, stiffness: 10 } });
   const rightProgress = spring({ frame: frame - 14, fps, config: { damping: 100, stiffness: 10 } });
 
-  const interval = Math.min((durationFrames * 0.55) / Math.max(data.before_items.length, data.after_items.length), 18);
+  const interval = Math.min((durationFrames * 0.55) / Math.max((data.before_items ?? []).length, (data.after_items ?? []).length), 18);
 
   const beforeColor = data.before_color ?? "#FF6B6B";
   const afterColor  = data.after_color  ?? "#52D68A";
@@ -43,7 +46,7 @@ export const SplitScreen: React.FC<Props> = ({ data, durationFrames }) => {
       <div style={{
         textAlign: "center" as const,
         padding: "16px 24px",
-        background: `${color}15`,
+        background: `${color}30`,
         border: `1px solid ${color}50`,
         borderBottom: `3px solid ${color}`,
         borderRadius: "12px 12px 0 0",

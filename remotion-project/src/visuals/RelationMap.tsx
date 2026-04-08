@@ -1,13 +1,16 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: { title: string; center: { label: string; icon?: string }; nodes: Array<{ label: string; relation: string; icon?: string }> };
 }
 
 export const RelationMap: React.FC<Props> = ({ data: props }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!props) return null;
   const { fps } = useVideoConfig();
   const { title, center, nodes } = props;
   const titleOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
@@ -15,7 +18,7 @@ export const RelationMap: React.FC<Props> = ({ data: props }) => {
   const centerP = spring({ frame: frame - 8, fps, config: { damping: 100, stiffness: 10 } });
   const centerOpacity = interpolate(frame, [8, 20], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
-  const cx = 800, cy = 400, r = 300;
+  const cx = 800, cy = 420, r = 380;
   const n = nodes.length;
 
   return (
@@ -28,7 +31,7 @@ export const RelationMap: React.FC<Props> = ({ data: props }) => {
         {/* Center node */}
         <div style={{
           position: "absolute", left: cx - 100, top: cy - 100, width: 200, height: 200,
-          borderRadius: "50%", background: `${theme.tiffany}15`, border: `3px solid ${theme.tiffany}50`,
+          borderRadius: "50%", background: `${theme.tiffany}30`, border: `3px solid ${theme.tiffany}50`,
           display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
           opacity: centerOpacity, transform: `scale(${interpolate(centerP, [0, 1], [0.5, 1])})`,
         }}>
@@ -48,8 +51,8 @@ export const RelationMap: React.FC<Props> = ({ data: props }) => {
             <React.Fragment key={i}>
               {/* Connection line */}
               <svg style={{ position: "absolute", left: 0, top: 0, width: 1600, height: 720, pointerEvents: "none" }}>
-                <line x1={cx} y1={cy} x2={nx} y2={ny} stroke={`${theme.tiffany}35`} strokeWidth={2} strokeDasharray="8 5" opacity={nodeOpacity} />
-                <text x={(cx + nx) / 2} y={(cy + ny) / 2 - 12} fill={theme.grayLight} fontSize={20} fontWeight="600" fontFamily={theme.font} textAnchor="middle" opacity={nodeOpacity}>
+                <line x1={cx} y1={cy} x2={nx} y2={ny} stroke={`${theme.tiffany}`} strokeWidth={2} strokeDasharray="8 5" opacity={nodeOpacity * 0.5} />
+                <text x={cx + (nx - cx) * 0.55} y={cy + (ny - cy) * 0.55 - 12} fill="#ffffff" fontSize={24} fontWeight="700" fontFamily={theme.font} textAnchor="middle" opacity={nodeOpacity}>
                   {node.relation}
                 </text>
               </svg>
@@ -57,7 +60,7 @@ export const RelationMap: React.FC<Props> = ({ data: props }) => {
               <div style={{
                 position: "absolute", left: nx - 95, top: ny - 60, width: 190,
                 padding: "18px 16px", borderRadius: 16,
-                background: "rgba(129,216,208,0.08)", border: "1px solid rgba(129,216,208,0.2)",
+                background: "rgba(129,216,208,0.30)", border: "1px solid rgba(129,216,208,0.2)",
                 display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
                 opacity: nodeOpacity, transform: `scale(${interpolate(nodeP, [0, 1], [0.7, 1])})`,
               }}>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Stage {
   label: string;
@@ -19,13 +20,15 @@ interface Props {
 const STAGE_COLORS = ["#81D8D0", "#52D68A", "#FFB347", "#C084FC", "#FF6B6B"];
 
 export const FunnelChart: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
   const glowPulse = (Math.sin(frame * 0.04) + 1) / 2;
 
-  const maxValue = Math.max(...data.stages.map(s => s.value));
+  const maxValue = Math.max(...(data.stages ?? []).map(s => s.value));
 
   return (
     <div style={{
@@ -46,7 +49,7 @@ export const FunnelChart: React.FC<Props> = ({ data }) => {
 
       {/* 깔때기 단계 */}
       <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 8 }}>
-        {data.stages.map((stage, i) => {
+        {(data.stages ?? []).map((stage, i) => {
           const p = spring({
             frame: frame - 8 - i * 12,
             fps, config: { damping: 100, stiffness: 5 },
@@ -94,7 +97,7 @@ export const FunnelChart: React.FC<Props> = ({ data }) => {
               </div>
               {/* 바 */}
               <div style={{
-                width: "100%", height: 36, background: "rgba(255,255,255,0.06)",
+                width: "100%", height: 36, background: "rgba(255,255,255,0.20)",
                 borderRadius: 8, overflow: "hidden",
               }}>
                 <div style={{

@@ -44,7 +44,8 @@ export const ChartBar: React.FC<Props> = ({ data, title, startFrame }) => {
     <div style={{
       width: "100%", height: "100%",
       display: "flex", flexDirection: "column",
-      padding: "70px 120px 90px",
+      alignItems: "center", justifyContent: "center",
+      padding: "60px 300px 140px",
     }}>
       {/* 차트 제목 */}
       {title && (
@@ -60,7 +61,7 @@ export const ChartBar: React.FC<Props> = ({ data, title, startFrame }) => {
       )}
 
       {/* 차트 영역 */}
-      <div style={{ flex: 1, display: "flex", alignItems: "flex-end", gap: 20, position: "relative" }}>
+      <div style={{ width: "100%", height: 480, display: "flex", alignItems: "flex-end", gap: 20, position: "relative" }}>
 
         {/* 가로 기준선들 */}
         {[0.25, 0.5, 0.75, 1.0].map((ratio) => (

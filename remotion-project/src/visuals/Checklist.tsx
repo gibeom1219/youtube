@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface CheckItem {
   text: string;
@@ -17,7 +18,9 @@ interface Props {
 }
 
 export const Checklist: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
   const { fps } = useVideoConfig();
 
   const titleProgress = spring({ frame, fps, config: { damping: 100, stiffness: 10 } });
@@ -56,9 +59,9 @@ export const Checklist: React.FC<Props> = ({ data }) => {
 
       {/* 체크리스트 */}
       <div style={{
-        width: "100%", display: "flex", flexDirection: "column", gap: 16,
+        maxWidth: 900, alignSelf: "center", width: "100%", display: "flex", flexDirection: "column", gap: 16,
       }}>
-        {data.items.map((item, i) => {
+        {(data.items ?? []).map((item, i) => {
           const itemProgress = spring({
             frame: frame - 8 - i * 12,
             fps, config: { damping: 100, stiffness: 10 },
@@ -69,7 +72,7 @@ export const Checklist: React.FC<Props> = ({ data }) => {
           return (
             <div key={i} style={{
               display: "flex", alignItems: "flex-start", gap: 20,
-              background: `${color}08`,
+              background: `${color}22`,
               border: `1px solid ${color}30`,
               borderRadius: 16, padding: "20px 28px",
               opacity: Math.min(1, itemProgress),

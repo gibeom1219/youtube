@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
 import { theme } from "../styles/theme";
+import { useSceneTheme } from "../contexts/SceneTheme";
 
 interface Props {
   data: {
@@ -13,14 +14,23 @@ interface Props {
 }
 
 const TYPE_CONFIG = {
-  breaking: { label: "🔴 BREAKING",  color: "#FF4444", bg: "#FF444412" },
-  warning:  { label: "⚠️ 경고",       color: "#FFB347", bg: "#FFB34712" },
-  update:   { label: "📢 업데이트",   color: "#81D8D0", bg: "#81D8D012" },
-  alert:    { label: "🚨 긴급",       color: "#FF6B6B", bg: "#FF6B6B12" },
+  breaking: { label: "🔴 BREAKING",  color: "#FF4444", bg: "#FF444435" },
+  warning:  { label: "⚠️ 경고",       color: "#FFB347", bg: "#FFB34735" },
+  update:   { label: "📢 업데이트",   color: "#81D8D0", bg: "#81D8D035" },
+  alert:    { label: "🚨 긴급",       color: "#FF6B6B", bg: "#FF6B6B35" },
 };
 
 export const AlertBanner: React.FC<Props> = ({ data }) => {
+  const theme = useSceneTheme();
   const frame = useCurrentFrame();
+  if (!data) return null;
+  // message → sub_text, description → source 호환
+  if (!data.sub_text && (data as any).message) {
+    (data as any).sub_text = (data as any).message;
+  }
+  if (!data.source && (data as any).description) {
+    (data as any).source = (data as any).description;
+  }
   const { fps } = useVideoConfig();
 
   const type = data.type ?? "breaking";
@@ -57,7 +67,7 @@ export const AlertBanner: React.FC<Props> = ({ data }) => {
       }}>
         {/* 상단 배지 바 */}
         <div style={{
-          background: `${cfg.color}22`,
+          background: `${cfg.color}35`,
           borderBottom: `1px solid ${cfg.color}40`,
           padding: "14px 40px",
           display: "flex", alignItems: "center",
@@ -88,7 +98,7 @@ export const AlertBanner: React.FC<Props> = ({ data }) => {
             textAlign: "center",
             opacity: Math.min(1, headlineProgress),
             transform: `translateY(${interpolate(Math.min(1, headlineProgress), [0, 1], [30, 0])}px)`,
-            textShadow: `0 0 ${20 + glowPulse * 15}px ${cfg.color}30`,
+            textShadow: theme.textShadow.strong,
           }}>
             {data.headline}
           </div>
@@ -98,6 +108,7 @@ export const AlertBanner: React.FC<Props> = ({ data }) => {
               fontSize: 28, color: theme.grayLight,
               fontFamily: theme.font, fontWeight: 500,
               textAlign: "center", marginTop: 24,
+              textShadow: theme.textShadow.medium,
               opacity: Math.min(1, subProgress),
               transform: `translateY(${interpolate(Math.min(1, subProgress), [0, 1], [20, 0])}px)`,
             }}>
